@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Validación de documento de persona</h1>
+<mat-dialog-content>
+<p *ngFor="let message of data.messages">{{message}}</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-flat-button
+          (click)="aceptar()"
+  >ACEPTAR</button>
+</mat-dialog-actions>
+

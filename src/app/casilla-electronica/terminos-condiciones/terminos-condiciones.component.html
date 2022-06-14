@@ -1,0 +1,20 @@
+<form [formGroup]="formGroup" (submit)="$event.preventDefault()">
+  <mat-card class="long-text-card">
+    {{terminosCondicionesTexto}}
+  </mat-card>
+  <br>
+  <div fxLayout="column" fxLayoutGap="10px">
+    <div fxFlex="100">
+      <mat-checkbox formControlName="terminosCondiciones">Estoy de acuerdo con los TÉRMINOS Y CONDICIONES.
+      </mat-checkbox>
+    </div>
+    <div fxFlex="100">
+      <mat-checkbox formControlName="politicasDatos">Estoy de acuerdo con las POLÍTICAS DE DATOS.</mat-checkbox>
+    </div>
+  </div>
+  <br>
+  <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center">
+    <button mat-flat-button type="button" color="primary" (click)="regresar()">REGRESAR</button>
+    <button mat-flat-button type="button" color="warn" (click)="continuar()">CONTINUAR</button>
+  </div>
+</form>
