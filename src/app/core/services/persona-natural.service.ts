@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import { map, Observable} from "rxjs";
 import {environment} from "../../../environments/environment";
-import {PersonaNaturalDni} from "../dto/personaNaturalDni";
+import {PersonaNaturalDni, RequestValidateData, ResponseValidateData} from "../dto/personaNaturalDni";
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +19,10 @@ export class PersonaNaturalService {
     return this.http.post<PersonaNaturalDni>(`${this.configUrl}/obtener-datos-persona-dni`, {
       dni: dni
     })
+  }
+
+
+  validarDatosPersona(datos : RequestValidateData):Observable<ResponseValidateData>{
+    return this.http.post<ResponseValidateData>(this.configUrl + '/validarPersona',datos).pipe(map(resp=>resp));
   }
 }

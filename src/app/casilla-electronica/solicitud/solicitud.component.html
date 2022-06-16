@@ -22,7 +22,8 @@
   <app-alert type="warn">Verifica que los documentos adjuntos estén completos antes de hacer click en "ENVIAR".<br />
     Recuerda que tienes 48 horas para enviar tu solicitud firmada</app-alert>
   <br/>
-  <div fxLayout="row" fxLayoutAlign="center center">
+  <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center">
+    <button mat-flat-button type="button" color="primary" (click)="regresar()">REGRESAR</button>
     <button mat-flat-button color="warn" (click)="continuar()">ENVIAR</button>
   </div>
 </ol>

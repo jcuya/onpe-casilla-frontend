@@ -2,13 +2,13 @@
   <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field appearance="outline" fxFlex="50">
       <mat-label>Tipo de Documento</mat-label>
-      <mat-select formControlName="tipoDocumento" (selectionChange)="tipoDocumentoCambiado($event.value)">
+      <mat-select formControlName="tipoDocumento" (selectionChange)="tipoDocumentoCambiado($event.value)" required>
         <mat-option *ngFor="let item of tipoDocumentoList" [value]="item">{{item.nombre}}</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex="50" class="button-suffix">
       <mat-label>Número de documento</mat-label>
-      <input matInput formControlName="numeroDocumento" (change)="invalidarDocumento()">
+      <input matInput formControlName="numeroDocumento" (change)="invalidarDocumento()" required>
       <button *ngIf="esTipoDocumentoDni" class="append-button" mat-flat-button aria-label="Validar" (click)="validarDocumento()" type="button">
         Validar
       </button>
@@ -17,7 +17,7 @@
   <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field appearance="outline" fxFlex="100" >
       <mat-label>Apellidos</mat-label>
-      <input matInput formControlName="apellidos">
+      <input matInput formControlName="apellidos" required>
     </mat-form-field>
   </div>
   <div fxLayout="row" fxLayoutGap="10px">

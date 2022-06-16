@@ -1,22 +1,22 @@
 <mat-stepper linear #stepper labelPosition="bottom">
-  <!--<mat-step [stepControl]="datosGeneralesFormGroup" label="Datos generales">-->
-  <mat-step label="Datos generales" [editable]="false" >
+  <mat-step [stepControl]="datosGeneralesFormGroup" label="Datos generales" [editable]="isEditable">
+  <!-- <mat-step label="Datos generales"  > -->
     <ng-template matStepLabel>Datos generales</ng-template>
-    <app-datos-generales (completedStep)="completedStep()"></app-datos-generales>
+      <app-datos-generales (completedStep)="completedStep()" (TipoPerson)="personType($event)"></app-datos-generales>
   </mat-step>
   <!--<mat-step [stepControl]="datosRepresentanteFormGroup" label="Datos del representante">-->
-  <mat-step label="Datos del representante" [editable]="false">
+  <mat-step *ngIf="tipoPersona" label="Datos del representante" [editable]="isEditable">
     <ng-template matStepLabel>Datos del representante</ng-template>
     <app-datos-representante (completedStep)="completedStep()" (previousStep)="previousStep()"></app-datos-representante>
   </mat-step>
   <!--<mat-step [stepControl]="terminosCondicionesFormGroup" label="Términos y condiciones">-->
-  <mat-step label="Términos y condiciones" [editable]="false" >
+  <mat-step label="Términos y condiciones" [editable]="isEditable" >
     <ng-template matStepLabel>Términos y condiciones</ng-template>
     <app-terminos-condiciones (completedStep)="completedStep()" (previousStep)="previousStep()"></app-terminos-condiciones>
   </mat-step>
   <!--<mat-step [stepControl]="solicitudCasillaElectronicaFormGroup" label="Solicitud de Casilla Electrónica">-->
-  <mat-step label="Solicitud de Casilla Electrónica" >
+  <mat-step label="Solicitud de Casilla Electrónica" [editable]="isEditable">
     <ng-template matStepLabel>Solicitud de Casilla Electrónica</ng-template>
-    <app-solicitud (completedStep)="completedStep()"></app-solicitud>
+    <app-solicitud (completedStep)="completedStep()" (previousStep)="previousStep()"></app-solicitud>
   </mat-step>
 </mat-stepper>

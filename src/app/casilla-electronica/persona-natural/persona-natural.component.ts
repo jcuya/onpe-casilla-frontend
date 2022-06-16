@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Condicion_Persona_Natural, TipoDocumento, TipoDocumento_DNI} from "../../core/dto/documento";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CasillaService} from "../../core/services/casilla.service";
@@ -24,7 +24,9 @@ export class PersonaNaturalComponent implements OnInit {
   distritoList: Array<Distrito> = []
 
   numeroDniValido: Boolean | undefined = undefined
-  personaNaturalDni: PersonaNaturalDni | null = null
+  personaNaturalDni: PersonaNaturalDni | null = null;
+
+  //@Output() FormValidNatural = new EventEmitter<any>()
 
   constructor(
     private formBuilder: FormBuilder,
@@ -45,7 +47,7 @@ export class PersonaNaturalComponent implements OnInit {
       nombreMadre: ['', Validators.required],
       fechaNacimento: ['', Validators.required],
       digitoVerificacion: ['', Validators.required],
-      correoElectronico: ['', Validators.required, Validators.email],
+      correoElectronico: ['',[ Validators.required, Validators.email]],
       numeroCelular: ['', Validators.required],
       departamento: ['', Validators.required],
       provincia: ['', Validators.required],

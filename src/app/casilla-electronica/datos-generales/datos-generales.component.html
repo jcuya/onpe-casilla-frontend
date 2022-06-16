@@ -2,7 +2,7 @@
   <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field appearance="outline" fxFlex="100">
       <mat-label>Condición</mat-label>
-      <mat-select formControlName="condicion" (change)="update()">
+      <mat-select formControlName="condicion" (selectionChange)="update()" required>
         <mat-option *ngFor="let item of condicionList" [value]="item">{{item.nombre}}</mat-option>
       </mat-select>
     </mat-form-field>

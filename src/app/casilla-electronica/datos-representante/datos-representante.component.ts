@@ -73,7 +73,12 @@ export class DatosRepresentanteComponent implements OnInit {
   }
 
   siguientePaso() {
-    this.completedStep.emit()
+
+    if(this.formGroup.valid){
+      this.completedStep.emit()
+    }
+
+   
   }
 
   obtenerCorreo() {

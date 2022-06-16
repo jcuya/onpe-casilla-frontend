@@ -9,6 +9,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class SolicitudComponent implements OnInit {
 
   @Output() completedStep = new EventEmitter<any>()
+  @Output() previousStep = new EventEmitter<any>()
   formGroup!: FormGroup;
 
   constructor(
@@ -24,5 +25,9 @@ export class SolicitudComponent implements OnInit {
 
   continuar() {
     this.completedStep.emit(true)
+  }
+
+  regresar() {
+    this.previousStep.emit()
   }
 }

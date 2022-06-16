@@ -14,16 +14,18 @@ import {MatStepper} from "@angular/material/stepper";
 })
 export class CreacionPasosComponent implements OnInit {
 
-  //@ViewChild('DatosGeneralesComponent') datosGeneralesComponent!: DatosGeneralesComponent;
-  //@ViewChild('DatosRepresentanteComponent') datosRepresentanteComponent!: DatosRepresentanteComponent;
-  //@ViewChild('TerminosCondicionesComponent') terminosCondicionesComponent!: TerminosCondicionesComponent;
-  //@ViewChild('SolicitudComponent') solicitudCasillaElectronicaComponent!: SolicitudComponent;
+  @ViewChild('DatosGeneralesComponent') datosGeneralesComponent!: DatosGeneralesComponent;
+  @ViewChild('DatosRepresentanteComponent') datosRepresentanteComponent!: DatosRepresentanteComponent;
+  @ViewChild('TerminosCondicionesComponent') terminosCondicionesComponent!: TerminosCondicionesComponent;
+  @ViewChild('SolicitudComponent') solicitudCasillaElectronicaComponent!: SolicitudComponent;
   @ViewChild('stepper', {static: false}) stepper: MatStepper | null = null;
-
+  tipoPersona : boolean = false;
   constructor() {
   }
 
-  /*get datosGeneralesFormGroup() {
+  isEditable = true;
+
+  get datosGeneralesFormGroup() {
     return this.datosGeneralesComponent?.formGroup || null;
   }
 
@@ -37,13 +39,27 @@ export class CreacionPasosComponent implements OnInit {
 
   get solicitudCasillaElectronicaFormGroup() {
     return this.solicitudCasillaElectronicaComponent?.formGroup || null;
-  }*/
+  }
 
   datosGeneralesCompleted = false
+  datosRepresentantesCompleted = false
+  terminosyCondicionesCompleted = false
+  SolicitudCompleted = false
 
   completedStep() {
     this.datosGeneralesCompleted = true
     this.stepper?.next()
+  }
+
+  completedStepDatos(){
+    this.datosRepresentantesCompleted = true;
+  }
+  completedStepRepresent(){
+    this.terminosyCondicionesCompleted = true;
+  }
+
+  completedStepTerm(){
+
   }
 
   previousStep() {
@@ -51,5 +67,13 @@ export class CreacionPasosComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.datosGeneralesFormGroup;
+
+  }
+
+
+  personType(tipo : any){
+    const tip = tipo;
+    this.tipoPersona = tip === 'j'? true : false;
   }
 }
