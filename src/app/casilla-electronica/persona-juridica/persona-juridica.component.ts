@@ -35,7 +35,7 @@ export class PersonaJuridicaComponent implements OnInit {
       tipoDocumento: ['', Validators.required],
       numeroDocumento: ['', Validators.required],
       razonSocial: ['', Validators.required],
-      correoElectronico: ['', Validators.required],
+      correoElectronico: ['',[ Validators.required, Validators.email]],
       ciudadTelefono: ['', Validators.required],
       telefono: ['', Validators.required],
       departamento: ['', Validators.required],
@@ -60,4 +60,12 @@ export class PersonaJuridicaComponent implements OnInit {
   async cambiarDistrito(value: Provincia) {
     this.distritoList = await firstValueFrom(this.ubigeoService.getDistritoList(value.ubdep, value.ubprv))
   }
+
+  validarsoloNumeros(event : any): boolean{
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+   }
 }

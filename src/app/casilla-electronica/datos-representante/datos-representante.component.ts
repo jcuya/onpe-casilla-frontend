@@ -4,7 +4,8 @@ import {CasillaService} from "../../core/services/casilla.service";
 import {
   Cargo,
   Condicion_Persona_Natural,
-  TipoDocumento
+  TipoDocumento,
+  TipoDocumento_DNI
 } from "../../core/dto/documento";
 import {firstValueFrom} from "rxjs";
 import {ValidarCorreoService} from "../../core/services/validar-correo.service";
@@ -29,7 +30,7 @@ export class DatosRepresentanteComponent implements OnInit {
   distritoList: Array<Distrito> = []
   cargoList: Array<Cargo> = []
   codigoEnviado = false
-
+  maxlength : number = 0;
   constructor(
     private formBuilder: FormBuilder,
     private casillaService: CasillaService,
@@ -42,12 +43,12 @@ export class DatosRepresentanteComponent implements OnInit {
     this.formGroup = this.formBuilder.group({
       tipoDocumentoAdjunto: ['', Validators.required],
       tipoDocumentoAdjuntoNombre: ['', Validators.required],
-      documentoArchivo: ['', Validators.required],
+     // documentoArchivo: ['', Validators.required],
       tipoDocumento: ['', Validators.required],
       numeroDocumento: ['', Validators.required],
       apellidos: ['', Validators.required],
       nombres: ['', Validators.required],
-      correoElectronico: ['', Validators.required],
+      correoElectronico: ['',[ Validators.required, Validators.email]],
       numeroCelular: ['', Validators.required],
       departamento: ['', Validators.required],
       provincia: ['', Validators.required],
@@ -76,9 +77,23 @@ export class DatosRepresentanteComponent implements OnInit {
 
     if(this.formGroup.valid){
       this.completedStep.emit()
+    }else{
+      this.formGroup.markAllAsTouched()
+      return;
     }
 
    
+  }
+
+  tipoDocumentoCambiado(value: TipoDocumento) {
+   
+
+
+    if (value.codigo == TipoDocumento_DNI) {
+      this.maxlength = 8;
+    } else {
+      this.maxlength =9
+    }
   }
 
   obtenerCorreo() {
@@ -103,4 +118,12 @@ export class DatosRepresentanteComponent implements OnInit {
   async cambiarDistrito(value: Provincia) {
     this.distritoList = await firstValueFrom(this.ubigeoService.getDistritoList(value.ubdep, value.ubprv))
   }
+
+  validarsoloNumeros(event : any): boolean{
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+   }
 }

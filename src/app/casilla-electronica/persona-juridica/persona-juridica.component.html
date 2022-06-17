@@ -8,7 +8,7 @@
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex="50">
       <mat-label>Número de documento</mat-label>
-      <input matInput formControlName="numeroDocumento">
+      <input matInput formControlName="numeroDocumento" (keypress)="validarsoloNumeros($event)" maxlength="11">
     </mat-form-field>
   </div>
   <div fxLayout="row" fxLayoutGap="10px">
@@ -33,7 +33,7 @@
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex="50">
       <mat-label>Teléfono</mat-label>
-      <input matInput formControlName="telefono">
+      <input matInput formControlName="telefono" (keypress)="validarsoloNumeros($event)" maxlength="7">
     </mat-form-field>
   </div>
   <h2>Domicilio físico</h2>

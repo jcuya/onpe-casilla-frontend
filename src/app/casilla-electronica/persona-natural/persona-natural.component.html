@@ -8,7 +8,7 @@
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex="50" class="button-suffix">
       <mat-label>Número de documento</mat-label>
-      <input matInput formControlName="numeroDocumento" (change)="invalidarDocumento()" required>
+      <input matInput formControlName="numeroDocumento" (change)="invalidarDocumento()" (keypress)="validarsoloNumeros($event)" [maxlength] ="maxlength"  required>
       <button *ngIf="esTipoDocumentoDni" class="append-button" mat-flat-button aria-label="Validar" (click)="validarDocumento()" type="button">
         Validar
       </button>
@@ -51,7 +51,7 @@
     </mat-form-field>
     <mat-form-field *ngIf="esTipoDocumentoDni" appearance="outline" fxFlex="50">
       <mat-label>Dígito de verificación</mat-label>
-      <input matInput formControlName="digitoVerificacion">
+      <input matInput formControlName="digitoVerificacion" (keypress)="validarsoloNumeros($event)" maxlength="1">
       <button matSuffix mat-icon-button aria-label="Clear">
         <mat-icon>info</mat-icon>
       </button>
@@ -61,13 +61,13 @@
     <mat-form-field appearance="outline" fxFlex="70">
       <mat-label>Correo electrónico</mat-label>
       <input matInput formControlName="correoElectronico">
-      <button class="append-button" mat-flat-button aria-label="Validar" (click)="validarCorreoElectronico()" type="button">
+      <!-- <button class="append-button" mat-flat-button aria-label="Validar" (click)="validarCorreoElectronico()" type="button">
         Validar
-      </button>
+      </button> -->
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex="30">
       <mat-label>Número de celular</mat-label>
-      <input matInput formControlName="numeroCelular">
+      <input matInput formControlName="numeroCelular" (keypress)="validarsoloNumeros($event)" maxlength="9">
     </mat-form-field>
   </div>
   <div fxLayout="row" fxLayoutGap="10px">

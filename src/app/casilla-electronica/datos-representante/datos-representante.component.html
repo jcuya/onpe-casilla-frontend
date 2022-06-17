@@ -2,7 +2,7 @@
   <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field appearance="outline" fxFlex="100">
       <mat-label>Tipo de documento adjunto</mat-label>
-      <mat-select formControlName="tipoDocumentoAdjunto">
+      <mat-select formControlName="tipoDocumentoAdjunto" >
         <mat-option *ngFor="let item of tipoDocumentoAdjuntoList" [value]="item">{{item.nombre}}</mat-option>
       </mat-select>
     </mat-form-field>
@@ -14,9 +14,9 @@
     </mat-form-field>
   </div>
   <div fxLayout="row" fxLayoutGap="10px">
-    <div style="display: none">
+    <!-- <div style="display: none">
       <input matInput formControlName="documentoArchivo">
-    </div>
+    </div> -->
     <app-upload-file
       (fileDropped)="handleArchivoAgregado($event)"
       fxFlex="100"
@@ -27,13 +27,13 @@
   <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field appearance="outline" fxFlex="50">
       <mat-label>Tipo de Documento</mat-label>
-      <mat-select formControlName="tipoDocumento">
+      <mat-select formControlName="tipoDocumento" (selectionChange)="tipoDocumentoCambiado($event.value)">
         <mat-option *ngFor="let item of tipoDocumentoList" [value]="item">{{item.nombre}}</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex="50">
       <mat-label>Número de documento</mat-label>
-      <input matInput formControlName="numeroDocumento">
+      <input matInput formControlName="numeroDocumento" (keypress)="validarsoloNumeros($event)" [maxlength]="maxlength">
     </mat-form-field>
   </div>
   <div fxLayout="row" fxLayoutGap="10px">
@@ -55,7 +55,7 @@
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex="30">
       <mat-label>Número de celular</mat-label>
-      <input matInput formControlName="numeroCelular">
+      <input matInput formControlName="numeroCelular" (keypress)="validarsoloNumeros($event)" maxlength="9">
     </mat-form-field>
   </div>
   <h2>Domicilio físico</h2>

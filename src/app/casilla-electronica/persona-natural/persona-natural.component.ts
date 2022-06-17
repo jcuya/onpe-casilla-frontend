@@ -27,7 +27,7 @@ export class PersonaNaturalComponent implements OnInit {
   personaNaturalDni: PersonaNaturalDni | null = null;
 
   //@Output() FormValidNatural = new EventEmitter<any>()
-
+   maxlength : number = 8;
   constructor(
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
@@ -60,10 +60,16 @@ export class PersonaNaturalComponent implements OnInit {
 
   tipoDocumentoCambiado(value: TipoDocumento) {
     this.invalidarDocumento();
+
+    this.formGroup.get("nombres")?.setValue("");
+    this.formGroup.get("apellidos")?.setValue("");
+
     if (value.codigo == TipoDocumento_DNI) {
+      this.maxlength = 8;
       this.formGroup.get('nombres')?.disable();
       this.formGroup.get('apellidos')?.disable();
     } else {
+      this.maxlength =9
       this.formGroup.get('nombres')?.enable();
       this.formGroup.get('apellidos')?.enable();
     }
@@ -120,4 +126,12 @@ export class PersonaNaturalComponent implements OnInit {
   async cambiarDistrito(value: Provincia) {
     this.distritoList = await firstValueFrom(this.ubigeoService.getDistritoList(value.ubdep, value.ubprv))
   }
+
+  validarsoloNumeros(event : any): boolean{
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+   }
 }

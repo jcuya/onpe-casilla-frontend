@@ -119,7 +119,7 @@ export class DatosGeneralesComponent implements OnInit {
           console.log("request envio", this.validateRequest)
           this.personaService.validarDatosPersona(this.validateRequest).subscribe(res =>{
             if(res.status){
-              this.personaNaturalFormGroup.markAllAsTouched()
+             
               this.completedStep.emit();
             }else{
               this.dialog.open(AlertDialogComponent, {
@@ -130,24 +130,23 @@ export class DatosGeneralesComponent implements OnInit {
               return;
             }
           })
-
-
-          
-
-
-
-       
+        }else{
+          this.personaNaturalComponent?.formGroup.markAllAsTouched()
         }
       }
 
       if(this.esPersonaJuridica){
         if(this.personaJuridicaFormGroup.valid){
-          this.personaJuridicaFormGroup.markAllAsTouched()
+         
           this.completedStep.emit();
+        }else{
+          this.personaJuridicaFormGroup.markAllAsTouched()
         }
       }
 
       
+    }else{
+      this.formGroup.markAllAsTouched();
     }
     
   }
