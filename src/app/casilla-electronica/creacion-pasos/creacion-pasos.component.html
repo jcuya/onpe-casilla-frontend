@@ -14,6 +14,10 @@
     <ng-template matStepLabel>Términos y condiciones</ng-template>
     <app-terminos-condiciones (completedStep)="completedStep()" (previousStep)="previousStep()"></app-terminos-condiciones>
   </mat-step>
+  <mat-step label="Foto con DNI" [editable]="isEditable" >
+    <ng-template matStepLabel>Foto con DNI</ng-template>
+    <app-foto-dni (completedStep)="completedStep()" (previousStep)="previousStep()"></app-foto-dni>
+  </mat-step>
   <!--<mat-step [stepControl]="solicitudCasillaElectronicaFormGroup" label="Solicitud de Casilla Electrónica">-->
   <mat-step label="Solicitud de Casilla Electrónica" [editable]="isEditable">
     <ng-template matStepLabel>Solicitud de Casilla Electrónica</ng-template>

@@ -55,6 +55,7 @@ export class DatosGeneralesComponent implements OnInit {
   update() {
     this.cdr.detectChanges();
     var data = this.obtenerCondicion();
+    this.requestSave.TipoPersona = data;
     this.TipoPerson.emit(data);
 
   }
@@ -162,17 +163,17 @@ export class DatosGeneralesComponent implements OnInit {
       if(this.esPersonaJuridica){
         if(this.personaJuridicaFormGroup.valid){
 
-          var apellidos = this.personaNaturalFormGroup.controls['apellidos'].value.split(' ');
+          // var apellidos = this.personaNaturalFormGroup.controls['apellidos'].value.split(' ');
 
-          this.requestSave.tipoDocumento = this.personaNaturalFormGroup.controls['tipoDocumento'].value;
-          this.requestSave.numeroDocumento = this.personaNaturalFormGroup.controls['numeroDocumento'].value;
-          this.requestSave.nombres = this.personaNaturalFormGroup.controls['nombres'].value;
-          this.requestSave.apePaterno = apellidos[0];
-          this.requestSave.apeMaterno =  apellidos[1];
-          this.requestSave.correoElectronico = this.personaNaturalFormGroup.controls['correoElectronico'].value;
-          this.requestSave.numeroCelular = this.personaNaturalFormGroup.controls['numeroCelular'].value;
-          this.requestSave.domicilioFisico =  this.personaNaturalFormGroup.controls['domicilioFisico'].value;
-          this.casillaService.setCasilla(this.requestSave);
+          // this.requestSave.tipoDocumento = this.personaNaturalFormGroup.controls['tipoDocumento'].value;
+          // this.requestSave.numeroDocumento = this.personaNaturalFormGroup.controls['numeroDocumento'].value;
+          // this.requestSave.nombres = this.personaNaturalFormGroup.controls['nombres'].value;
+          // this.requestSave.apePaterno = apellidos[0];
+          // this.requestSave.apeMaterno =  apellidos[1];
+          // this.requestSave.correoElectronico = this.personaNaturalFormGroup.controls['correoElectronico'].value;
+          // this.requestSave.numeroCelular = this.personaNaturalFormGroup.controls['numeroCelular'].value;
+          // this.requestSave.domicilioFisico =  this.personaNaturalFormGroup.controls['domicilioFisico'].value;
+          // this.casillaService.setCasilla(this.requestSave);
          
           this.completedStep.emit();
         }else{

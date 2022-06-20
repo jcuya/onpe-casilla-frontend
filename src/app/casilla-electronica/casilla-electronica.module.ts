@@ -29,6 +29,7 @@ import { PersonaNaturalComponent } from './persona-natural/persona-natural.compo
 import {DndDirective} from "../directives/dnd.directive";
 import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
 import { AlertDialogComponent } from './alert-dialog/alert-dialog.component';
+import { FotoDniComponent } from './foto-dni/foto-dni.component';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { AlertDialogComponent } from './alert-dialog/alert-dialog.component';
     PersonaJuridicaComponent,
     PersonaNaturalComponent,
     AlertDialogComponent,
+    FotoDniComponent,
   ],
   exports: [
     CreacionPasosComponent,

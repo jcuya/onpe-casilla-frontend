@@ -10,6 +10,8 @@ export class requestGlobal{
     numeroDocumento!: string;
     razonSocial!: string;
     file!: File;
+
+    TipoPersona !: string;
 }
 
 

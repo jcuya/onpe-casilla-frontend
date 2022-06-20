@@ -29,34 +29,38 @@
 </ol> -->
 
 <p>Valide sus datos si todo esta conforme, haga clic en el botón "Enviar" de lo contrario haga clic en "Regresar"</p>
-<ol>
+<ol *ngIf="requestSave.TipoPersona === 'n'; else juridica" >
   <li>Persona Natural</li>
-  <li>Tipo de documento: *Aquí el valor*</li>
-  <li>Número de documento: *Aquí el valor*</li>
-  <li>Apellidos y Nombres: -Aquí el apepat--Aquí el apemat-,-Nombres-</li>
-  <li>Correo Electrónico: *Aquí el valor*</li>
-  <li>Número de Celular: *Aquí el valor*</li>
+  <li>Tipo de documento: <b>{{requestSave.tipoDocumento}}</b> </li>
+  <li>Número de documento: <b>{{requestSave.numeroDocumento}}</b></li>
+  <li>Apellidos y Nombres: <b>{{requestSave.apePaterno }}  {{requestSave.apeMaterno }} {{requestSave.nombres}}</b></li>
+  <li>Correo Electrónico: <b>{{requestSave.correoElectronico}}</b></li>
+  <li>Número de Celular: <b>{{requestSave.numeroCelular}}</b></li>
   <li>Departamento / Provincia / Distrito: *Aquí el valor*</li>
-  <li>Dirección: *Aquí el valor*</li>
+  <li>Dirección: <b>{{requestSave.domicilioFisico}}</b></li>
   <li>Foto: *Aquí el valor*</li>
 </ol>
-<ol>
-  <li>Persona Jurídica</li>
-  <li>RUC: *Aquí el valor*</li>
-  <li>Razón Social: *Aquí el valor*</li>
-  <li>Correo Electrónico: *Aquí el valor*</li>
-  <li>Número de Celular: *Aquí el valor*</li>
-  <li>Departamento / Provincia / Distrito: *Aquí el valor*</li>
-  <li>Dirección: *Aquí el valor*</li>
-  <li>Página Web: *Aquí el valor*</li>
-  <li>Representante:</li>
-  <ol style="margin-left: 20px;">
-    <li>Tipo de documento: *Aquí el valor*</li>
-    <li>Número de documento: *Aquí el valor*</li>
-    <li>Apellidos y Nombres: -Aquí el apepat--Aquí el apemat-,-Nombres-</li>
-    <li>Foto: *Aquí el valor*</li>
+
+<ng-template #juridica>
+  <ol >
+    <li>Persona Jurídica</li>
+    <li>RUC: *Aquí el valor*</li>
+    <li>Razón Social: *Aquí el valor*</li>
+    <li>Correo Electrónico: *Aquí el valor*</li>
+    <li>Número de Celular: *Aquí el valor*</li>
+    <li>Departamento / Provincia / Distrito: *Aquí el valor*</li>
+    <li>Dirección: *Aquí el valor*</li>
+    <li>Página Web: *Aquí el valor*</li>
+    <li>Representante:</li>
+    <ol style="margin-left: 20px;">
+      <li>Tipo de documento: *Aquí el valor*</li>
+      <li>Número de documento: *Aquí el valor*</li>
+      <li>Apellidos y Nombres: -Aquí el apepat--Aquí el apemat-,-Nombres-</li>
+      <li>Foto: *Aquí el valor*</li>
+    </ol>
   </ol>
-</ol>
+</ng-template>
+
 
 <br/>
 <app-alert type="warn">Una vez enviada la información, se le notificará el resultado de su Solicitud mediante su correo electrónico registrado.<br />
