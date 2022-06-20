@@ -68,14 +68,14 @@ export class SolicitudComponent implements OnInit {
 
 console.log("respuesta" , res)
 
-      // if(res.status){
-      //   this.dialog.open(AlertDialogComponent, {
-      //     disableClose: true,
-      //     hasBackdrop: true,
-      //     data: {messages: 'Usuario registrado correctamente'}
-      //   });
-      //   return;
-      // }
+      if(res.status){
+        this.dialog.open(AlertDialogComponent, {
+          disableClose: true,
+          hasBackdrop: true,
+          data: {messages: ['Usuario registrado correctamente']}
+        });
+        
+      }
 
     });
 

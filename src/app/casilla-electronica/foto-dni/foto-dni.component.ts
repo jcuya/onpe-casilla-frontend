@@ -16,9 +16,13 @@ export class FotoDniComponent implements OnInit {
 
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
+      file: ['', Validators.required]
     });
   }
-
+  handleArchivoAgregado(event: any) {
+    console.log(event)
+    this.formGroup.get('file')?.setValue(event)
+  }
 
   regresar() {
     this.previousStep.emit()
