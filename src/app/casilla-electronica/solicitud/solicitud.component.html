@@ -30,7 +30,7 @@
 
 <p>Valide sus datos si todo esta conforme, haga clic en el botón "Enviar" de lo contrario haga clic en "Regresar"</p>
 <ol>
-  <li>Condición: *Aquí el valor*</li>
+  <li>Persona Natural</li>
   <li>Tipo de documento: *Aquí el valor*</li>
   <li>Número de documento: *Aquí el valor*</li>
   <li>Apellidos y Nombres: -Aquí el apepat--Aquí el apemat-,-Nombres-</li>
@@ -39,12 +39,30 @@
   <li>Departamento / Provincia / Distrito: *Aquí el valor*</li>
   <li>Dirección: *Aquí el valor*</li>
   <li>Foto: *Aquí el valor*</li>
-  <br/>
-  <app-alert type="warn">Una vez enviada la información, se le notificará el resultado de su Solicitud mediante su correo electrónico registrado.<br />
-    Recuerda que tienes 48 horas para enviar tu solicitud firmada</app-alert>
-  <br/>
-  <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center">
-    <button mat-flat-button type="button" color="primary" (click)="regresar()">REGRESAR</button>
-    <button mat-flat-button color="warn" (click)="continuar()">ENVIAR</button>
-  </div>
 </ol>
+<ol>
+  <li>Persona Jurídica</li>
+  <li>RUC: *Aquí el valor*</li>
+  <li>Razón Social: *Aquí el valor*</li>
+  <li>Correo Electrónico: *Aquí el valor*</li>
+  <li>Número de Celular: *Aquí el valor*</li>
+  <li>Departamento / Provincia / Distrito: *Aquí el valor*</li>
+  <li>Dirección: *Aquí el valor*</li>
+  <li>Página Web: *Aquí el valor*</li>
+  <li>Representante:</li>
+  <ol style="margin-left: 20px;">
+    <li>Tipo de documento: *Aquí el valor*</li>
+    <li>Número de documento: *Aquí el valor*</li>
+    <li>Apellidos y Nombres: -Aquí el apepat--Aquí el apemat-,-Nombres-</li>
+    <li>Foto: *Aquí el valor*</li>
+  </ol>
+</ol>
+
+<br/>
+<app-alert type="warn">Una vez enviada la información, se le notificará el resultado de su Solicitud mediante su correo electrónico registrado.<br />
+  Recuerda que tienes 48 horas para enviar tu solicitud firmada</app-alert>
+<br/>
+<div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center">
+  <button mat-flat-button type="button" color="primary" (click)="regresar()">REGRESAR</button>
+  <button mat-flat-button color="warn" (click)="continuar()">ENVIAR</button>
+</div>
