@@ -1,9 +1,11 @@
 import {Injectable} from '@angular/core';
 import {Condicion, TipoDocumento, Cargo} from "../dto/documento";
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {BehaviorSubject, map, Observable} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {Departamento, Distrito, Provincia} from "../dto/ubigeo.dto";
+import { requestGlobal } from '../dto/request';
+import { ResponseValidateData } from '../dto/personaNaturalDni';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +14,20 @@ export class CasillaService {
 
   configUrl = `${environment.serviceUrl}`
 
+  public _casilla: BehaviorSubject<requestGlobal> = new BehaviorSubject<requestGlobal>(new requestGlobal());
+  casilla$ = this._casilla.asObservable();
   constructor(
     private http: HttpClient
   ) {
+
+  }
+
+  setCasilla(company: requestGlobal){
+    this._casilla.next(company);
+  }
+
+  getCasilla(): requestGlobal {
+    return this._casilla.value;
   }
 
   enviarCodigoValidacion(correo: string): Observable<any> {
@@ -28,6 +41,10 @@ export class CasillaService {
       correo: correo,
       codigoValidacion: codigoValidacion
     })
+  }
+
+  enviarDatos(datos : requestGlobal):Observable<ResponseValidateData>{
+    return this.http.post<ResponseValidateData>(this.configUrl + '/create-box',datos).pipe(map(resp=>resp));
   }
 
   getTipoDocumentoAdjuntoList(): Observable<Array<TipoDocumento>> {

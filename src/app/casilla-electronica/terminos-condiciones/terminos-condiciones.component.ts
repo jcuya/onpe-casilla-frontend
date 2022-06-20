@@ -1,5 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { Subscription } from 'rxjs';
+import { requestGlobal } from 'src/app/core/dto/request';
 import {CasillaService} from "../../core/services/casilla.service";
 
 @Component({
@@ -15,11 +17,23 @@ export class TerminosCondicionesComponent implements OnInit {
   formGroup!: FormGroup;
   terminosCondicionesTexto = ''
 
+  observableRequestSubscription!: Subscription;
+  requestSave: requestGlobal = new requestGlobal();
+
   constructor(
     private formBuilder: FormBuilder,
     private casillaService: CasillaService
   ) {
     this.terminosCondicionesTexto = casillaService.getTerminosCondiciones()
+
+    this.observableRequestSubscription = casillaService.casilla$.subscribe(
+      (requestSave: requestGlobal) => {
+        this.requestSave = requestSave;
+
+        
+        //if (requestSave) this.companyId = requestSave;
+      }
+    );
   }
 
   ngOnInit(): void {
@@ -38,6 +52,8 @@ export class TerminosCondicionesComponent implements OnInit {
       this.formGroup.markAllAsTouched()
       return
     }
+
+    
     this.completedStep.emit()
   }
 }

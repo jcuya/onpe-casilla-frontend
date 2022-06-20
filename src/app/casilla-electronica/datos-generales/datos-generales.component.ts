@@ -5,11 +5,12 @@ import {Condicion, Condicion_Persona_Juridica, Condicion_Persona_Natural,} from 
 import {MatDialog} from "@angular/material/dialog";
 import {PersonaNaturalComponent} from "../persona-natural/persona-natural.component";
 import {PersonaJuridicaComponent} from "../persona-juridica/persona-juridica.component";
-import {firstValueFrom} from "rxjs";
+import {firstValueFrom, Subscription} from "rxjs";
 import {ValidarCorreoService} from "../../core/services/validar-correo.service";
 import { RequestValidateData } from 'src/app/core/dto/personaNaturalDni';
 import { PersonaNaturalService } from 'src/app/core/services/persona-natural.service';
 import { AlertDialogComponent } from '../alert-dialog/alert-dialog.component';
+import { requestGlobal } from 'src/app/core/dto/request';
 
 @Component({
   selector: 'app-datos-generales',
@@ -17,6 +18,7 @@ import { AlertDialogComponent } from '../alert-dialog/alert-dialog.component';
   styleUrls: ['./datos-generales.component.css']
 })
 export class DatosGeneralesComponent implements OnInit {
+
 
   @ViewChild(PersonaNaturalComponent)  personaNaturalComponent !: PersonaNaturalComponent ;
   @ViewChild(PersonaJuridicaComponent) personaJuridicaComponent!: PersonaJuridicaComponent;
@@ -29,6 +31,10 @@ export class DatosGeneralesComponent implements OnInit {
 
   validateRequest : RequestValidateData = new RequestValidateData();
 
+
+  observableRequestSubscription!: Subscription;
+  requestSave: requestGlobal = new requestGlobal();
+
   constructor(
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
@@ -37,6 +43,13 @@ export class DatosGeneralesComponent implements OnInit {
     private cdr: ChangeDetectorRef,
     private personaService : PersonaNaturalService
   ) {
+
+    this.observableRequestSubscription = casillaService.casilla$.subscribe(
+      (requestSave: requestGlobal) => {
+        this.requestSave = requestSave;
+        //if (requestSave) this.companyId = requestSave;
+      }
+    );
   }
 
   update() {
@@ -119,7 +132,18 @@ export class DatosGeneralesComponent implements OnInit {
           console.log("request envio", this.validateRequest)
           this.personaService.validarDatosPersona(this.validateRequest).subscribe(res =>{
             if(res.status){
-             
+
+              var apellidos = this.personaNaturalFormGroup.controls['apellidos'].value.split(' ');
+              var tipoDoc = this.personaNaturalFormGroup.controls['tipoDocumento'].value;
+              this.requestSave.tipoDocumento = tipoDoc.nombre;
+              this.requestSave.numeroDocumento = this.personaNaturalFormGroup.controls['numeroDocumento'].value;
+              this.requestSave.nombres = this.personaNaturalFormGroup.controls['nombres'].value;
+              this.requestSave.apePaterno = apellidos[0];
+              this.requestSave.apeMaterno =  apellidos[1];
+              this.requestSave.correoElectronico = this.personaNaturalFormGroup.controls['correoElectronico'].value;
+              this.requestSave.numeroCelular = this.personaNaturalFormGroup.controls['numeroCelular'].value;
+              this.requestSave.domicilioFisico =  this.personaNaturalFormGroup.controls['domicilioFisico'].value;
+              this.casillaService.setCasilla(this.requestSave);
               this.completedStep.emit();
             }else{
               this.dialog.open(AlertDialogComponent, {
@@ -137,6 +161,18 @@ export class DatosGeneralesComponent implements OnInit {
 
       if(this.esPersonaJuridica){
         if(this.personaJuridicaFormGroup.valid){
+
+          var apellidos = this.personaNaturalFormGroup.controls['apellidos'].value.split(' ');
+
+          this.requestSave.tipoDocumento = this.personaNaturalFormGroup.controls['tipoDocumento'].value;
+          this.requestSave.numeroDocumento = this.personaNaturalFormGroup.controls['numeroDocumento'].value;
+          this.requestSave.nombres = this.personaNaturalFormGroup.controls['nombres'].value;
+          this.requestSave.apePaterno = apellidos[0];
+          this.requestSave.apeMaterno =  apellidos[1];
+          this.requestSave.correoElectronico = this.personaNaturalFormGroup.controls['correoElectronico'].value;
+          this.requestSave.numeroCelular = this.personaNaturalFormGroup.controls['numeroCelular'].value;
+          this.requestSave.domicilioFisico =  this.personaNaturalFormGroup.controls['domicilioFisico'].value;
+          this.casillaService.setCasilla(this.requestSave);
          
           this.completedStep.emit();
         }else{
