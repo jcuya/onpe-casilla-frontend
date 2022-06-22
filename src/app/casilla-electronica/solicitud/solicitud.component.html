@@ -36,7 +36,7 @@
   <li>Apellidos y Nombres: <b>{{requestSave.apePaterno }}  {{requestSave.apeMaterno }} {{requestSave.nombres}}</b></li>
   <li>Correo Electrónico: <b>{{requestSave.correoElectronico}}</b></li>
   <li>Número de Celular: <b>{{requestSave.numeroCelular}}</b></li>
-  <li>Departamento / Provincia / Distrito: *Aquí el valor*</li>
+  <li>Departamento / Provincia / Distrito: <b>{{requestSave.departamento}} / {{requestSave.provincia}} / {{requestSave.distrito}} </b></li>
   <li>Dirección: <b>{{requestSave.domicilioFisico}}</b></li>
   <li>Foto: *Aquí el valor*</li>
 </ol>
@@ -44,12 +44,12 @@
 <ng-template #juridica>
   <ol >
     <li>Persona Jurídica</li>
-    <li>RUC: *Aquí el valor*</li>
-    <li>Razón Social: *Aquí el valor*</li>
-    <li>Correo Electrónico: *Aquí el valor*</li>
-    <li>Número de Celular: *Aquí el valor*</li>
-    <li>Departamento / Provincia / Distrito: *Aquí el valor*</li>
-    <li>Dirección: *Aquí el valor*</li>
+    <li>RUC: <b>{{requestSave.numeroDocumento}}</b></li>
+    <li>Razón Social: <b>{{requestSave.razonSocial}}</b></li>
+    <li>Correo Electrónico: <b>{{requestSave.correoElectronico}}</b></li>
+    <li>Número de teléfono: <b>{{requestSave.telefono}}</b> </li>
+    <li>Departamento / Provincia / Distrito: <b>{{requestSave.departamento}} / {{requestSave.provincia}} / {{requestSave.distrito}} </b></li>
+    <li>Dirección: <b>{{requestSave.domicilioFisico}}</b> </li>
     <li>Página Web: *Aquí el valor*</li>
     <li>Representante:</li>
     <ol style="margin-left: 20px;">

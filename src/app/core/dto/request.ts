@@ -12,6 +12,11 @@ export class requestGlobal{
     file!: File;
 
     TipoPersona !: string;
+
+    representante : any;
+    departamento!: string;
+    provincia!: string;
+    distrito!: string;
 }
 
 

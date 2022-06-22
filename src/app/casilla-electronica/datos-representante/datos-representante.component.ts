@@ -7,10 +7,11 @@ import {
   TipoDocumento,
   TipoDocumento_DNI
 } from "../../core/dto/documento";
-import {firstValueFrom} from "rxjs";
+import {firstValueFrom, Subscription} from "rxjs";
 import {ValidarCorreoService} from "../../core/services/validar-correo.service";
 import {Departamento, Distrito, Provincia} from "../../core/dto/ubigeo.dto";
 import {UbigeoService} from "../../core/services/ubigeo.service";
+import { requestGlobal, RequestRepresentante } from 'src/app/core/dto/request';
 
 @Component({
   selector: 'app-datos-representante',
@@ -22,6 +23,11 @@ export class DatosRepresentanteComponent implements OnInit {
   @Output() completedStep = new EventEmitter<any>()
   @Output() previousStep = new EventEmitter<any>()
 
+  observableRequestSubscription!: Subscription;
+  requestSave: requestGlobal = new requestGlobal();
+
+
+  requestRepresentante : RequestRepresentante = new RequestRepresentante();
   formGroup!: FormGroup;
   tipoDocumentoAdjuntoList: Array<TipoDocumento> = []
   tipoDocumentoList: Array<TipoDocumento> = []
@@ -37,6 +43,13 @@ export class DatosRepresentanteComponent implements OnInit {
     private ubigeoService: UbigeoService,
     private validarCorreoService: ValidarCorreoService,
   ) {
+
+    this.observableRequestSubscription = casillaService.casilla$.subscribe(
+      (requestSave: requestGlobal) => {
+        this.requestSave = requestSave;
+        //if (requestSave) this.companyId = requestSave;
+      }
+    );
   }
 
   async ngOnInit() {
@@ -76,6 +89,28 @@ export class DatosRepresentanteComponent implements OnInit {
   siguientePaso() {
 
     if(this.formGroup.valid){
+
+      var nombreCompleto = this.formGroup.controls['nombres'].value + this.formGroup.controls['apellidos'].value + "";
+      var cargo = this.formGroup.controls['cargo'].value ;
+      var tipoDocumento = this.formGroup.controls['tipoDocumento'].value ;
+      var tipoDocumentoAdjunto = this.formGroup.controls['tipoDocumentoAdjunto'].value;;
+
+      this.requestRepresentante.tipoDocumentoAdjunto = tipoDocumentoAdjunto.nombre;
+      this.requestRepresentante.tipoDocumentoAdjuntoNombre = this.formGroup.controls['tipoDocumentoAdjuntoNombre'].value;
+      this.requestRepresentante.tipoDocumento = tipoDocumento.nombre;
+      this.requestRepresentante.numeroDocumento = this.formGroup.controls['numeroDocumento'].value;
+      this.requestRepresentante.nombreCompleto = nombreCompleto;
+      this.requestRepresentante.correoElectronico = this.formGroup.controls['correoElectronico'].value;
+      this.requestRepresentante.numeroCelular = this.formGroup.controls['numeroCelular'].value;
+      this.requestRepresentante.domicilioFisico = this.formGroup.controls['domicilioFisico'].value;
+      this.requestRepresentante.cargo = cargo.nombre;
+      this.requestRepresentante.cargoNombre = this.formGroup.controls['cargoNombre'].value;
+      this.requestRepresentante.file = this.formGroup.controls['file'].value;
+
+      this.requestSave.representante = this.requestRepresentante;
+      this.casillaService.setCasilla(this.requestSave);
+
+
       this.completedStep.emit()
     }else{
       this.formGroup.markAllAsTouched()

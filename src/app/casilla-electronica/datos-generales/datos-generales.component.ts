@@ -144,13 +144,21 @@ export class DatosGeneralesComponent implements OnInit {
               this.requestSave.correoElectronico = this.personaNaturalFormGroup.controls['correoElectronico'].value;
               this.requestSave.numeroCelular = this.personaNaturalFormGroup.controls['numeroCelular'].value;
               this.requestSave.domicilioFisico =  this.personaNaturalFormGroup.controls['domicilioFisico'].value;
+
+              var departamento  = this.personaNaturalFormGroup.controls['departamento'].value;
+              var provincia  = this.personaNaturalFormGroup.controls['provincia'].value;
+              var distrito  = this.personaNaturalFormGroup.controls['distrito'].value;
+
+              this.requestSave.departamento = departamento.nodep;
+              this.requestSave.provincia = provincia.noprv;
+              this.requestSave.distrito = distrito.nodis;
               this.casillaService.setCasilla(this.requestSave);
               this.completedStep.emit();
             }else{
               this.dialog.open(AlertDialogComponent, {
                 disableClose: true,
                 hasBackdrop: true,
-                data: {messages: [res.mensaje]}
+                data: {cabecera : 'Notificación' ,messages: [res.mensaje]}
               });
               return;
             }
@@ -163,17 +171,21 @@ export class DatosGeneralesComponent implements OnInit {
       if(this.esPersonaJuridica){
         if(this.personaJuridicaFormGroup.valid){
 
-          // var apellidos = this.personaNaturalFormGroup.controls['apellidos'].value.split(' ');
+          var tipoDoc = this.personaJuridicaFormGroup.controls['tipoDocumento'].value;
+          this.requestSave.tipoDocumento =tipoDoc.nombre;
+          this.requestSave.numeroDocumento = this.personaJuridicaFormGroup.controls['numeroDocumento'].value;
+          this.requestSave.razonSocial = this.personaJuridicaFormGroup.controls['razonSocial'].value;
+          this.requestSave.correoElectronico = this.personaJuridicaFormGroup.controls['correoElectronico'].value;
+          this.requestSave.telefono = this.personaJuridicaFormGroup.controls['telefono'].value;
+          this.requestSave.domicilioFisico =  this.personaJuridicaFormGroup.controls['direccion'].value;
+          var departamento  = this.personaJuridicaFormGroup.controls['departamento'].value;
+          var provincia  = this.personaJuridicaFormGroup.controls['provincia'].value;
+          var distrito  = this.personaJuridicaFormGroup.controls['distrito'].value;
 
-          // this.requestSave.tipoDocumento = this.personaNaturalFormGroup.controls['tipoDocumento'].value;
-          // this.requestSave.numeroDocumento = this.personaNaturalFormGroup.controls['numeroDocumento'].value;
-          // this.requestSave.nombres = this.personaNaturalFormGroup.controls['nombres'].value;
-          // this.requestSave.apePaterno = apellidos[0];
-          // this.requestSave.apeMaterno =  apellidos[1];
-          // this.requestSave.correoElectronico = this.personaNaturalFormGroup.controls['correoElectronico'].value;
-          // this.requestSave.numeroCelular = this.personaNaturalFormGroup.controls['numeroCelular'].value;
-          // this.requestSave.domicilioFisico =  this.personaNaturalFormGroup.controls['domicilioFisico'].value;
-          // this.casillaService.setCasilla(this.requestSave);
+          this.requestSave.departamento = departamento.nodep;
+          this.requestSave.provincia = provincia.noprv;
+          this.requestSave.distrito = distrito.nodis;
+          this.casillaService.setCasilla(this.requestSave);
          
           this.completedStep.emit();
         }else{

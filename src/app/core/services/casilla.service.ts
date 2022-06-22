@@ -1,12 +1,17 @@
 import {Injectable} from '@angular/core';
 import {Condicion, TipoDocumento, Cargo} from "../dto/documento";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {BehaviorSubject, map, Observable} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {Departamento, Distrito, Provincia} from "../dto/ubigeo.dto";
 import { requestGlobal } from '../dto/request';
 import { ResponseValidateData } from '../dto/personaNaturalDni';
 
+const httpOptions = {
+  headers: new HttpHeaders({
+      'Content-Type': 'application/json'  
+  })
+};
 @Injectable({
   providedIn: 'root'
 })
@@ -43,7 +48,8 @@ export class CasillaService {
     })
   }
 
-  enviarDatos(datos : requestGlobal):Observable<ResponseValidateData>{
+  enviarDatos(datos: FormData ):Observable<ResponseValidateData>{
+    var headers = new HttpHeaders().set("Content-Type","application/json"); 
     return this.http.post<ResponseValidateData>(this.configUrl + '/create-box',datos).pipe(map(resp=>resp));
   }
 

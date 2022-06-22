@@ -3,6 +3,9 @@
     <br>
     <div fxLayout="column" fxLayoutGap="10px">
         <div>
+           <div style="display: none">
+            <input matInput formControlName="file">
+          </div>
             <app-upload-file
             (fileDropped)="handleArchivoAgregado($event)"
               fxFlex="100"

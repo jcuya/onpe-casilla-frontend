@@ -92,7 +92,7 @@ export class PersonaNaturalComponent implements OnInit {
         this.dialog.open(AlertDialogComponent, {
           disableClose: true,
           hasBackdrop: true,
-          data: {messages: ['No se encontró la información de la persona']}
+          data: {cabecera : 'Notificación' ,messages: ['No se encontró la información de la persona']}
         });
         return;
       }

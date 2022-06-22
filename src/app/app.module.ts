@@ -6,6 +6,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LayoutComponent} from './layout/layout.component';
 import {CasillaElectronicaModule} from "./casilla-electronica/casilla-electronica.module";
 import {HttpClientModule} from "@angular/common/http";
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import {HttpClientModule} from "@angular/common/http";
     BrowserModule,
     BrowserAnimationsModule,
     CasillaElectronicaModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot([])
   ],
   providers: [],
   exports: [],
