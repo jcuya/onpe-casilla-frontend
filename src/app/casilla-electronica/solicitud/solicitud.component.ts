@@ -95,6 +95,7 @@ export class SolicitudComponent implements OnInit {
     fd.append('correoElectronico',this.requestSave.correoElectronico)
     fd.append('numeroCelular',this.requestSave.numeroCelular)
     fd.append('telefono',this.requestSave.telefono)
+    fd.append('paginaweb',this.requestSave.paginaWeb)
     fd.append('domicilioFisico',this.requestSave.domicilioFisico)
     fd.append('nombres',this.requestSave.nombres)
     fd.append('apePaterno',this.requestSave.apePaterno)
