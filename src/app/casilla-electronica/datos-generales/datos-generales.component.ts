@@ -178,6 +178,7 @@ export class DatosGeneralesComponent implements OnInit {
           this.requestSave.correoElectronico = this.personaJuridicaFormGroup.controls['correoElectronico'].value;
           this.requestSave.telefono = this.personaJuridicaFormGroup.controls['telefono'].value;
           this.requestSave.domicilioFisico =  this.personaJuridicaFormGroup.controls['direccion'].value;
+          this.requestSave.paginaWeb = this.personaJuridicaComponent.formGroup.controls['paginaWeb'].value;
           var departamento  = this.personaJuridicaFormGroup.controls['departamento'].value;
           var provincia  = this.personaJuridicaFormGroup.controls['provincia'].value;
           var distrito  = this.personaJuridicaFormGroup.controls['distrito'].value;

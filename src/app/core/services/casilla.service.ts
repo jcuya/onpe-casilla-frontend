@@ -56,6 +56,7 @@ export class CasillaService {
   getTipoDocumentoAdjuntoList(): Observable<Array<TipoDocumento>> {
     return this.dummy([
       {codigo: 'r', nombre: 'Resolución de designación'},
+      {codigo:'o' , nombre : 'Oficio de designación'}
     ])
   }
 

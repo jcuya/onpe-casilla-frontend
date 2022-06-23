@@ -107,6 +107,12 @@ export class DatosRepresentanteComponent implements OnInit {
       this.requestRepresentante.cargoNombre = this.formGroup.controls['cargoNombre'].value;
       this.requestRepresentante.file = this.formGroup.controls['file'].value;
 
+      var departamento  = this.formGroup.controls['departamento'].value;
+      var provincia  = this.formGroup.controls['provincia'].value;
+      var distrito  = this.formGroup.controls['distrito'].value;
+      let Ubigeo =  departamento.nodep   + " / " + provincia.noprv + " / " + distrito.nodis;
+      this.requestRepresentante.ubigeo = Ubigeo;
+
       this.requestSave.representante = this.requestRepresentante;
       this.casillaService.setCasilla(this.requestSave);
 

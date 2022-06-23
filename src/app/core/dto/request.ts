@@ -12,8 +12,8 @@ export class requestGlobal{
     file!: File;
 
     TipoPersona !: string;
-
-    representante : any;
+    paginaWeb !: string;
+    representante : RequestRepresentante = new RequestRepresentante();
     departamento!: string;
     provincia!: string;
     distrito!: string;
@@ -66,6 +66,10 @@ export class RequestRepresentante{
     cargo!: string;
     cargoNombre!: string;
     file!: File;
+    // departamento !: string;
+    // provincia !: string;
+    // distrito !: string;
+    ubigeo !: string;
 }
 
 export class RequestTerminos{

@@ -38,7 +38,7 @@
   <li>Número de Celular: <b>{{requestSave.numeroCelular}}</b></li>
   <li>Departamento / Provincia / Distrito: <b>{{requestSave.departamento}} / {{requestSave.provincia}} / {{requestSave.distrito}} </b></li>
   <li>Dirección: <b>{{requestSave.domicilioFisico}}</b></li>
-  <li>Foto: *Aquí el valor*</li>
+  <img [src]="imageSrc" *ngIf="imageSrc" style="height: 300px; width:400px">
 </ol>
 
 <ng-template #juridica>
@@ -50,13 +50,13 @@
     <li>Número de teléfono: <b>{{requestSave.telefono}}</b> </li>
     <li>Departamento / Provincia / Distrito: <b>{{requestSave.departamento}} / {{requestSave.provincia}} / {{requestSave.distrito}} </b></li>
     <li>Dirección: <b>{{requestSave.domicilioFisico}}</b> </li>
-    <li>Página Web: *Aquí el valor*</li>
+    <li>Página Web: <b>{{requestSave.paginaWeb}}</b></li>
     <li>Representante:</li>
     <ol style="margin-left: 20px;">
-      <li>Tipo de documento: *Aquí el valor*</li>
-      <li>Número de documento: *Aquí el valor*</li>
-      <li>Apellidos y Nombres: -Aquí el apepat--Aquí el apemat-,-Nombres-</li>
-      <li>Foto: *Aquí el valor*</li>
+      <li>Tipo de documento: <b>{{requestSave?.representante!.tipoDocumento}}</b></li>
+      <li>Número de documento: <b>{{requestSave?.representante!.numeroDocumento}}</b> </li>
+      <li>Apellidos y Nombres: <b>{{requestSave?.representante!.nombreCompleto}}</b></li>
+      <img [src]="imageSrc" *ngIf="imageSrc" style="height: 300px; width:400px">
     </ol>
   </ol>
 </ng-template>
@@ -64,7 +64,7 @@
 
 <br/>
 <app-alert type="warn">Una vez enviada la información, se le notificará el resultado de su Solicitud mediante su correo electrónico registrado.<br />
-  Recuerda que tienes 48 horas para enviar tu solicitud firmada</app-alert>
+ </app-alert>
 <br/>
 <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center">
   <button mat-flat-button type="button" color="primary" (click)="regresar()">REGRESAR</button>

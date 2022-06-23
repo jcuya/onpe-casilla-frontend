@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { MatDialog } from '@angular/material/dialog';
 import { Route, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { requestGlobal } from 'src/app/core/dto/request';
+import { requestGlobal, RequestRepresentante } from 'src/app/core/dto/request';
 import { CasillaService } from 'src/app/core/services/casilla.service';
 import { AlertDialogComponent } from '../alert-dialog/alert-dialog.component';
 import { DatosGeneralesComponent } from '../datos-generales/datos-generales.component';
@@ -26,9 +26,11 @@ export class SolicitudComponent implements OnInit {
   @Output() previousStep = new EventEmitter<any>()
   formGroup!: FormGroup;
   listFiles : File[] = [];
+  imageSrc: string="";
 
   observableRequestSubscription!: Subscription;
   requestSave: requestGlobal = new requestGlobal();
+  requestRepresentante : RequestRepresentante = new RequestRepresentante();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -39,8 +41,10 @@ export class SolicitudComponent implements OnInit {
     this.observableRequestSubscription = casillaService.casilla$.subscribe(
       (requestSave: requestGlobal) => {
         this.requestSave = requestSave;
+        this.requestRepresentante = this.requestSave!.representante;
         console.log("data enviar", this.requestSave)
-        //if (requestSave) this.companyId = requestSave;
+    
+        this.onFileChange(this.requestSave.file);
       }
     );
   }
@@ -51,6 +55,8 @@ export class SolicitudComponent implements OnInit {
     this.formGroup = this.formBuilder.group({
       name: ['', Validators.required]
     });
+
+
   }
 
   continuar() {
@@ -95,6 +101,9 @@ export class SolicitudComponent implements OnInit {
     fd.append('apeMaterno',this.requestSave.apeMaterno)
     fd.append('tipoPersona',this.requestSave.TipoPersona)
     fd.append('files',this.requestSave.file)
+    let Ubigeo = this.requestSave.departamento + " / " +this.requestSave.provincia + " / " + this.requestSave.distrito
+
+    fd.append('ubigeo',Ubigeo)
     
 
     if(this.requestSave.TipoPersona === 'j'){
@@ -127,12 +136,28 @@ export class SolicitudComponent implements OnInit {
 
     });
 
-
-
-
-
-
   }
 
+
+
+  onFileChange(foto : File) {
+    const reader = new FileReader();
+    
+    if(foto) {
+      const file = foto;
+      reader.readAsDataURL(file);
+    
+      reader.onload = () => {
+   
+        this.imageSrc = reader.result as string;
+     
+        // this.myForm.patchValue({
+        //   fileSource: reader.result
+        // });
+   
+      };
+   
+    }
+  }
 
 }
