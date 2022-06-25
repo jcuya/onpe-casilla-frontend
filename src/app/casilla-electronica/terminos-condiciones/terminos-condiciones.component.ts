@@ -48,12 +48,21 @@ export class TerminosCondicionesComponent implements OnInit {
   }
 
   continuar() {
-    if(!this.formGroup.valid){
+    if(this.formGroup.valid){
+      if(this.formGroup.controls['terminosCondiciones'].value == true && this.formGroup.controls['politicasDatos'].value == true){
+        this.completedStep.emit()
+      }else{
+        this.formGroup.markAllAsTouched()
+        return
+      }
+    
+    
+    }else{
       this.formGroup.markAllAsTouched()
       return
     }
 
     
-    this.completedStep.emit()
+   
   }
 }

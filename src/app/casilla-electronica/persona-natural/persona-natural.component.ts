@@ -72,6 +72,12 @@ export class PersonaNaturalComponent implements OnInit {
       this.maxlength =9
       this.formGroup.get('nombres')?.enable();
       this.formGroup.get('apellidos')?.enable();
+
+      this.formGroup.get("nombreMadre")?.setValue(" ");
+      this.formGroup.get("nombrePadre")?.setValue(" ");
+      this.formGroup.get("digitoVerificacion")?.setValue(" ");
+
+
     }
   }
 

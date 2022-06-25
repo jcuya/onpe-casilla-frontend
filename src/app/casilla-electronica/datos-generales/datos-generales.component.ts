@@ -124,6 +124,7 @@ export class DatosGeneralesComponent implements OnInit {
 
       if(this.esPersonaNatural){
         if(this.personaNaturalFormGroup.valid){
+    
 
           this.validateRequest.dni = this.personaNaturalFormGroup.controls['numeroDocumento'].value;
           this.validateRequest.nombreMadre = this.personaNaturalFormGroup.controls['nombreMadre'].value;
@@ -131,29 +132,15 @@ export class DatosGeneralesComponent implements OnInit {
           this.validateRequest.fechaNacimiento = new Date (this.personaNaturalFormGroup.controls['fechaNacimento'].value);
           this.validateRequest.codigoVerifi = this.personaNaturalFormGroup.controls['digitoVerificacion'].value;
           console.log("request envio", this.validateRequest)
+          var tipoDoc = this.personaNaturalFormGroup.controls['tipoDocumento'].value;
+          if(tipoDoc.nombre === 'CE'){
+            return  this.generateRequestNaturalEmit();
+          }
           this.personaService.validarDatosPersona(this.validateRequest).subscribe(res =>{
             if(res.status){
 
-              var apellidos = this.personaNaturalFormGroup.controls['apellidos'].value.split(' ');
-              var tipoDoc = this.personaNaturalFormGroup.controls['tipoDocumento'].value;
-              this.requestSave.tipoDocumento = tipoDoc.nombre;
-              this.requestSave.numeroDocumento = this.personaNaturalFormGroup.controls['numeroDocumento'].value;
-              this.requestSave.nombres = this.personaNaturalFormGroup.controls['nombres'].value;
-              this.requestSave.apePaterno = apellidos[0];
-              this.requestSave.apeMaterno =  apellidos[1];
-              this.requestSave.correoElectronico = this.personaNaturalFormGroup.controls['correoElectronico'].value;
-              this.requestSave.numeroCelular = this.personaNaturalFormGroup.controls['numeroCelular'].value;
-              this.requestSave.domicilioFisico =  this.personaNaturalFormGroup.controls['domicilioFisico'].value;
+             this.generateRequestNaturalEmit();
 
-              var departamento  = this.personaNaturalFormGroup.controls['departamento'].value;
-              var provincia  = this.personaNaturalFormGroup.controls['provincia'].value;
-              var distrito  = this.personaNaturalFormGroup.controls['distrito'].value;
-
-              this.requestSave.departamento = departamento.nodep;
-              this.requestSave.provincia = provincia.noprv;
-              this.requestSave.distrito = distrito.nodis;
-              this.casillaService.setCasilla(this.requestSave);
-              this.completedStep.emit();
             }else{
               this.dialog.open(AlertDialogComponent, {
                 disableClose: true,
@@ -199,6 +186,33 @@ export class DatosGeneralesComponent implements OnInit {
       this.formGroup.markAllAsTouched();
     }
     
+  }
+
+
+
+  generateRequestNaturalEmit(){
+
+    var apellidos = this.personaNaturalFormGroup.controls['apellidos'].value.split(' ');
+    var tipoDoc = this.personaNaturalFormGroup.controls['tipoDocumento'].value;
+    this.requestSave.tipoDocumento = tipoDoc.nombre;
+    this.requestSave.numeroDocumento = this.personaNaturalFormGroup.controls['numeroDocumento'].value;
+    this.requestSave.nombres = this.personaNaturalFormGroup.controls['nombres'].value;
+    this.requestSave.apePaterno = apellidos[0];
+    this.requestSave.apeMaterno =  apellidos[1];
+    this.requestSave.correoElectronico = this.personaNaturalFormGroup.controls['correoElectronico'].value;
+    this.requestSave.numeroCelular = this.personaNaturalFormGroup.controls['numeroCelular'].value;
+    this.requestSave.domicilioFisico =  this.personaNaturalFormGroup.controls['domicilioFisico'].value;
+
+    var departamento  = this.personaNaturalFormGroup.controls['departamento'].value;
+    var provincia  = this.personaNaturalFormGroup.controls['provincia'].value;
+    var distrito  = this.personaNaturalFormGroup.controls['distrito'].value;
+
+    this.requestSave.departamento = departamento.nodep;
+    this.requestSave.provincia = provincia.noprv;
+    this.requestSave.distrito = distrito.nodis;
+
+    this.casillaService.setCasilla(this.requestSave);
+    this.completedStep.emit();
   }
 
   get esPersonaNatural(): boolean {
