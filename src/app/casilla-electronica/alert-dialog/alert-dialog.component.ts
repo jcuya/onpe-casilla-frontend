@@ -1,5 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import { DOCUMENT } from '@angular/common';
 
 class DialogData {
   messages: string[] = [];
@@ -15,6 +16,7 @@ export class AlertDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<AlertDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    @Inject(DOCUMENT) private document: Document,
   ) {
   }
 
@@ -22,6 +24,7 @@ export class AlertDialogComponent implements OnInit {
   }
 
   aceptar(){
-    this.dialogRef.close()
+    this.dialogRef.close();
+    this.document.location.href = 'https://casillaelectronica.onpe.gob.pe/#/login';
   }
 }
