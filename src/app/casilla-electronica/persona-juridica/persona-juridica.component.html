@@ -9,6 +9,9 @@
     <mat-form-field appearance="outline" fxFlex="50">
       <mat-label>Número de documento</mat-label>
       <input matInput formControlName="numeroDocumento" (keypress)="validarsoloNumeros($event)" maxlength="11">
+      <button *ngIf="esTipoDocumentoRuc" class="append-button" mat-flat-button aria-label="Validar" (click)="validarDocumento()" type="button">
+        Validar
+      </button>
     </mat-form-field>
   </div>
   <div fxLayout="row" fxLayoutGap="10px">
