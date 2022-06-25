@@ -1,6 +1,14 @@
 <form [formGroup]="formGroup" (submit)="$event.preventDefault()">
   
     <br>
+    <app-alert type="warn"><p><strong>Instrucciones</strong></p>
+      <ol>
+        <li>Asegúrate de tomarte la foto con una luz blanca.</li>
+        <li>No tengas accesorios puestos como lentes, aretes, etc.</li>
+        <li>Recuerda que debes mostrar el frontal de tu DNI.</li>
+      </ol>
+     </app-alert>
+    <br/>
     <div fxLayout="column" fxLayoutGap="10px">
         <div>
            <div style="display: none">
@@ -9,7 +17,7 @@
             <app-upload-file
             (fileDropped)="handleArchivoAgregado($event)"
               fxFlex="100"
-              label = "Cargar foto"
+              label = ""
               title="Arrastrar y soltar"
               description="Cargar foto DNI (Formato JPG o PDF, peso máximo 2Mb)"></app-upload-file>
           </div>

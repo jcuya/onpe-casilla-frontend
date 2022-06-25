@@ -122,7 +122,7 @@ export class SolicitudComponent implements OnInit {
         this.dialog.open(AlertDialogComponent, {
           disableClose: true,
           hasBackdrop: true,
-          data: {cabecera : 'Registrado!' ,messages: ['Usuario registrado correctamente']}
+          data: {cabecera : '¡Solicitud Enviada!' ,messages: ['Se ha enviado tu solicitud de registro de casilla.']}
         }).afterClosed().subscribe(result =>{
           // this.router.navigateByUrl("https://casillaelectronica.onpe.gob.pe");
         });
