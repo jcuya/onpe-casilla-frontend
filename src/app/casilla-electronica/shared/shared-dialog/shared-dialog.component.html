@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="col col-md-12">
+        <h3 class="title"><strong>{{titleForm}}</strong></h3>
+       
+
+            <div class="form-group">
+                <label>{{info}}</label>
+               
+            </div>
+            <br>
+            <form [formGroup]="formGroup" class="form-inline" class="form-group center">
+
+                <input type="text" class="cuadro"  maxlength="1" formControlName="codigo1" (keypress)="validarsoloNumeros($event)">
+                <input type="text" class="cuadro"  maxlength="1" formControlName="codigo2" (keypress)="validarsoloNumeros($event)">
+                <input type="text" class="cuadro"  maxlength="1" formControlName="codigo3" (keypress)="validarsoloNumeros($event)">
+                <input type="text" class="cuadro"  maxlength="1" formControlName="codigo4" (keypress)="validarsoloNumeros($event)">
+                <input type="text" class="cuadro"  maxlength="1" formControlName="codigo5"(keypress)="validarsoloNumeros($event)">
+                <input type="text" class="cuadro"  maxlength="1" formControlName="codigo6"(keypress)="validarsoloNumeros($event)">
+
+            </form>
+ 
+
+            <div  align="end"  >
+                <!-- <button class="append-button" mat-flat-button aria-label="Validar" type="button"  (click)="cancel()" ></button> -->
+                <button mat-flat-button type="button" color="success"         (click)="valid()"  >Validar</button>
+            </div>
+        
+    </div>
+</div>

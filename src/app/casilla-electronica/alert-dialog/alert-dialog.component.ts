@@ -26,5 +26,6 @@ export class AlertDialogComponent implements OnInit {
   aceptar(){
     this.dialogRef.close();
     //this.document.location.href = 'https://casillaelectronica.onpe.gob.pe/#/login';
+  
   }
 }

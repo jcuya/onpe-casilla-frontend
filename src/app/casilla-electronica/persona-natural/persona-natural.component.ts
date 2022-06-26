@@ -2,7 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Condicion_Persona_Natural, TipoDocumento, TipoDocumento_DNI} from "../../core/dto/documento";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CasillaService} from "../../core/services/casilla.service";
-import {MatDialog} from "@angular/material/dialog";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {firstValueFrom} from "rxjs";
 import {Departamento, Distrito, Provincia} from "../../core/dto/ubigeo.dto";
 import {UbigeoService} from "../../core/services/ubigeo.service";
@@ -10,6 +10,7 @@ import {PersonaNaturalService} from "../../core/services/persona-natural.service
 import {PersonaNaturalDni} from "../../core/dto/personaNaturalDni";
 import {ValidacionCorreoComponent} from "../validacion-correo/validacion-correo.component";
 import {AlertDialogComponent} from "../alert-dialog/alert-dialog.component";
+import { SharedDialogComponent } from '../shared/shared-dialog/shared-dialog.component';
 
 @Component({
   selector: 'app-persona-natural',
@@ -53,6 +54,7 @@ export class PersonaNaturalComponent implements OnInit {
       provincia: ['', Validators.required],
       distrito: ['', Validators.required],
       domicilioFisico: ['', Validators.required],
+      validateEmail : [false, Validators.required],
     })
     this.tipoDocumentoList = await firstValueFrom(this.casillaService.getTipoDocumentoList(Condicion_Persona_Natural))
     this.departamentoList = await firstValueFrom(this.ubigeoService.getDepartamentoList())
@@ -81,8 +83,17 @@ export class PersonaNaturalComponent implements OnInit {
     }
   }
 
-  validarCorreoElectronico() {
 
+
+  validarCorreoElectronico() {
+    const dialogRef = this.dialog.open(SharedDialogComponent, {
+      width: "700px",
+      disableClose: true,
+      //data: dataItem,
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      this.formGroup.get("validateEmail")?.setValue(result);
+    });
   }
 
   invalidarDocumento() {

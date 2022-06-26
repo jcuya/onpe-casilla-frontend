@@ -30,6 +30,7 @@ import {DndDirective} from "../directives/dnd.directive";
 import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
 import { AlertDialogComponent } from './alert-dialog/alert-dialog.component';
 import { FotoDniComponent } from './foto-dni/foto-dni.component';
+import { SharedDialogComponent } from './shared/shared-dialog/shared-dialog.component';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { FotoDniComponent } from './foto-dni/foto-dni.component';
     PersonaNaturalComponent,
     AlertDialogComponent,
     FotoDniComponent,
+    SharedDialogComponent,
   ],
   exports: [
     CreacionPasosComponent,

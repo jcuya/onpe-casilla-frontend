@@ -1,0 +1,18 @@
+.cuadro{
+    width: 18px;
+    margin: 5px;
+}
+
+.center{
+    text-align: center;
+}
+
+input {
+    text-align: center;
+  }
+  ::-webkit-input-placeholder {
+    text-align: center;
+  }
+  :-moz-placeholder {
+    text-align: center;
+  }
