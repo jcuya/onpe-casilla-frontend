@@ -1,4 +1,5 @@
-import {Component, EventEmitter, HostBinding, OnInit, Output, ViewChild} from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import {Component, EventEmitter, HostBinding, Inject, OnInit, Output, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { MatDialog } from '@angular/material/dialog';
 import { Route, Router } from '@angular/router';
@@ -36,7 +37,8 @@ export class SolicitudComponent implements OnInit {
     private formBuilder: FormBuilder,
     private casillaService: CasillaService,
     public dialog: MatDialog,
-    private router : Router
+    private router : Router,
+    @Inject(DOCUMENT) private document: Document
   ) {
     this.observableRequestSubscription = casillaService.casilla$.subscribe(
       (requestSave: requestGlobal) => {
@@ -124,7 +126,7 @@ export class SolicitudComponent implements OnInit {
           hasBackdrop: true,
           data: {cabecera : '¡Solicitud Enviada!' ,messages: ['Se ha enviado tu solicitud de registro de casilla.']}
         }).afterClosed().subscribe(result =>{
-          // this.router.navigateByUrl("https://casillaelectronica.onpe.gob.pe");
+          this.document.location.href = 'https://casillaelectronica.onpe.gob.pe/#/login';
         });
         
       }else{

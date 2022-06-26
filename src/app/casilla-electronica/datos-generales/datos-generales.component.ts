@@ -124,6 +124,15 @@ export class DatosGeneralesComponent implements OnInit {
 
       if(this.esPersonaNatural){
         if(this.personaNaturalFormGroup.valid){
+
+          if(!this.personaNaturalFormGroup.controls['validateEmail'].value){
+            this.dialog.open(AlertDialogComponent, {
+              disableClose: true,
+              hasBackdrop: true,
+              data: {cabecera : 'Validación' ,messages: ['No validó el correo electrónico']}
+            });
+            return;
+          }
     
 
           this.validateRequest.dni = this.personaNaturalFormGroup.controls['numeroDocumento'].value;
