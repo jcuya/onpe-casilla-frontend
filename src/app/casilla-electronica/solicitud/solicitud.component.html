@@ -38,7 +38,7 @@
   <li>Número de Celular: <b>{{requestSave.numeroCelular}}</b></li>
   <li>Departamento / Provincia / Distrito: <b>{{requestSave.departamento}} / {{requestSave.provincia}} / {{requestSave.distrito}} </b></li>
   <li>Dirección: <b>{{requestSave.domicilioFisico}}</b></li>
-  <img [src]="imageSrc" *ngIf="imageSrc" style="height: 300px; width:400px">
+  <img [src]="imageSrc" *ngIf="imageSrc" height="350px" >
 </ol>
 
 <ng-template #juridica>
@@ -56,7 +56,7 @@
       <li>Tipo de documento: <b>{{requestSave?.representante!.tipoDocumento}}</b></li>
       <li>Número de documento: <b>{{requestSave?.representante!.numeroDocumento}}</b> </li>
       <li>Apellidos y Nombres: <b>{{requestSave?.representante!.nombreCompleto}}</b></li>
-      <img [src]="imageSrc" *ngIf="imageSrc" style="height: 300px; width:400px">
+      <img height="350px" [src]="imageSrc" *ngIf="imageSrc">
     </ol>
   </ol>
 </ng-template>
