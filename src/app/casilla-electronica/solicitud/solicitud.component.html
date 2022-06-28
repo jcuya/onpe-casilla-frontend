@@ -1,65 +1,48 @@
-<!-- <p>Estás por culminar tu solicitud, solo faltan estos pasos</p>
-<ol>
-  <li>Descarga tu solicitud.
-    <br/>
-    <div fxLayout="row" fxLayoutAlign="center center">
-      <button mat-flat-button color="warn">DESCARGAR SOLICITUD</button>
-    </div>
-    <br/>
-  </li>
-  <li>Imprime tu solicitud.</li>
-  <li>Firma tu solicitud. Recuerda realizar la firma lo más parecida a tu DNI.</li>
-  <li>Carga el documento adjunto. Puedes arrastrar el archivo en este cuadro.</li>
-  <li>Adjunta el documento escaneado</li>
-  <br/>
+  <app-alert type="warn">Valide sus datos si todo esta conforme, haga clic en el botón "Enviar" de lo contrario haga clic en "Regresar"<br />
+  </app-alert>
+  <br> <br>
+
+  <div class="wrapper">
   <div>
-    <app-upload-file
-      fxFlex="100"
-      label = "Cargar solicitud firmada"
-      title="Arrastrar y soltar"
-      description="Cargar solicitud firmada (Formato JPG o PDF, peso máximo 2Mb)"></app-upload-file>
-  </div>
-  <app-alert type="warn">Verifica que los documentos adjuntos estén completos antes de hacer click en "ENVIAR".<br />
-    Recuerda que tienes 48 horas para enviar tu solicitud firmada</app-alert>
-  <br/>
-  <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center">
-    <button mat-flat-button type="button" color="primary" (click)="regresar()">REGRESAR</button>
-    <button mat-flat-button color="warn" (click)="continuar()">ENVIAR</button>
-  </div>
-</ol> -->
-
-<p>Valide sus datos si todo esta conforme, haga clic en el botón "Enviar" de lo contrario haga clic en "Regresar"</p>
-<ol *ngIf="requestSave.TipoPersona === 'n'; else juridica" >
-  <li>Persona Natural</li>
-  <li>Tipo de documento: <b>{{requestSave.tipoDocumento}}</b> </li>
-  <li>Número de documento: <b>{{requestSave.numeroDocumento}}</b></li>
-  <li>Apellidos y Nombres: <b>{{requestSave.apePaterno }}  {{requestSave.apeMaterno }} {{requestSave.nombres}}</b></li>
-  <li>Correo Electrónico: <b>{{requestSave.correoElectronico}}</b></li>
-  <li>Número de Celular: <b>{{requestSave.numeroCelular}}</b></li>
-  <li>Departamento / Provincia / Distrito: <b>{{requestSave.departamento}} / {{requestSave.provincia}} / {{requestSave.distrito}} </b></li>
-  <li>Dirección: <b>{{requestSave.domicilioFisico}}</b></li>
-  <img [src]="imageSrc" *ngIf="imageSrc" height="350px" >
-</ol>
-
-<ng-template #juridica>
-  <ol >
-    <li>Persona Jurídica</li>
-    <li>RUC: <b>{{requestSave.numeroDocumento}}</b></li>
-    <li>Razón Social: <b>{{requestSave.razonSocial}}</b></li>
-    <li>Correo Electrónico: <b>{{requestSave.correoElectronico}}</b></li>
-    <li>Número de teléfono: <b>{{requestSave.telefono}}</b> </li>
-    <li>Departamento / Provincia / Distrito: <b>{{requestSave.departamento}} / {{requestSave.provincia}} / {{requestSave.distrito}} </b></li>
-    <li>Dirección: <b>{{requestSave.domicilioFisico}}</b> </li>
-    <li>Página Web: <b>{{requestSave.paginaWeb}}</b></li>
-    <li>Representante:</li>
-    <ol style="margin-left: 20px;">
-      <li>Tipo de documento: <b>{{requestSave?.representante!.tipoDocumento}}</b></li>
-      <li>Número de documento: <b>{{requestSave?.representante!.numeroDocumento}}</b> </li>
-      <li>Apellidos y Nombres: <b>{{requestSave?.representante!.nombreCompleto}}</b></li>
-      <img height="350px" [src]="imageSrc" *ngIf="imageSrc">
+    <ol *ngIf="requestSave.TipoPersona === 'n'; else juridica" >
+      <li>Persona Natural</li>
+      <li>Tipo de documento: <b>{{requestSave.tipoDocumento}}</b> </li>
+      <li>Número de documento: <b>{{requestSave.numeroDocumento}}</b></li>
+      <li>Apellidos y Nombres: <b>{{requestSave.apePaterno }}  {{requestSave.apeMaterno }} {{requestSave.nombres}}</b></li>
+      <li>Correo Electrónico: <b>{{requestSave.correoElectronico}}</b></li>
+      <li>Número de Celular: <b>{{requestSave.numeroCelular}}</b></li>
+      <li>Departamento / Provincia / Distrito: <b>{{requestSave.departamento}} / {{requestSave.provincia}} / {{requestSave.distrito}} </b></li>
+      <li>Dirección: <b>{{requestSave.domicilioFisico}}</b></li>
     </ol>
-  </ol>
-</ng-template>
+
+    <ng-template #juridica>
+      <h1 class="h1Persona">Datos de la Entidad:</h1>
+      <ol >
+        <li>Persona Jurídica</li>
+        <li>RUC: <b>{{requestSave.numeroDocumento}}</b></li>
+        <li>Razón Social: <b>{{requestSave.razonSocial}}</b></li>
+        <li>Correo Electrónico: <b>{{requestSave.correoElectronico}}</b></li>
+        <li>Número de teléfono: <b>{{requestSave.telefono}}</b> </li>
+        <li>Departamento / Provincia / Distrito: <b>{{requestSave.departamento}} / {{requestSave.provincia}} / {{requestSave.distrito}} </b></li>
+        <li>Dirección: <b>{{requestSave.domicilioFisico}}</b> </li>
+        <li>Página Web: <b>{{requestSave.paginaWeb}}</b></li>
+      </ol>
+      
+      <h1 class="h1Persona">Representante:</h1>
+      <ol style="margin-left: 20px;">
+        <li>Tipo de documento: <b>{{requestSave?.representante!.tipoDocumento}}</b></li>
+        <li>Número de documento: <b>{{requestSave?.representante!.numeroDocumento}}</b> </li>
+        <li>Apellidos y Nombres: <b>{{requestSave?.representante!.nombreCompleto}}</b></li>
+      </ol>
+    </ng-template>
+    
+  </div>
+  <div><img class="center" [src]="imageSrc" *ngIf="imageSrc" height="350px" ></div>
+</div>
+
+
+
+
 
 
 <br/>
