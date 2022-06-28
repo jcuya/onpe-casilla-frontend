@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {DatosGeneralesComponent} from "./datos-generales/datos-generales.component";
 import {DatosRepresentanteComponent} from "./datos-representante/datos-representante.component";
@@ -31,6 +31,8 @@ import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
 import { AlertDialogComponent } from './alert-dialog/alert-dialog.component';
 import { FotoDniComponent } from './foto-dni/foto-dni.component';
 import { SharedDialogComponent } from './shared/shared-dialog/shared-dialog.component';
+import { FileUploadModule } from '@iplab/ngx-file-upload';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -66,8 +68,11 @@ import { SharedDialogComponent } from './shared/shared-dialog/shared-dialog.comp
     MatStepperModule,
     SharedModule,
     MatDialogModule,
-    MatSnackBarModule
-  ]
+    MatSnackBarModule,
+    FileUploadModule,
+    BrowserAnimationsModule
+  ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CasillaElectronicaModule {
 }

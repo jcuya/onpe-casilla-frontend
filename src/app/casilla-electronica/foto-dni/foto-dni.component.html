@@ -9,7 +9,7 @@
       </ol>
      </app-alert>
     <br/>
-    <div fxLayout="column" fxLayoutGap="10px">
+    <!-- <div fxLayout="column" fxLayoutGap="10px">
         <div>
            <div style="display: none">
             <input matInput formControlName="file">
@@ -21,10 +21,62 @@
               title="Arrastrar y soltar"
               description="Cargar foto DNI (Formato JPG o PDF, peso máximo 2Mb)"></app-upload-file>
           </div>
+    </div> -->
+
+
+    <div fxLayout="row" fxLayoutGap="10px">
+      <file-upload
+        formControlName="files"
+        [multiple]="false"
+        [animation]="true"
+        accept="file_extension|image/*"
+        fxFlex="100"
+        [ngStyle]="{
+          'outline-color': filesControl.valid == false ? 'red' : ''
+        }"
+        [ngStyle]="{
+          'background-color': filesControl.valid == false ? '#fdf4f4' : ''
+        }"
+      >
+        <ng-template
+          let-isFileDragDropAvailable="isFileDragDropAvailable"
+          #placeholder
+        >
+          <file-upload-drop-zone>
+            <ng-container
+              *ngIf="isFileDragDropAvailable; else isNotDragDropAvailable"
+            >
+              Agregar archivo(png - jpg - jpeg), o dar clic aquí.
+            </ng-container>
+            <ng-template #isNotDragDropAvailable> </ng-template>
+          </file-upload-drop-zone>
+        </ng-template>
+  
+        <ng-template
+          let-i="index"
+          let-file="file"
+          let-control="control"
+          #item
+        >
+          <file-upload-list-item
+            [index]="i"
+            class="item-test"
+            [file]="file"
+            [control]="control"
+            >Remover</file-upload-list-item
+          >
+        </ng-template>
+      </file-upload>
+  
     </div>
+
+
+
+
+
     <br>
     <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center">
       <button mat-flat-button type="button" color="primary" (click)="regresar()">REGRESAR</button>
-      <button mat-flat-button type="button" color="warn" (click)="continuar()">CONTINUAR</button>
+      <button mat-flat-button type="button" color="warn" [disabled]="formGroup.invalid" (click)="continuar()">CONTINUAR</button>
     </div>
   </form>

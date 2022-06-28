@@ -1,5 +1,5 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Component, ElementRef, EventEmitter, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {CasillaService} from "../../core/services/casilla.service";
 import {
   Cargo,
@@ -12,16 +12,25 @@ import {ValidarCorreoService} from "../../core/services/validar-correo.service";
 import {Departamento, Distrito, Provincia} from "../../core/dto/ubigeo.dto";
 import {UbigeoService} from "../../core/services/ubigeo.service";
 import { requestGlobal, RequestRepresentante } from 'src/app/core/dto/request';
+import { FileUploadControl, FileUploadValidators } from '@iplab/ngx-file-upload';
 
 @Component({
   selector: 'app-datos-representante',
   templateUrl: './datos-representante.component.html',
-  styleUrls: ['./datos-representante.component.css']
+  styleUrls: ['./datos-representante.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class DatosRepresentanteComponent implements OnInit {
-
+  @ViewChild('fileUpload', { static: false }) fileUpload !: ElementRef;
   @Output() completedStep = new EventEmitter<any>()
   @Output() previousStep = new EventEmitter<any>()
+
+  public animation: boolean = false;
+  public multiple: boolean = false;
+
+ // private filesControl = new FormControl(null, FileUploadValidators.filesLimit(2));
+
+  //public fileUploadControl = new FileUploadControl(FileUploadValidators.fileSize(80000));
 
   observableRequestSubscription!: Subscription;
   requestSave: requestGlobal = new requestGlobal();
@@ -69,7 +78,8 @@ export class DatosRepresentanteComponent implements OnInit {
       domicilioFisico: ['', Validators.required],
       cargo: ['', Validators.required],
       cargoNombre: ['', Validators.required],
-      file: ['', Validators.required],
+      //file: ['', Validators.required],
+     files: this.filesControl
     });
     this.tipoDocumentoAdjuntoList = await firstValueFrom(this.casillaService.getTipoDocumentoAdjuntoList())
     this.tipoDocumentoList = await firstValueFrom(this.casillaService.getTipoDocumentoList(Condicion_Persona_Natural))
@@ -77,16 +87,17 @@ export class DatosRepresentanteComponent implements OnInit {
     this.cargoList = await firstValueFrom(this.casillaService.getCargoList())
   }
 
-  handleArchivoAgregado(event: any) {
-    console.log(event)
-    this.formGroup.get('file')?.setValue(event)
-  }
+  // handleArchivoAgregado(event: any) {
+  //   console.log(event)
+  //   this.formGroup.get('file')?.setValue(event)
+  // }
 
   regresar() {
     this.previousStep.emit()
   }
 
   siguientePaso() {
+
 
     if(this.formGroup.valid){
 
@@ -105,7 +116,7 @@ export class DatosRepresentanteComponent implements OnInit {
       this.requestRepresentante.domicilioFisico = this.formGroup.controls['domicilioFisico'].value;
       this.requestRepresentante.cargo = cargo.nombre;
       this.requestRepresentante.cargoNombre = this.formGroup.controls['cargoNombre'].value;
-      this.requestRepresentante.file = this.formGroup.controls['file'].value;
+      this.requestRepresentante.file = this.formGroup.controls['files'].value[0];
 
       var departamento  = this.formGroup.controls['departamento'].value;
       var provincia  = this.formGroup.controls['provincia'].value;
@@ -125,6 +136,14 @@ export class DatosRepresentanteComponent implements OnInit {
 
    
   }
+
+  public filesControl = new FormControl(null, [
+    Validators.required,
+    FileUploadValidators.accept(['.pdf']),
+    FileUploadValidators.filesLimit(1),
+    FileUploadValidators.fileSize(1048576 * 10),
+   // this.noWhitespaceValidator,
+  ]);
 
   tipoDocumentoCambiado(value: TipoDocumento) {
    

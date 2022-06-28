@@ -197,6 +197,34 @@ export class DatosGeneralesComponent implements OnInit {
     
   }
 
+  validateForms():boolean{
+
+    let retorno = true;
+
+
+    if(this.formGroup.valid){
+
+      if(this.esPersonaNatural){
+        if(this.personaNaturalFormGroup?.valid){
+          retorno= false;
+        }
+
+
+      } else{
+        if(this.personaJuridicaFormGroup?.valid){
+          retorno= false;
+        }
+      }
+
+      return retorno;
+      
+    }else{
+      return true;
+    }
+
+
+  }
+
 
 
   generateRequestNaturalEmit(){

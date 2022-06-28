@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
 
-  serviceUrl: 'http://localhost:3035',
+  serviceUrl: 'http://localhost:3000',
   snackbarDuration: 3000
 };
 

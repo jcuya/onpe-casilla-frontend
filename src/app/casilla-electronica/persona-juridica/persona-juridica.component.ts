@@ -53,7 +53,7 @@ export class PersonaJuridicaComponent implements OnInit {
     })
     this.tipoDocumentoList = await firstValueFrom(this.casillaService.getTipoDocumentoList(Condicion_Persona_Juridica))
     this.departamentoList = await firstValueFrom(this.ubigeoService.getDepartamentoList())
-    this.formGroup.get('razonSocial')?.disable();
+   // this.formGroup.get('razonSocial')?.disable();
   }
 
   obtenerCorreo() {

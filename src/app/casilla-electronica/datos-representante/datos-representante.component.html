@@ -13,17 +13,81 @@
       <input matInput formControlName="tipoDocumentoAdjuntoNombre">
     </mat-form-field>
   </div>
-  <div fxLayout="row" fxLayoutGap="10px">
-    <!-- <div style="display: none">
+
+  <!-- <div fxLayout="row" fxLayoutGap="10px">
+     <div style="display: none">
       <input matInput formControlName="documentoArchivo">
-    </div> -->
-    <app-upload-file
+    </div> 
+     <app-upload-file
       (fileDropped)="handleArchivoAgregado($event)"
       fxFlex="100"
       label="Cargar el documento de sustento"
       title="Arrastrar y soltar"
-      description="Cargar el documento de sustento (Formato JPG o PDF, peso máximo 2Mb)"></app-upload-file>
+      description="Cargar el documento de sustento (Formato JPG o PDF, peso máximo 2Mb)"></app-upload-file> 
+  </div> -->
+
+
+
+  <div fxLayout="row" fxLayoutGap="10px">
+
+
+    <div class="labelsColor">
+      Adjuntar un archivo PDF como máximo (peso máximo de 10 MB)<br />
+      El nombre del archivo no debe superar los 100 caracteres
+    </div>
+    <file-upload
+      formControlName="files"
+      [multiple]="false"
+      [animation]="true"
+      accept=".pdf"
+      fxFlex="100"
+      [ngStyle]="{
+        'outline-color': filesControl.valid == false ? 'red' : ''
+      }"
+      [ngStyle]="{
+        'background-color': filesControl.valid == false ? '#fdf4f4' : ''
+      }"
+    >
+      <ng-template
+        let-isFileDragDropAvailable="isFileDragDropAvailable"
+        #placeholder
+      >
+        <file-upload-drop-zone>
+          <ng-container
+            *ngIf="isFileDragDropAvailable; else isNotDragDropAvailable"
+          >
+            Agregar archivo, o dar clic aquí.
+          </ng-container>
+          <ng-template #isNotDragDropAvailable> </ng-template>
+        </file-upload-drop-zone>
+      </ng-template>
+
+      <ng-template
+        let-i="index"
+        let-file="file"
+        let-control="control"
+        #item
+      >
+        <file-upload-list-item
+          [index]="i"
+          class="item-test"
+          [file]="file"
+          [control]="control"
+          >Remover</file-upload-list-item
+        >
+      </ng-template>
+    </file-upload>
+
+
+
+
+    <!-- <file-upload formControlName="files" [multiple]="multiple" [animation]="animation"></file-upload> -->
+
   </div>
+
+
+
+
   <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field appearance="outline" fxFlex="50">
       <mat-label>Tipo de Documento</mat-label>
@@ -104,7 +168,7 @@
   <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center">
     <button mat-flat-button type="button" color="primary" (click)="regresar()">REGRESAR</button>
     <!-- <button mat-flat-button type="button" color="warn" (click)="continuar()">VALIDAR</button> -->
-    <button mat-flat-button type="button" color="warn" (click)="siguientePaso()">VALIDAR</button>
+    <button mat-flat-button type="button" color="warn" [disabled]="formGroup.invalid" (click)="siguientePaso()">VALIDAR</button>
   </div>
 
 </form>

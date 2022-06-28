@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FileUploadValidators } from '@iplab/ngx-file-upload';
 import { Subscription } from 'rxjs';
 import { requestGlobal } from 'src/app/core/dto/request';
 import { CasillaService } from 'src/app/core/services/casilla.service';
@@ -31,13 +32,11 @@ export class FotoDniComponent implements OnInit {
 
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
-      file: ['', Validators.required]
+      files: this.filesControl
     });
   }
 
-  public filesControl = new FormControl(null, [
-    Validators.required
-  ]);
+ 
   handleArchivoAgregado(event: any) {
     console.log(event)
     this.formGroup.get('file')?.setValue(event)
@@ -53,10 +52,19 @@ export class FotoDniComponent implements OnInit {
       return
     }
 
-    this.requestSave.file = this.formGroup.controls['file'].value;
+    this.requestSave.file = this.formGroup.controls['files'].value[0];
     this.casillaService.setCasilla(this.requestSave);
     
     this.completedStep.emit()
   }
+
+
+  public filesControl = new FormControl(null, [
+    Validators.required,
+    FileUploadValidators.accept(['file_extension|image/*']),
+    FileUploadValidators.filesLimit(1),
+    FileUploadValidators.fileSize(1048576 * 10),
+   // this.noWhitespaceValidator,
+  ]);
 
 }

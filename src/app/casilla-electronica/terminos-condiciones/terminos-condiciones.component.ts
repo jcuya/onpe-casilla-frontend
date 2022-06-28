@@ -65,4 +65,17 @@ export class TerminosCondicionesComponent implements OnInit {
     
    
   }
+
+
+
+  validarForm():boolean{
+
+
+    if(this.formGroup.controls['terminosCondiciones'].value == true && this.formGroup.controls['politicasDatos'].value == true){
+      return false;
+    }
+
+    return true;
+
+  }
 }
