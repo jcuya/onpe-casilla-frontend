@@ -2,10 +2,12 @@
   <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field appearance="outline" fxFlex="100">
       <mat-label>Condición</mat-label>
-      <mat-select formControlName="condicion" (selectionChange)="update()" required>
-        <mat-option *ngFor="let item of condicionList" [value]="item">{{item.nombre}}</mat-option>
+      <mat-select formControlName="condicion" (selectionChange)="update()" [disabled]="true" >
+        <mat-option *ngFor="let item of condicionList; let i = index" [value]="item" >{{item.nombre}}</mat-option>
       </mat-select>
+      
     </mat-form-field>
+  
   </div>
   <app-persona-natural *ngIf="esPersonaNatural"></app-persona-natural>
   <app-persona-juridica *ngIf="esPersonaJuridica"></app-persona-juridica>
