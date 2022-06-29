@@ -74,7 +74,14 @@ export class DatosGeneralesComponent implements OnInit {
     this.personaNaturalFormGroup;
     this.personaJuridicaFormGroup;
     this.condicionList = await firstValueFrom(this.casillaService.getCondicionList())
+   
+
+    //SOLO PERSONA NATURAL
+    this.formGroup.get('condicion')?.setValue(this.condicionList[0])
+    this.update();
   }
+
+
 
   obtenerCondicion() {
     //return Condicion_Persona_Natural

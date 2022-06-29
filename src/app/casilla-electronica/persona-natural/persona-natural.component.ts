@@ -88,7 +88,7 @@ export class PersonaNaturalComponent implements OnInit {
   validarCorreoElectronico() {
     const dialogRef = this.dialog.open(SharedDialogComponent, {
       width: "700px",
-      disableClose: true,
+      disableClose: false,
       //data: dataItem,
     });
     dialogRef.afterClosed().subscribe((result) => {

@@ -10,19 +10,23 @@
             <br>
             <form [formGroup]="formGroup" class="form-inline" class="form-group center">
 
-                <input type="text" class="cuadro"  maxlength="1" formControlName="codigo1" (keypress)="validarsoloNumeros($event)">
-                <input type="text" class="cuadro"  maxlength="1" formControlName="codigo2" (keypress)="validarsoloNumeros($event)">
-                <input type="text" class="cuadro"  maxlength="1" formControlName="codigo3" (keypress)="validarsoloNumeros($event)">
-                <input type="text" class="cuadro"  maxlength="1" formControlName="codigo4" (keypress)="validarsoloNumeros($event)">
-                <input type="text" class="cuadro"  maxlength="1" formControlName="codigo5"(keypress)="validarsoloNumeros($event)">
-                <input type="text" class="cuadro"  maxlength="1" formControlName="codigo6"(keypress)="validarsoloNumeros($event)">
+            
+                    <!-- <input matInput placeholder="username" #usernameInput cdkFocusInitial> -->
+                    <input cdkFocusInitial type="text" id="input1"  name="input1" #input1 class="cuadro"  maxlength="1" formControlName="codigo1" (keypress)="validarsoloNumeros($event)" (keyup)="(input1.value.length == 1 ) ? input2.focus() :''" (keydown)="input1.value = ''" tabindex="-1"  >
+              
+               
+                <input type="text" #input2 class="cuadro"  maxlength="1" formControlName="codigo2" (keypress)="validarsoloNumeros($event)" (keyup)="(input2.value.length == 1) ? input3.focus() :''" (keydown)="input2.value = ''" tabindex="-1">
+                <input type="text" #input3 class="cuadro"  maxlength="1" formControlName="codigo3" (keypress)="validarsoloNumeros($event)" (keyup)="(input3.value.length == 1) ? input4.focus() :''" (keydown)="input3.value = ''" tabindex="-1">
+                <input type="text" #input4 class="cuadro"  maxlength="1" formControlName="codigo4" (keypress)="validarsoloNumeros($event)" (keyup)="(input4.value.length == 1) ? input5.focus() :''" (keydown)="input4.value = ''" tabindex="-1">
+                <input type="text" #input5 class="cuadro"  maxlength="1" formControlName="codigo5" (keypress)="validarsoloNumeros($event)" (keyup)="(input5.value.length == 1) ? input6.focus() :''" (keydown)="input5.value = ''" tabindex="-1">
+                <input type="text" #input6 class="cuadro"  maxlength="1" formControlName="codigo6" (keypress)="validarsoloNumeros($event)" (keyup)="(input6.value.length == 1) ? btn.focus() :''" (keydown)="input6.value = ''" tabindex="-1">
 
             </form>
  
 
             <div  align="end"  >
                 <!-- <button class="append-button" mat-flat-button aria-label="Validar" type="button"  (click)="cancel()" ></button> -->
-                <button mat-flat-button type="button" color="success"         (click)="valid()"  >Validar</button>
+                <button #btn mat-flat-button type="button" color="success"   tabindex="-1"      (click)="valid()"  >Validar</button>
             </div>
         
     </div>
