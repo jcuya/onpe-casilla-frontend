@@ -14,4 +14,6 @@
     font-family: Roboto, 'Helvetica Neue', sans-serif; 
     font-weight: 500;
     margin: 20px;
+    position: absolute; 
+    bottom: 0px;
 }
