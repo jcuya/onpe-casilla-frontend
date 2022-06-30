@@ -21,6 +21,7 @@ export class SharedDialogComponent implements OnInit   {
   idEnvio !: number;
   tipoDocumento !: string;
   numeroDocumento !: string;
+  email !: string;
 
   constructor( @Inject(MAT_DIALOG_DATA) private data : any,
   private dialogRef: MatDialogRef<SharedDialogComponent>,
@@ -32,6 +33,7 @@ export class SharedDialogComponent implements OnInit   {
     this.idEnvio = data.idEnvio;
     this.tipoDocumento = data.requestData.tipoDocumento;
     this.numeroDocumento = data.requestData.numeroDocumento
+    this.email = data.email;
    }
 
   ngOnInit(): void {
@@ -108,6 +110,32 @@ export class SharedDialogComponent implements OnInit   {
       })
 
   }
+}
+
+reenvio(){
+
+  let request = {
+    tipoDocumento : this.tipoDocumento ,
+    numeroDocumento : this.numeroDocumento,
+    correoElectronico : this.email
+    }
+
+
+  this.correoService.envioCorreoVerificacion(request).subscribe(res =>{
+
+    if(res){
+
+      this.idEnvio = res.idEnvio; 
+      
+    }else{
+      this.dialog.open(AlertDialogComponent, {
+        disableClose: true,
+        hasBackdrop: true,
+        data: {cabecera : 'Error!' ,messages: ['Error servicio']}
+      })
+    }
+
+  });
 }
 
 get primerDigito() {

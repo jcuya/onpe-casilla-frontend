@@ -125,7 +125,7 @@ export class PersonaNaturalComponent implements OnInit {
         const dialogRef = this.dialog.open(SharedDialogComponent, {
           width: "700px",
           disableClose: false,
-          data: {  idEnvio :res.idEnvio , requestData : request},
+          data: {  idEnvio :res.idEnvio , requestData : request , email : this.formGroup.get('correoElectronico')?.value},
         });
         dialogRef.afterClosed().subscribe((result) => {
           this.formGroup.get("validateEmail")?.setValue(result);
