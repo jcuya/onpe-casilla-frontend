@@ -32,7 +32,7 @@ export class ValidarCorreoService {
 
   validarCodigoVerificacion(request : any): Observable<any>{
 
-    return this.http.post<any>(this.configUrl + '/alidar-codigo-verificacionn',request).pipe(map(resp=>resp));
+    return this.http.post<any>(this.configUrl + '/validar-codigo-verificacion',request).pipe(map(resp=>resp));
     
   }
 
