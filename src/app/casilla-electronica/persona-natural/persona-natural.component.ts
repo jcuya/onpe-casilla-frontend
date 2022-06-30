@@ -91,6 +91,22 @@ export class PersonaNaturalComponent implements OnInit {
 
     }
   }
+  ActiveButton():boolean{
+
+    if(this.formGroup.get('validateEmail')?.value == true){
+      return true;
+    }else{
+      if( this.formGroup.get('tipoDocumento')?.invalid ||this.formGroup.get('numeroDocumento')?.invalid || this.formGroup.get('correoElectronico')?.invalid ){
+        return true
+      }
+      else{
+        return false;
+      }
+
+    }
+
+
+  }
 
 
 
@@ -113,6 +129,10 @@ export class PersonaNaturalComponent implements OnInit {
         });
         dialogRef.afterClosed().subscribe((result) => {
           this.formGroup.get("validateEmail")?.setValue(result);
+          if(result){
+            this.formGroup.get('correoElectronico')?.disable();
+          }
+
         });
         
       }else{
