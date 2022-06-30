@@ -4,7 +4,7 @@
 
   <div class="wrapper">
   <div>
-    <ol *ngIf="requestSave.TipoPersona === 'n'; else juridica" >
+    <!-- <ol *ngIf="requestSave.TipoPersona === 'n'; else juridica" >
       <li>Persona Natural</li>
       <li>Tipo de documento: <b>{{requestSave.tipoDocumento}}</b> </li>
       <li>Número de documento: <b>{{requestSave.numeroDocumento}}</b></li>
@@ -13,7 +13,54 @@
       <li>Número de Celular: <b>{{requestSave.numeroCelular}}</b></li>
       <li>Departamento / Provincia / Distrito: <b>{{requestSave.departamento}} / {{requestSave.provincia}} / {{requestSave.distrito}} </b></li>
       <li>Dirección: <b>{{requestSave.domicilioFisico}}</b></li>
+    </ol> -->
+    
+    <ol *ngIf="requestSave.TipoPersona === 'n'; else juridica" >
+      <li>
+        <div class="wrapper">
+          <div class="labelList">Tipo de documento: </div>
+          <div class="detailList"><b>{{requestSave.tipoDocumento}}</b></div>
+        </div>
+      </li>
+      <li>
+        <div class="wrapper">
+          <div class="labelList">Número de documento: </div>
+          <div class="detailList"><b>{{requestSave.numeroDocumento}}</b></div>
+        </div>
+      </li>
+      <li>
+        <div class="wrapper">
+          <div class="labelList">Apellidos y Nombres:</div>
+          <div class="detailList"><b>{{requestSave.apePaterno }}  {{requestSave.apeMaterno }} {{requestSave.nombres}}</b></div>
+        </div>
+      </li>
+      <li>
+        <div class="wrapper">
+          <div class="labelList">Correo Electrónico: </div>
+          <div class="detailList"> <b>{{requestSave.correoElectronico}}</b></div>
+        </div>
+      </li>
+      <li>
+        <div class="wrapper">
+          <div class="labelList">Número de Celular:</div>
+          <div class="detailList"><b>{{requestSave.numeroCelular}}</b></div>
+        </div>
+      </li>
+      <li>
+        <div class="wrapper">
+          <div class="labelList">Departamento / Provincia / Distrito:</div>
+          <div class="detailList"><b>{{requestSave.departamento}}, {{requestSave.provincia}}, {{requestSave.distrito}} </b></div>
+        </div>
+      </li>
+      <li>
+        <div class="wrapper">
+          <div class="labelList">Dirección:</div>
+          <div class="detailList"><b>{{requestSave.domicilioFisico}}</b></div>
+        </div>
+      </li>
     </ol>
+
+
 
     <ng-template #juridica>
       <h1 class="h1Persona">Datos de la Entidad:</h1>
