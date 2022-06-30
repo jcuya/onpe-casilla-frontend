@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit,ElementRef ,ViewChild, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ValidarCorreoService } from 'src/app/core/services/validar-correo.service';
 import { AlertDialogComponent } from '../../alert-dialog/alert-dialog.component';
 
 @Component({
@@ -8,22 +9,30 @@ import { AlertDialogComponent } from '../../alert-dialog/alert-dialog.component'
   templateUrl: './shared-dialog.component.html',
   styleUrls: ['./shared-dialog.component.css']
 })
-export class SharedDialogComponent implements OnInit ,AfterViewInit  {
+export class SharedDialogComponent implements OnInit   {
   @ViewChild('input1') input1 !: ElementRef ;
   formGroup!: FormGroup;
   titleForm = "Validación de correo electrónico"
   info = "Ingresa a tu bandeja principal o bande de no deseados, porque hemos enviado un coreo electrónico con un código de verficiación, ingresalo aquí."
 
-  listCodVerifica = [6,6,6,6,6,6]
-  listArrayHtml: Number[]= [];
+
   respuesta : boolean = false;
+
+  idEnvio !: number;
+  tipoDocumento !: string;
+  numeroDocumento !: string;
 
   constructor( @Inject(MAT_DIALOG_DATA) private data : any,
   private dialogRef: MatDialogRef<SharedDialogComponent>,
   private dialogRefmessage: MatDialogRef<AlertDialogComponent>,
+  private correoService : ValidarCorreoService,
   private formBuilder: FormBuilder,
   public dialog: MatDialog
-  ) { }
+  ) {
+    this.idEnvio = data.idEnvio;
+    this.tipoDocumento = data.requestData.tipoDocumento;
+    this.numeroDocumento = data.requestData.numeroDocumento
+   }
 
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
@@ -37,9 +46,9 @@ export class SharedDialogComponent implements OnInit ,AfterViewInit  {
    // this.autoFocus();
   }
 
-  ngAfterViewInit(): void {
-    this.input1.nativeElement.focus();
-  }
+  // ngAfterViewInit(): void {
+  //   this.input1.nativeElement.focus();
+  // }
 
   validarsoloNumeros(event : any): boolean{
    
@@ -64,24 +73,17 @@ export class SharedDialogComponent implements OnInit ,AfterViewInit  {
   valid(){
     if(this.formGroup.valid){
       
-       this.listArrayHtml = [
-        Number(this.formGroup.get('codigo1')?.value),
-        Number(this.formGroup.get('codigo2')?.value),
-        Number(this.formGroup.get('codigo3')?.value),
-        Number(this.formGroup.get('codigo4')?.value),
-        Number(this.formGroup.get('codigo5')?.value),
-        Number(this.formGroup.get('codigo6')?.value)
-      ]
+      var codigoEnvio = this.formGroup.get('codigo1')?.value + this.formGroup.get('codigo2')?.value + this.formGroup.get('codigo3')?.value + this.formGroup.get('codigo4')?.value + this.formGroup.get('codigo5')?.value +  this.formGroup.get('codigo6')?.value
+      let request = {
+        tipoDocumento: this.tipoDocumento,
+        numeroDocumento: this.numeroDocumento,
+        idEnvio: this.idEnvio,
+        codigo: codigoEnvio,
+      }
 
-    if(this.listCodVerifica[0] == this.listArrayHtml[0] &&
-       this.listCodVerifica[1] == this.listArrayHtml[1] && 
-       this.listCodVerifica[2] == this.listArrayHtml[2] &&
-       this.listCodVerifica[3] == this.listArrayHtml[3] &&
-       this.listCodVerifica[4] == this.listArrayHtml[4] &&
-       this.listCodVerifica[5] == this.listArrayHtml[5] ){
 
-       
-
+      this.correoService.validarCodigoVerificacion(request).subscribe(respuesta =>{
+      if(respuesta){
         this.dialog.open(AlertDialogComponent, {
           disableClose: true,
           hasBackdrop: true,
@@ -90,21 +92,21 @@ export class SharedDialogComponent implements OnInit ,AfterViewInit  {
           this.respuesta = true;
           this.cancel(true);
         });
+      }else{
 
-    }else{
+        this.dialog.open(AlertDialogComponent, {
+          disableClose: true,
+          hasBackdrop: true,
+          data: {cabecera : 'Error' ,messages: ['Error al  validar código']}
+        }).afterClosed().subscribe(result =>{
+          this.respuesta = false;
+          //this.input1.nativeElement.focus();
+          this.autoFocus();
+        });
+      }
 
+      })
 
-      this.dialog.open(AlertDialogComponent, {
-        disableClose: true,
-        hasBackdrop: true,
-        data: {cabecera : 'Error' ,messages: ['Error al  validar código']}
-      }).afterClosed().subscribe(result =>{
-        this.respuesta = false;
-        //this.input1.nativeElement.focus();
-        this.autoFocus();
-      });
-
-    }
   }
 }
 

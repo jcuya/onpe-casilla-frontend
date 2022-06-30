@@ -26,7 +26,7 @@
 
             <div  align="end"  >
                 <!-- <button class="append-button" mat-flat-button aria-label="Validar" type="button"  (click)="cancel()" ></button> -->
-                <button #btn mat-flat-button type="button" color="success"   tabindex="-1"      (click)="valid()"  >Validar</button>
+                <button #btn mat-flat-button type="button" color="success"   tabindex="-1"  [disabled]="!formGroup.valid"    (click)="valid()"  >Validar</button>
             </div>
         
     </div>

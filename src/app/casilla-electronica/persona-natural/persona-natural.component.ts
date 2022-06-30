@@ -11,6 +11,7 @@ import {PersonaNaturalDni} from "../../core/dto/personaNaturalDni";
 import {ValidacionCorreoComponent} from "../validacion-correo/validacion-correo.component";
 import {AlertDialogComponent} from "../alert-dialog/alert-dialog.component";
 import { SharedDialogComponent } from '../shared/shared-dialog/shared-dialog.component';
+import { ValidarCorreoService } from 'src/app/core/services/validar-correo.service';
 
 @Component({
   selector: 'app-persona-natural',
@@ -34,6 +35,7 @@ export class PersonaNaturalComponent implements OnInit {
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
     private casillaService: CasillaService,
+    private correoService : ValidarCorreoService,
     private ubigeoService: UbigeoService,
     private personaNaturalService: PersonaNaturalService
   ) {
@@ -88,14 +90,46 @@ export class PersonaNaturalComponent implements OnInit {
 
 
   validarCorreoElectronico() {
-    const dialogRef = this.dialog.open(SharedDialogComponent, {
-      width: "700px",
-      disableClose: false,
-      //data: dataItem,
+
+    let request = {
+      tipoDocumento : this.formGroup.get('tipoDocumento')?.value ,
+      numeroDocumento : this.formGroup.get('numeroDocumento')?.value,
+      correoElectronico : this.formGroup.get('correoElectronico')?.value
+      }
+
+
+    this.correoService.envioCorreoVerificacion(request).subscribe(res =>{
+
+      if(res){
+        const dialogRef = this.dialog.open(SharedDialogComponent, {
+          width: "700px",
+          disableClose: false,
+          data: {  idEnvio :res.idEnvio , requestData : request},
+        });
+        dialogRef.afterClosed().subscribe((result) => {
+          this.formGroup.get("validateEmail")?.setValue(result);
+        });
+        
+      }else{
+        this.dialog.open(AlertDialogComponent, {
+          disableClose: true,
+          hasBackdrop: true,
+          data: {cabecera : 'Error!' ,messages: ['Error al  registrar']}
+        })
+      }
+
     });
-    dialogRef.afterClosed().subscribe((result) => {
-      this.formGroup.get("validateEmail")?.setValue(result);
-    });
+
+
+
+
+
+
+
+
+
+
+
   }
 
   invalidarDocumento() {

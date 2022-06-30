@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
 import {ValidacionCorreoComponent} from "../../casilla-electronica/validacion-correo/validacion-correo.component";
-import {firstValueFrom} from "rxjs";
+import {firstValueFrom, map, Observable} from "rxjs";
 import {CasillaService} from "./casilla.service";
 import {MatDialog} from "@angular/material/dialog";
 import {environment} from "../../../environments/environment";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,34 @@ export class ValidarCorreoService {
     private casillaService: CasillaService,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
+    private http: HttpClient
   ) {
+  }
+
+
+
+
+
+  envioCorreoVerificacion(request : any): Observable<any>{
+
+    return this.http.get("../../assets/enviocorreoverifica.json").pipe(map(resp=>resp));
+  
+  }
+
+  validarCodigoVerificacion(request : any): Observable<any>{
+
+      return this.http.get("../../assets/validado.json").pipe(map((resp : any) =>{
+
+     if(request.codigo === resp.codigoVerificacion){
+       resp.esValidado = true;
+     }else{
+      resp.esValidado = false;
+     }
+
+     return resp.esValidado;
+      }));
+
+    
   }
 
   async enviarCorreo(correo: string) {
