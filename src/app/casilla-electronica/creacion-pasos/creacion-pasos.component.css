@@ -6,3 +6,12 @@
     margin-left: 200px;
     margin-right: 200px;
 }
+.footerVersion{
+    color: rgb(23, 91, 165); 
+    font-size: 12px; 
+    display: flex; 
+    align-items: center; 
+    font-family: Roboto, 'Helvetica Neue', sans-serif; 
+    font-weight: 500;
+    margin: 20px;
+}

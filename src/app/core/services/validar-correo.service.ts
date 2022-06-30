@@ -31,19 +31,14 @@ export class ValidarCorreoService {
   }
 
   validarCodigoVerificacion(request : any): Observable<any>{
-
       return this.http.get("../../assets/validado.json").pipe(map((resp : any) =>{
-
      if(request.codigo === resp.codigoVerificacion){
        resp.esValidado = true;
      }else{
       resp.esValidado = false;
      }
-
      return resp.esValidado;
-      }));
-
-    
+      }));    
   }
 
   async enviarCorreo(correo: string) {
