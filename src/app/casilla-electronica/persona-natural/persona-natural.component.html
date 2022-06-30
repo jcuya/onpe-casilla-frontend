@@ -61,7 +61,7 @@
     <mat-form-field appearance="outline" fxFlex="70">
       <mat-label>Correo electrónico</mat-label>
       <input matInput type="email" name="email" ngModel [email]="true" formControlName="correoElectronico">
-      <button class="append-button" mat-flat-button aria-label="Validar" (click)="validarCorreoElectronico()" type="button">
+      <button class="append-button" mat-flat-button aria-label="Validar" [disabled]="ActiveButton()" (click)="validarCorreoElectronico()" type="button">
         Validar
       </button>
     </mat-form-field>
