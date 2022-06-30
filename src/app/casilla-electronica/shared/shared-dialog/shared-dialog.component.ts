@@ -83,7 +83,7 @@ export class SharedDialogComponent implements OnInit   {
 
 
       this.correoService.validarCodigoVerificacion(request).subscribe(respuesta =>{
-      if(respuesta){
+      if(respuesta.esValido){
         this.dialog.open(AlertDialogComponent, {
           disableClose: true,
           hasBackdrop: true,

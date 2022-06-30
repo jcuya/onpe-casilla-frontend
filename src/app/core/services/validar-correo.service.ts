@@ -11,7 +11,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ValidarCorreoService {
-
+  configUrl = `${environment.serviceUrl}`
   constructor(
     private casillaService: CasillaService,
     private dialog: MatDialog,
@@ -25,24 +25,14 @@ export class ValidarCorreoService {
 
 
   envioCorreoVerificacion(request : any): Observable<any>{
-
-    return this.http.get("../../assets/enviocorreoverifica.json").pipe(map(resp=>resp));
+    return this.http.post<any>(this.configUrl + '/enviar-correo-verificacion',request).pipe(map(resp=>resp));
+   // return this.http.get("../../assets/enviocorreoverifica.json").pipe(map(resp=>resp));
   
   }
 
   validarCodigoVerificacion(request : any): Observable<any>{
 
-      return this.http.get("../../assets/validado.json").pipe(map((resp : any) =>{
-
-     if(request.codigo === resp.codigoVerificacion){
-       resp.esValidado = true;
-     }else{
-      resp.esValidado = false;
-     }
-
-     return resp.esValidado;
-      }));
-
+    return this.http.post<any>(this.configUrl + '/alidar-codigo-verificacionn',request).pipe(map(resp=>resp));
     
   }
 
