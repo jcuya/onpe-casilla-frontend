@@ -1,4 +1,5 @@
 <div class="row">
+    <button class="append-button btnCancel" mat-flat-button aria-label="Validar" type="button"  (click)="cancel(false)" >x</button>
     <div class="col col-md-12">
         <h3 class="title"><strong>{{titleForm}}</strong></h3>
        
@@ -25,8 +26,7 @@
  
 
             <div  align="end"  >
-                <!-- <button class="append-button" mat-flat-button aria-label="Validar" type="button"  (click)="cancel()" ></button> -->
-                <button #btn mat-flat-button type="button" color="success"   tabindex="-1"  [disabled]="!formGroup.valid"    (click)="valid()"  >Validar</button>
+                <button #btn mat-flat-button type="button" color="success" class="btnValidar"   tabindex="-1"      (click)="valid()"  >Validar</button>
             </div>
         
     </div>

@@ -13,7 +13,7 @@ export class SharedDialogComponent implements OnInit   {
   @ViewChild('input1') input1 !: ElementRef ;
   formGroup!: FormGroup;
   titleForm = "Validación de correo electrónico"
-  info = "Ingresa a tu bandeja principal o bande de no deseados, porque hemos enviado un coreo electrónico con un código de verficiación, ingresalo aquí."
+  info = "Ingresa a tu bandeja principal o bandeja de no deseados, ya que te hemos enviado un correo electrónico con un código de verificación, el cual debes ingresarlo aquí:"
 
 
   respuesta : boolean = false;
