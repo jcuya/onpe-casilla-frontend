@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-fin-proceso',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FinProcesoComponent implements OnInit {
 
-  constructor() { }
+  @Output() completedStep = new EventEmitter<any>()
+  @Output() previousStep = new EventEmitter<any>()
+  constructor(
+    
+    @Inject(DOCUMENT) private document: Document
+  ) { }
 
   ngOnInit(): void {
   }
 
+
+  goCasilla(){
+
+    this.document.location.href = 'https://casillaelectronica.onpe.gob.pe/#/login';
+  }
 }

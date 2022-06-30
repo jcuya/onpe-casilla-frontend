@@ -121,13 +121,15 @@ export class SolicitudComponent implements OnInit {
 
 
       if(res.status){
-        this.dialog.open(AlertDialogComponent, {
-          disableClose: true,
-          hasBackdrop: true,
-          data: {cabecera : '¡Solicitud Enviada!' ,messages: ['Se ha enviado tu solicitud de registro de casilla.']}
-        }).afterClosed().subscribe(result =>{
-          this.document.location.href = 'https://casillaelectronica.onpe.gob.pe/#/login';
-        });
+        // this.dialog.open(AlertDialogComponent, {
+        //   disableClose: true,
+        //   hasBackdrop: true,
+        //   data: {cabecera : '¡Solicitud Enviada!' ,messages: ['Se ha enviado tu solicitud de registro de casilla.']}
+        // }).afterClosed().subscribe(result =>{
+        //   this.document.location.href = 'https://casillaelectronica.onpe.gob.pe/#/login';
+        // });
+
+        this.completedStep.emit();
         
       }else{
         this.dialog.open(AlertDialogComponent, {
