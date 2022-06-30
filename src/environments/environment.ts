@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
 
-  //serviceUrl: 'http://localhost:3000', // jcuyaPC
+  //serviceUrl: 'http://localhost:3000', // jcuyaPC_casa
   serviceUrl: 'http://localhost:3035', // JcuyaPC_ONPE
   snackbarDuration: 3000
 };

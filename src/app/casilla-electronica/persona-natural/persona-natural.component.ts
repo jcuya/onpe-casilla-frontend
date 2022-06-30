@@ -26,6 +26,7 @@ export class PersonaNaturalComponent implements OnInit {
 
   numeroDniValido: Boolean | undefined = undefined
   personaNaturalDni: PersonaNaturalDni | null = null;
+  valueIniCelular: String = '9';
 
   //@Output() FormValidNatural = new EventEmitter<any>()
    maxlength : number = 8;
@@ -58,6 +59,7 @@ export class PersonaNaturalComponent implements OnInit {
     })
     this.tipoDocumentoList = await firstValueFrom(this.casillaService.getTipoDocumentoList(Condicion_Persona_Natural))
     this.departamentoList = await firstValueFrom(this.ubigeoService.getDepartamentoList())
+    
   }
 
   tipoDocumentoCambiado(value: TipoDocumento) {
@@ -99,7 +101,15 @@ export class PersonaNaturalComponent implements OnInit {
   invalidarDocumento() {
     this.numeroDniValido = false
   }
-
+  llenar9(){
+    if(this.valueIniCelular=='') this.valueIniCelular='9'
+  }
+  onFocusOut9(event: any){
+    if(this.valueIniCelular=='') this.valueIniCelular='9'
+  }
+  verificaVacio(){
+    if(this.valueIniCelular=='') this.valueIniCelular='9'
+  }
   async validarDocumento() {
     console.log('validando documento')
     const numeroDocumento = (this.formGroup.get('numeroDocumento')?.value ?? '') as string
@@ -109,7 +119,7 @@ export class PersonaNaturalComponent implements OnInit {
         this.dialog.open(AlertDialogComponent, {
           disableClose: true,
           hasBackdrop: true,
-          data: {cabecera : 'Notificación' ,messages: ['No se encontró la información de la persona']}
+          data: {cabecera : 'Verifica si tu número de DNI ingresado es correcto.' ,messages: ['En caso sea correcto, te invitamos a presentar tu Solicitud mediante Mesa de Partes Física o Virtual.']}
         });
         return;
       }

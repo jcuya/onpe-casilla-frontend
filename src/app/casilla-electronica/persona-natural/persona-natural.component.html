@@ -10,7 +10,7 @@
       <mat-label>Número de documento</mat-label>
       <input matInput formControlName="numeroDocumento" (change)="invalidarDocumento()" (keypress)="validarsoloNumeros($event)" [maxlength] ="maxlength"  required>
       <button *ngIf="esTipoDocumentoDni" class="append-button" mat-flat-button aria-label="Validar" (click)="validarDocumento()" type="button">
-        Validar
+        Consultar
       </button>
     </mat-form-field>
   </div>
@@ -60,14 +60,14 @@
   <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field appearance="outline" fxFlex="70">
       <mat-label>Correo electrónico</mat-label>
-      <input matInput formControlName="correoElectronico">
+      <input matInput type="email" name="email" ngModel [email]="true" formControlName="correoElectronico">
       <button class="append-button" mat-flat-button aria-label="Validar" (click)="validarCorreoElectronico()" type="button">
         Validar
       </button>
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex="30">
       <mat-label>Número de celular</mat-label>
-      <input matInput formControlName="numeroCelular" (keypress)="validarsoloNumeros($event)" maxlength="9">
+      <input [(ngModel)]="valueIniCelular" matInput formControlName="numeroCelular" (keypress)="validarsoloNumeros($event)" maxlength="9" (click)="llenar9()" (keydown)="verificaVacio()" (focusout)="onFocusOut9($event)">
     </mat-form-field>
   </div>
   <div fxLayout="row" fxLayoutGap="10px">
