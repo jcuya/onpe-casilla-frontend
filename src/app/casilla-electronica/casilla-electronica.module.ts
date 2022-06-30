@@ -33,6 +33,7 @@ import { FotoDniComponent } from './foto-dni/foto-dni.component';
 import { SharedDialogComponent } from './shared/shared-dialog/shared-dialog.component';
 import { FileUploadModule } from '@iplab/ngx-file-upload';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FinProcesoComponent } from './fin-proceso/fin-proceso.component';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AlertDialogComponent,
     FotoDniComponent,
     SharedDialogComponent,
+    FinProcesoComponent,
   ],
   exports: [
     CreacionPasosComponent,

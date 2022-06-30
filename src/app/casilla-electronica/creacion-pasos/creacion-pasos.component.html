@@ -24,6 +24,12 @@
       <ng-template matStepLabel>Solicitud de Casilla Electrónica</ng-template>
       <app-solicitud (completedStep)="completedStep()" (previousStep)="previousStep()"></app-solicitud>
     </mat-step>
+    <mat-step label="Solicitud de Casilla Electrónica" [editable]="isEditable">
+      <ng-template matStepLabel>Fin Proceso</ng-template>
+      <app-fin-proceso ></app-fin-proceso>
+    </mat-step>
+
+    
   </mat-stepper>
   
 </div>
