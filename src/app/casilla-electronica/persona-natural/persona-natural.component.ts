@@ -1,4 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {FormControl} from '@angular/forms';
 import {Condicion_Persona_Natural, TipoDocumento, TipoDocumento_DNI} from "../../core/dto/documento";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CasillaService} from "../../core/services/casilla.service";
@@ -11,6 +12,8 @@ import {PersonaNaturalDni} from "../../core/dto/personaNaturalDni";
 import {ValidacionCorreoComponent} from "../validacion-correo/validacion-correo.component";
 import {AlertDialogComponent} from "../alert-dialog/alert-dialog.component";
 import { SharedDialogComponent } from '../shared/shared-dialog/shared-dialog.component';
+import {TooltipPosition} from '@angular/material/tooltip';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-persona-natural',
@@ -23,6 +26,8 @@ export class PersonaNaturalComponent implements OnInit {
   departamentoList: Array<Departamento> = []
   provinciaList: Array<Provincia> = []
   distritoList: Array<Distrito> = []
+  positionOptions: TooltipPosition[] = ['below', 'above', 'left', 'right'];
+  position = new FormControl(this.positionOptions[0]);
 
   numeroDniValido: Boolean | undefined = undefined
   personaNaturalDni: PersonaNaturalDni | null = null;

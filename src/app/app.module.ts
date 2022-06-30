@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { FileUploadModule } from '@iplab/ngx-file-upload';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DatosRepresentanteComponent } from './casilla-electronica/datos-representante/datos-representante.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { DatosRepresentanteComponent } from './casilla-electronica/datos-represe
     FileUploadModule,
     CasillaElectronicaModule,
     HttpClientModule,
+    MatTooltipModule,
     RouterModule.forRoot([])
   ],
   providers: [],
