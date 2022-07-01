@@ -21,6 +21,10 @@
 .btnValidar{
   border: 1px solid #7e7e7e;
 }
+.btnReenviar{
+  border: 1px solid #7e7e7e;
+  bottom: -35px;
+}
 input {
     text-align: center;
   }

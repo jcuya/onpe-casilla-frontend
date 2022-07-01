@@ -7,11 +7,13 @@ export class PersonaNaturalDni {
 
 export class RequestValidateData{
 
-  dni !: number;
+  tipoDocumento!: string;
+  nroDocumento!: string;
   nombrePadre !: string;
   nombreMadre !: string;
   fechaNacimiento !:Date;
   codigoVerifi !: string;
+  correo!: string;
 }
 
 
