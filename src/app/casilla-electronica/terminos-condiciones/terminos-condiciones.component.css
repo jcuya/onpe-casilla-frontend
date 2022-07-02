@@ -4,3 +4,7 @@
   overflow-y: scroll !important;
 }
 
+p,li {
+  text-align: justify;
+  margin-bottom: 14px;
+}
