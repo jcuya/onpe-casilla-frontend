@@ -11,6 +11,8 @@ import { FileUploadModule } from '@iplab/ngx-file-upload';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DatosRepresentanteComponent } from './casilla-electronica/datos-representante/datos-representante.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { RecaptchaFormsModule, RecaptchaModule, RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -25,9 +27,16 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     CasillaElectronicaModule,
     HttpClientModule,
     MatTooltipModule,
-    RouterModule.forRoot([])
+    RouterModule.forRoot([]),
+    RecaptchaModule, //this is the recaptcha main module
+    RecaptchaFormsModule, //this is the module for form incase form validation
+    RecaptchaV3Module
   ],
-  providers: [],
+  providers: [   
+    {
+    provide: RECAPTCHA_V3_SITE_KEY,
+    useValue: environment.KeycodeCaptcha,
+  },],
   exports: [],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

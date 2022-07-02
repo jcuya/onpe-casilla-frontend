@@ -7,7 +7,9 @@ export const environment = {
 
   //serviceUrl: 'http://localhost:3000', // jcuyaPC_casa
   serviceUrl: 'http://localhost:3035', // JcuyaPC_ONPE
-  snackbarDuration: 3000
+  snackbarDuration: 3000,
+  KeycodeCaptcha: '6LeFgcMZAAAAACDRx5DWqeuvRVAnYqvXNazcSDNf',
+  SECRET_KEY: '5iseN-$2022',
 };
 
 /*

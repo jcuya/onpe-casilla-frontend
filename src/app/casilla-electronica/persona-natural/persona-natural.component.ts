@@ -4,11 +4,11 @@ import {Condicion_Persona_Natural, TipoDocumento, TipoDocumento_DNI} from "../..
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CasillaService} from "../../core/services/casilla.service";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {firstValueFrom} from "rxjs";
+import {firstValueFrom, Subscription} from "rxjs";
 import {Departamento, Distrito, Provincia} from "../../core/dto/ubigeo.dto";
 import {UbigeoService} from "../../core/services/ubigeo.service";
 import {PersonaNaturalService} from "../../core/services/persona-natural.service";
-import {PersonaNaturalDni} from "../../core/dto/personaNaturalDni";
+import {ObtenerDatosPersonaDniDto, PersonaNaturalDni} from "../../core/dto/personaNaturalDni";
 import {ValidacionCorreoComponent} from "../validacion-correo/validacion-correo.component";
 import {AlertDialogComponent} from "../alert-dialog/alert-dialog.component";
 import { SharedDialogComponent } from '../shared/shared-dialog/shared-dialog.component';
@@ -16,6 +16,12 @@ import { ValidarCorreoService } from 'src/app/core/services/validar-correo.servi
 import {TooltipPosition} from '@angular/material/tooltip';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
+import {
+  RECAPTCHA_V3_SITE_KEY,
+  RecaptchaV3Module,
+  ReCaptchaV3Service,
+} from 'ng-recaptcha';
+import { environment } from 'src/environments/environment';
 //import 'moment/locale/ja';
 
 @Component({
@@ -38,6 +44,15 @@ export class PersonaNaturalComponent implements OnInit {
 
   //@Output() FormValidNatural = new EventEmitter<any>()
    maxlength : number = 8;
+
+   sitekey = '';
+   RequerdCaptcha: boolean = true;
+   captchaView!: boolean;
+   TOkenCaptcha: string = '';
+
+
+
+
   constructor(
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
@@ -47,9 +62,11 @@ export class PersonaNaturalComponent implements OnInit {
     private personaNaturalService: PersonaNaturalService,
     private _adapter: DateAdapter<any>,
     @Inject(MAT_DATE_LOCALE) private _locale: string,
+    private reCaptchaV3Service: ReCaptchaV3Service
   ) {
     this._locale = 'es';
     this._adapter.setLocale(this._locale);
+    this.sitekey =  environment.KeycodeCaptcha;
   }
 
   async ngOnInit() {
@@ -69,6 +86,7 @@ export class PersonaNaturalComponent implements OnInit {
       distrito: ['', Validators.required],
       domicilioFisico: ['', Validators.required],
       validateEmail : [false, Validators.required],
+      recaptchaReactive: this.formBuilder.control(''),
     })
     this.tipoDocumentoList = await firstValueFrom(this.casillaService.getTipoDocumentoList(Condicion_Persona_Natural))
     this.departamentoList = await firstValueFrom(this.ubigeoService.getDepartamentoList())
@@ -179,20 +197,29 @@ export class PersonaNaturalComponent implements OnInit {
     console.log('validando documento')
     const numeroDocumento = (this.formGroup.get('numeroDocumento')?.value ?? '') as string
     if (this.esTipoDocumentoDni && numeroDocumento.length == 8) {
-      this.personaNaturalDni = await firstValueFrom(this.personaNaturalService.obtenerDatosPersona(numeroDocumento))
-      if (this.personaNaturalDni == null) {
-        this.dialog.open(AlertDialogComponent, {
-          disableClose: true,
-          hasBackdrop: true,
-          data: {cabecera : 'Verifica si tu número de DNI ingresado es correcto.' ,messages: ['En caso sea correcto, te invitamos a presentar tu Solicitud mediante Mesa de Partes Física o Virtual.']}
+
+      var validate = await this.executeAction('homeLogin');
+
+      if(validate){
+        let envio : ObtenerDatosPersonaDniDto = new ObtenerDatosPersonaDniDto();
+        envio.dni = numeroDocumento;
+        envio.recaptcha = this.TOkenCaptcha;
+        this.personaNaturalDni = await firstValueFrom(this.personaNaturalService.obtenerDatosPersona(envio))
+        if (this.personaNaturalDni == null) {
+          this.dialog.open(AlertDialogComponent, {
+            disableClose: true,
+            hasBackdrop: true,
+            data: {cabecera : 'Verifica si tu número de DNI ingresado es correcto.' ,messages: ['En caso sea correcto, te invitamos a presentar tu Solicitud mediante Mesa de Partes Física o Virtual.']}
+          });
+          return;
+        }
+        console.log(this.personaNaturalDni);
+        this.formGroup.patchValue({
+          'nombres': this.personaNaturalDni.nombres,
+          'apellidos': this.personaNaturalDni.apellidos,
         });
-        return;
       }
-      console.log(this.personaNaturalDni);
-      this.formGroup.patchValue({
-        'nombres': this.personaNaturalDni.nombres,
-        'apellidos': this.personaNaturalDni.apellidos,
-      });
+ 
     }
   }
 
@@ -237,4 +264,31 @@ export class PersonaNaturalComponent implements OnInit {
     }
     return true;
    }
+
+   public recentToken = '';
+   public recentError?: { error: any };
+   private singleExecutionSubscription!: Subscription;
+   private executeAction = async (action: string) => {
+    return new Promise((resolve) => {
+      if (this.singleExecutionSubscription) {
+        this.singleExecutionSubscription.unsubscribe();
+      }
+      this.singleExecutionSubscription = this.reCaptchaV3Service
+        .execute(action)
+        .subscribe(
+          (token) => {
+            this.recentToken = token;
+            this.recentError = undefined;
+            this.TOkenCaptcha = token;
+            resolve(true);
+          },
+          (error) => {
+            this.recentToken = '';
+            this.TOkenCaptcha = '';
+            this.recentError = { error };
+            resolve(false);
+          }
+        );
+    });
+  };
 }

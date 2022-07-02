@@ -32,3 +32,9 @@ export class ResponseValidateData{
   status !: boolean;
   mensaje !: string;
 }
+
+
+export class ObtenerDatosPersonaDniDto {
+  dni!: string;
+  recaptcha !: string;
+}
