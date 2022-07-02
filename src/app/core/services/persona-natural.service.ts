@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import { map, Observable} from "rxjs";
 import {environment} from "../../../environments/environment";
-import {PersonaNaturalDni, RequestValidateData, ResponseValidateData} from "../dto/personaNaturalDni";
+import {ObtenerDatosPersonaDniDto, PersonaNaturalDni, RequestValidateData, ResponseValidateData} from "../dto/personaNaturalDni";
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +15,8 @@ export class PersonaNaturalService {
     private http: HttpClient
   ) { }
 
-  obtenerDatosPersona(dni: string): Observable<PersonaNaturalDni> {
-    return this.http.post<PersonaNaturalDni>(`${this.configUrl}/obtener-datos-persona-dni`, {
-      dni: dni
-    })
+  obtenerDatosPersona(request: ObtenerDatosPersonaDniDto): Observable<PersonaNaturalDni> {
+    return this.http.post<PersonaNaturalDni>(`${this.configUrl}/obtener-datos-persona-dni`, request)
   }
 
 
