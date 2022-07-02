@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 import { requestGlobal } from 'src/app/core/dto/request';
 import {CasillaService} from "../../core/services/casilla.service";
@@ -29,9 +30,6 @@ export class TerminosCondicionesComponent implements OnInit {
     this.observableRequestSubscription = casillaService.casilla$.subscribe(
       (requestSave: requestGlobal) => {
         this.requestSave = requestSave;
-
-        
-        //if (requestSave) this.companyId = requestSave;
       }
     );
   }

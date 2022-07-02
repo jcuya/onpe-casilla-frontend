@@ -142,13 +142,13 @@ export class DatosGeneralesComponent implements OnInit {
           }
 
 
-          this.validateRequest.tipoDocumento = this.personaNaturalFormGroup.controls['tipoDocumento'].value.codigo;
-          this.validateRequest.nroDocumento = this.personaNaturalFormGroup.controls['numeroDocumento'].value;
+         // this.validateRequest.tipoDocumento = this.personaNaturalFormGroup.controls['tipoDocumento'].value.codigo;
+          this.validateRequest.dni = this.personaNaturalFormGroup.controls['numeroDocumento'].value;
           this.validateRequest.nombreMadre = this.personaNaturalFormGroup.controls['nombreMadre'].value;
           this.validateRequest.nombrePadre = this.personaNaturalFormGroup.controls['nombrePadre'].value;
           this.validateRequest.fechaNacimiento = new Date (this.personaNaturalFormGroup.controls['fechaNacimento'].value);
           this.validateRequest.codigoVerifi = this.personaNaturalFormGroup.controls['digitoVerificacion'].value;
-          this.validateRequest.correo = this.personaNaturalFormGroup.controls['correoElectronico'].value;
+         // this.validateRequest.correo = this.personaNaturalFormGroup.controls['correoElectronico'].value;
           console.log("request envio", this.validateRequest)
 
           this.personaService.validarDatosPersona(this.validateRequest).subscribe(res =>{

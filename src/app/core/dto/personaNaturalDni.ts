@@ -5,16 +5,27 @@ export class PersonaNaturalDni {
   nombreMadre: string[] = []
 }
 
+// export class RequestValidateData{
+
+//   tipoDocumento!: string;
+//   nroDocumento!: string;
+//   nombrePadre !: string;
+//   nombreMadre !: string;
+//   fechaNacimiento !:Date;
+//   codigoVerifi !: string;
+//   correo!: string;
+// }
+
 export class RequestValidateData{
 
-  tipoDocumento!: string;
-  nroDocumento!: string;
+  dni !: number;
   nombrePadre !: string;
   nombreMadre !: string;
   fechaNacimiento !:Date;
   codigoVerifi !: string;
-  correo!: string;
 }
+
+
 
 
 export class ResponseValidateData{

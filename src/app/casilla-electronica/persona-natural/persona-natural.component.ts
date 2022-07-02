@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Condicion_Persona_Natural, TipoDocumento, TipoDocumento_DNI} from "../../core/dto/documento";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -15,6 +15,8 @@ import { SharedDialogComponent } from '../shared/shared-dialog/shared-dialog.com
 import { ValidarCorreoService } from 'src/app/core/services/validar-correo.service';
 import {TooltipPosition} from '@angular/material/tooltip';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
+//import 'moment/locale/ja';
 
 @Component({
   selector: 'app-persona-natural',
@@ -42,8 +44,12 @@ export class PersonaNaturalComponent implements OnInit {
     private casillaService: CasillaService,
     private correoService : ValidarCorreoService,
     private ubigeoService: UbigeoService,
-    private personaNaturalService: PersonaNaturalService
+    private personaNaturalService: PersonaNaturalService,
+    private _adapter: DateAdapter<any>,
+    @Inject(MAT_DATE_LOCALE) private _locale: string,
   ) {
+    this._locale = 'es';
+    this._adapter.setLocale(this._locale);
   }
 
   async ngOnInit() {
