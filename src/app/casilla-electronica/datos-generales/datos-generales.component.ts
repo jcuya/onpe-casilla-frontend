@@ -160,7 +160,7 @@ export class DatosGeneralesComponent implements OnInit {
               this.dialog.open(AlertDialogComponent, {
                 disableClose: true,
                 hasBackdrop: true,
-                data: {cabecera : 'Notificación' ,messages: [res.mensaje]}
+                data: {cabecera : 'Verifique sus datos' ,messages: [res.mensaje]}
               });
               return;
             }
