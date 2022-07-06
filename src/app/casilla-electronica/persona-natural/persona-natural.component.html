@@ -8,10 +8,10 @@
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex="50" class="button-suffix">
       <mat-label>Número de documento</mat-label>
-      <input matInput formControlName="numeroDocumento" (change)="invalidarDocumento()" [disabled]="blockInput" (keypress)="validarsoloNumeros($event)" (keyup.enter)="validarDocumento()" [maxlength] ="maxlength"  required>
-      <button *ngIf="esTipoDocumentoDni" class="append-button" mat-flat-button aria-label="Validar" (click)="validarDocumento()" type="button">
+      <input matInput formControlName="numeroDocumento"  type="text" (change)="invalidarDocumento()"  (keypress)="validarsoloNumeros($event)" (keydown.enter)="validarDocumento()" [maxlength] ="maxlength"  required>
+      <button *ngIf="esTipoDocumentoDni" class="append-button" mat-flat-button aria-label="Validar" (click)="validarDocumento()" type="button" [class.spinner]="loading" [disabled]="loading">
         Consultar
-        <i class="fa fa-spinner fa-spin" *ngIf="loading"></i>
+       
       </button>
     </mat-form-field>
   </div>

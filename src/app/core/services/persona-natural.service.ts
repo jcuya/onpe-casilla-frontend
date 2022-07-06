@@ -16,7 +16,7 @@ export class PersonaNaturalService {
   ) { }
 
   obtenerDatosPersona(request: ObtenerDatosPersonaDniDto): Observable<PersonaNaturalDni> {
-    return this.http.post<PersonaNaturalDni>(`${this.configUrl}/obtener-datos-persona-dni`, request)
+    return this.http.post<PersonaNaturalDni>(`${this.configUrl}/obtener-datos-persona-dni`, request).pipe(map(resp=>resp));
   }
 
 

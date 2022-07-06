@@ -91,9 +91,10 @@ export class PersonaNaturalComponent implements OnInit {
       validateEmail : [false, Validators.required],
       recaptchaReactive: this.formBuilder.control(''),
     })
+    this.formGroup.get('numeroDocumento')?.disable();
     this.tipoDocumentoList = await firstValueFrom(this.casillaService.getTipoDocumentoList(Condicion_Persona_Natural))
     this.departamentoList = await firstValueFrom(this.ubigeoService.getDepartamentoList())
-    
+   
   }
 
   tipoDocumentoCambiado(value: TipoDocumento) {
@@ -115,11 +116,13 @@ export class PersonaNaturalComponent implements OnInit {
       this.maxlength = 8;
       this.formGroup.get('nombres')?.disable();
       this.formGroup.get('apellidos')?.disable();
+      this.formGroup.get('numeroDocumento')?.enable();
       
     } else {
       this.maxlength =9
       this.formGroup.get('nombres')?.enable();
       this.formGroup.get('apellidos')?.enable();
+      this.formGroup.get('numeroDocumento')?.enable();
 
       //this.formGroup.get("nombreMadre")?.setValue(" ");
       //this.formGroup.get("nombrePadre")?.setValue(" ");
@@ -213,6 +216,7 @@ export class PersonaNaturalComponent implements OnInit {
   }
   async validarDocumento() {
     this.loading = true;
+    this.formGroup.get('numeroDocumento')?.disable();
     console.log('validando documento')
     const numeroDocumento = (this.formGroup.get('numeroDocumento')?.value ?? '') as string
     if (this.esTipoDocumentoDni && numeroDocumento.length == 8) {
@@ -223,24 +227,52 @@ export class PersonaNaturalComponent implements OnInit {
         let envio : ObtenerDatosPersonaDniDto = new ObtenerDatosPersonaDniDto();
         envio.dni = numeroDocumento;
         envio.recaptcha = this.TOkenCaptcha;
-        this.personaNaturalDni = await firstValueFrom(this.personaNaturalService.obtenerDatosPersona(envio))
-        if (this.personaNaturalDni == null) {
+        //this.personaNaturalDni = await firstValueFrom(this.personaNaturalService.obtenerDatosPersona(envio))
+
+        this.personaNaturalService.obtenerDatosPersona(envio).subscribe(res =>{
+          if(res){
+            this.personaNaturalDni = res;
+            this.formGroup.patchValue({
+              'nombres': this.personaNaturalDni.nombres,
+              'apellidos': this.personaNaturalDni.apellidos,
+            });
+            this.loading = false;
+          this.blockInput = false;
+          }else{
+            this.blockInput = true;
+            this.loading = false;
+            this.formGroup.get('numeroDocumento')?.enable();
+            this.dialog.open(AlertDialogComponent, {
+              disableClose: true,
+              hasBackdrop: true,
+              data: {cabecera : 'Verifica si tu número de DNI ingresado es correcto.' ,messages: ['En caso sea correcto, te invitamos a presentar tu Solicitud mediante Mesa de Partes Física o Virtual.']}
+            });
+            return;
+          }
+
+
+        },error =>{
           this.blockInput = true;
+          this.loading = false;
+          this.formGroup.get('numeroDocumento')?.enable();
           this.dialog.open(AlertDialogComponent, {
             disableClose: true,
             hasBackdrop: true,
             data: {cabecera : 'Verifica si tu número de DNI ingresado es correcto.' ,messages: ['En caso sea correcto, te invitamos a presentar tu Solicitud mediante Mesa de Partes Física o Virtual.']}
           });
           return;
-        }else{
-          this.loading = false;
-          this.blockInput = false;
-        }
-        console.log(this.personaNaturalDni);
-        this.formGroup.patchValue({
-          'nombres': this.personaNaturalDni.nombres,
-          'apellidos': this.personaNaturalDni.apellidos,
-        });
+        })
+
+
+        // console.log("PERSONAA", this.personaNaturalDni)
+        // if (this.personaNaturalDni == null || this.personaNaturalDni == undefined) {
+ 
+        // }else{
+        //   this.loading = false;
+        //   this.blockInput = false;
+        // }
+        // console.log(this.personaNaturalDni);
+     
       }
  
     }
