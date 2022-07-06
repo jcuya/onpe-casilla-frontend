@@ -17,11 +17,13 @@ export class SharedDialogComponent implements OnInit   {
 
 
   respuesta : boolean = false;
-
+  blockbtnTimmer: boolean = false;
   idEnvio !: number;
   tipoDocumento !: string;
   numeroDocumento !: string;
   email !: string;
+  interval : any;
+  timeLeft: number = 30;
 
   constructor( @Inject(MAT_DIALOG_DATA) private data : any,
   private dialogRef: MatDialogRef<SharedDialogComponent>,
@@ -133,7 +135,25 @@ reenvio(){
       })
     }
 
+    if(!this.blockbtnTimmer){
+      this.blockbtnTimmer = true;
+      setTimeout(()=>{
+       this.blockbtnTimmer = false;
+    }, 30000)
+    this.startTimer();
+    }
+
   });
+}
+
+startTimer() {
+  this.interval = setInterval(() => {
+    if(this.timeLeft > 0) {
+      this.timeLeft--;
+    } else {
+    clearInterval(this.interval)
+    }
+  },1000)
 }
 
 get primerDigito() {

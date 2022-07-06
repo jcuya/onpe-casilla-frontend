@@ -50,6 +50,9 @@ export class PersonaNaturalComponent implements OnInit {
    captchaView!: boolean;
    TOkenCaptcha: string = '';
 
+   public loading: boolean = false;
+   blockInput : boolean = true;
+
 
 
 
@@ -94,6 +97,7 @@ export class PersonaNaturalComponent implements OnInit {
   }
 
   tipoDocumentoCambiado(value: TipoDocumento) {
+    this.blockInput = false;
       this.formGroup.get("departamento")?.setValue(null);
       this.formGroup.get("provincia")?.setValue(null);
       this.formGroup.get("distrito")?.setValue(null);
@@ -111,6 +115,7 @@ export class PersonaNaturalComponent implements OnInit {
       this.maxlength = 8;
       this.formGroup.get('nombres')?.disable();
       this.formGroup.get('apellidos')?.disable();
+      
     } else {
       this.maxlength =9
       this.formGroup.get('nombres')?.enable();
@@ -207,6 +212,7 @@ export class PersonaNaturalComponent implements OnInit {
     if(this.valueIniCelular=='') this.valueIniCelular='9'
   }
   async validarDocumento() {
+    this.loading = true;
     console.log('validando documento')
     const numeroDocumento = (this.formGroup.get('numeroDocumento')?.value ?? '') as string
     if (this.esTipoDocumentoDni && numeroDocumento.length == 8) {
@@ -219,12 +225,16 @@ export class PersonaNaturalComponent implements OnInit {
         envio.recaptcha = this.TOkenCaptcha;
         this.personaNaturalDni = await firstValueFrom(this.personaNaturalService.obtenerDatosPersona(envio))
         if (this.personaNaturalDni == null) {
+          this.blockInput = true;
           this.dialog.open(AlertDialogComponent, {
             disableClose: true,
             hasBackdrop: true,
             data: {cabecera : 'Verifica si tu número de DNI ingresado es correcto.' ,messages: ['En caso sea correcto, te invitamos a presentar tu Solicitud mediante Mesa de Partes Física o Virtual.']}
           });
           return;
+        }else{
+          this.loading = false;
+          this.blockInput = false;
         }
         console.log(this.personaNaturalDni);
         this.formGroup.patchValue({
