@@ -126,11 +126,13 @@ export class PersonaNaturalComponent implements OnInit {
 
       //this.formGroup.get("nombreMadre")?.setValue(" ");
       //this.formGroup.get("nombrePadre")?.setValue(" ");
-      this.formGroup.get("digitoVerificacion")?.setValue(" ");
-      this.formGroup.get("domicilioFisico")?.setValue(" ");
-      this.formGroup.get("numeroCelular")?.setValue(" ");
-      this.formGroup.get("fechaNacimento")?.setValue(" ");
-      this.formGroup.get("correoElectronico")?.setValue(" ");
+      this.formGroup.get("digitoVerificacion")?.setValue("");
+      this.formGroup.get("domicilioFisico")?.setValue("");
+      this.formGroup.get("numeroCelular")?.setValue("");
+      this.formGroup.get("fechaNacimento")?.setValue("");
+      this.formGroup.get('correoElectronico')?.enable();
+      this.formGroup.get("validateEmail")?.setValue(false);
+      this.formGroup.get("correoElectronico")?.setValue("");
 
     }
   }
@@ -190,16 +192,6 @@ export class PersonaNaturalComponent implements OnInit {
 
     });
 
-
-
-
-
-
-
-
-
-
-
   }
 
   invalidarDocumento() {
@@ -237,7 +229,8 @@ export class PersonaNaturalComponent implements OnInit {
               'apellidos': this.personaNaturalDni.apellidos,
             });
             this.loading = false;
-          this.blockInput = false;
+          this.blockInput = false;          
+          this.numeroDniValido = true;
           }else{
             this.blockInput = true;
             this.loading = false;
