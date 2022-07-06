@@ -150,8 +150,9 @@ startTimer() {
   this.interval = setInterval(() => {
     if(this.timeLeft > 0) {
       this.timeLeft--;
-    } else {
-    clearInterval(30)
+    } else if(this.timeLeft == 0) {
+    clearInterval(this.interval)
+    this.timeLeft = 30;
     }
   },1000)
 }
