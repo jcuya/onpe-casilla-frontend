@@ -1,0 +1,10 @@
+.long-text-card{
+  color: #949494;
+  background-color: #f1f1f1;
+  overflow-y: scroll !important;
+}
+
+p,li {
+  text-align: justify;
+  margin-bottom: 14px;
+}

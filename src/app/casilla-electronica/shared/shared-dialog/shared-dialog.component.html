@@ -1,0 +1,35 @@
+<div class="row">
+    <button class="append-button btnCancel" mat-flat-button aria-label="Validar" type="button"  (click)="cancel(false)" >x</button>
+    <div class="col col-md-12">
+        <h3 class="title"><strong>{{titleForm}}</strong></h3>
+       
+
+            <div class="form-group">
+                <label>{{info}}</label>
+               
+            </div>
+            <br>
+            <form [formGroup]="formGroup" class="form-inline" class="form-group center">
+
+            
+                    <!-- <input matInput placeholder="username" #usernameInput cdkFocusInitial> -->
+                    <input style="text-transform: uppercase;" cdkFocusInitial type="text" id="input1"  name="input1" #input1 class="cuadro"  maxlength="1" formControlName="codigo1" (keyup)="(input1.value.length == 1 ) ? input2.focus() :''" (keydown)="input1.value = ''" tabindex="-1"  >
+              
+               
+                <input style="text-transform: uppercase;" type="text" #input2 class="cuadro"  maxlength="1" formControlName="codigo2" (keyup)="(input2.value.length == 1) ? input3.focus() :''" (keydown)="input2.value = ''" tabindex="-1">
+                <input style="text-transform: uppercase;" type="text" #input3 class="cuadro"  maxlength="1" formControlName="codigo3" (keyup)="(input3.value.length == 1) ? input4.focus() :''" (keydown)="input3.value = ''" tabindex="-1">
+                <input style="text-transform: uppercase;" type="text" #input4 class="cuadro"  maxlength="1" formControlName="codigo4" (keyup)="(input4.value.length == 1) ? input5.focus() :''" (keydown)="input4.value = ''" tabindex="-1">
+                <input style="text-transform: uppercase;" type="text" #input5 class="cuadro"  maxlength="1" formControlName="codigo5" (keyup)="(input5.value.length == 1) ? input6.focus() :''" (keydown)="input5.value = ''" tabindex="-1">
+                <input style="text-transform: uppercase;" type="text" #input6 class="cuadro"  maxlength="1" formControlName="codigo6" (keyup)="(input6.value.length == 1) ? btn.focus() :''" (keydown)="input6.value = ''" tabindex="-1">
+
+            </form>
+ 
+            <div  align="start"  >
+                <button #btn mat-flat-button type="button" color="success" class="btnReenviar" tabindex="-1" (click)="reenvio()">Reenvio código de verificación</button>
+            </div>
+            <div  align="end"  >
+                <button #btn mat-flat-button type="button" color="success" class="btnValidar" tabindex="-1" (click)="valid()">Validar</button>
+            </div>
+        
+    </div>
+</div>

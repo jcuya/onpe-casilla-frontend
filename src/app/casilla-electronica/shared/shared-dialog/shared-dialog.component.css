@@ -1,0 +1,36 @@
+.cuadro{
+    width: 44px;
+    height: 44px;
+    margin: 5px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.center{
+    text-align: center;
+}
+.btnCancel{
+  top: -24px;
+  left: 24px;
+  float: right;
+  width: 10px;
+  padding: 0px;
+  margin: 0px;
+  font-size: 18px;
+}
+.btnValidar{
+  border: 1px solid #7e7e7e;
+}
+.btnReenviar{
+  border: 1px solid #7e7e7e;
+  bottom: -35px;
+}
+input {
+    text-align: center;
+  }
+  ::-webkit-input-placeholder {
+    text-align: center;
+  }
+  :-moz-placeholder {
+    text-align: center;
+  }

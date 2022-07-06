@@ -1,0 +1,99 @@
+<form [formGroup]="formGroup" (submit)="$event.preventDefault()">
+  <div fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field appearance="outline" fxFlex="50">
+      <mat-label>Tipo de Documento</mat-label>
+      <mat-select formControlName="tipoDocumento" (selectionChange)="tipoDocumentoCambiado($event.value)" required>
+        <mat-option *ngFor="let item of tipoDocumentoList" [value]="item">{{item.nombre}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex="50" class="button-suffix">
+      <mat-label>Número de documento</mat-label>
+      <input matInput formControlName="numeroDocumento" (change)="invalidarDocumento()" (keypress)="validarsoloNumeros($event)" [maxlength] ="maxlength"  required>
+      <button *ngIf="esTipoDocumentoDni" class="append-button" mat-flat-button aria-label="Validar" (click)="validarDocumento()" type="button">
+        Consultar
+      </button>
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field appearance="outline" fxFlex="100" >
+      <mat-label>Apellidos</mat-label>
+      <input matInput formControlName="apellidos" required maxlength="150">
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field appearance="outline" fxFlex="100">
+      <mat-label>Nombres</mat-label>
+      <input matInput formControlName="nombres" maxlength="150">
+    </mat-form-field>
+  </div>
+  <!-- <div *ngIf="esTipoDocumentoDni" fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field appearance="outline" fxFlex="100">
+      <mat-label>Nombre del padre</mat-label>
+      <mat-select formControlName="nombrePadre">
+        <mat-option *ngFor="let item of personaNaturalDni?.nombrePadre" [value]="item">{{item}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div *ngIf="esTipoDocumentoDni" fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field appearance="outline" fxFlex="100">
+      <mat-label>Nombre de la madre</mat-label>
+      <mat-select formControlName="nombreMadre">
+        <mat-option *ngFor="let item of personaNaturalDni?.nombreMadre" [value]="item">{{item}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div> -->
+  <div fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field appearance="outline" fxFlex="50">
+      <mat-label>Fecha de nacimiento</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="fechaNacimento" readonly>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field *ngIf="esTipoDocumentoDni" appearance="outline" fxFlex="50">
+      <mat-label>Dígito de verificación</mat-label>
+      <input matInput formControlName="digitoVerificacion" (keypress)="validarsoloNumeros($event)" maxlength="1">
+      <button class="tooltip" data-text="Es el número separado con un guión después de tu número de DNI." class="tooltip left" matSuffix mat-icon-button >
+        <mat-icon>info</mat-icon>
+      </button>       
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field appearance="outline" fxFlex="70">
+      <mat-label>Correo electrónico</mat-label>
+      <input matInput type="email" name="email" ngModel [email]="true" formControlName="correoElectronico">
+      <button class="append-button" mat-flat-button aria-label="Validar" [disabled]="ActiveButton()" (click)="validarCorreoElectronico()" type="button">
+        Validar
+      </button>
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex="30">
+      <mat-label>Número de celular</mat-label>
+      <input [(ngModel)]="valueIniCelular" matInput formControlName="numeroCelular" (keypress)="validarsoloNumeros($event)" minlength="9" maxlength="9" (click)="llenar9()" (keydown)="verificaVacio()" (focusout)="onFocusOut9($event)">
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field appearance="outline" fxFlex>
+      <mat-label>Departamento</mat-label>
+      <mat-select id="departamento" name="departamento" formControlName="departamento" (valueChange)="cambiarProvincia($event)">
+        <mat-option *ngFor="let item of departamentoList" [value]="item">{{item.nodep}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex>
+      <mat-label>Provincia</mat-label>
+      <mat-select id="provincia" name="provincia" formControlName="provincia" (valueChange)="cambiarDistrito($event)">
+        <mat-option *ngFor="let item of provinciaList" [value]="item">{{item.noprv}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex>
+      <mat-label>Distrito</mat-label>
+      <mat-select id="distrito" name="distrito" formControlName="distrito">
+        <mat-option *ngFor="let item of distritoList" [value]="item">{{item.nodis}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field appearance="outline" fxFlex="100">
+      <mat-label>Domicilio físico</mat-label>
+      <input matInput formControlName="domicilioFisico">
+    </mat-form-field>
+  </div>
+</form>

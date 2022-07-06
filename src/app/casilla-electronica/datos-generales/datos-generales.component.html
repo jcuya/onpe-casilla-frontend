@@ -1,0 +1,22 @@
+<form [formGroup]="formGroup" (submit)="$event.preventDefault()">
+  <div fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field appearance="outline" fxFlex="100">
+      <mat-label>Condición</mat-label>
+      <mat-select formControlName="condicion" (selectionChange)="update()" [disabled]="true" >
+        <mat-option *ngFor="let item of condicionList; let i = index" [value]="item" >{{item.nombre}}</mat-option>
+      </mat-select>
+      
+    </mat-form-field>
+  
+  </div>
+  <app-persona-natural *ngIf="esPersonaNatural"></app-persona-natural>
+  <app-persona-juridica *ngIf="esPersonaJuridica"></app-persona-juridica>
+  <app-alert type="warn">
+    <p>Verifica tus datos antes de hacer click en el botón Validar</p>
+    <p class="camposObligatorios">* Campos obligatorios</p>
+  </app-alert>
+  <br/>
+  <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center">
+    <button mat-flat-button type="button" color="warn" [disabled]="validateForms()" (click)="continuar()">VALIDAR</button>
+  </div>
+</form>

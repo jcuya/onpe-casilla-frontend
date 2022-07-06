@@ -1,0 +1,75 @@
+<form [formGroup]="formGroup" (submit)="$event.preventDefault()">
+  <div fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field appearance="outline" fxFlex="50">
+      <mat-label>Tipo de Documento</mat-label>
+      <mat-select formControlName="tipoDocumento">
+        <mat-option *ngFor="let item of tipoDocumentoList" [value]="item">{{item.nombre}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex="50">
+      <mat-label>Número de documento</mat-label>
+      <input matInput formControlName="numeroDocumento" (keypress)="validarsoloNumeros($event)" maxlength="11">
+      <button *ngIf="esTipoDocumentoRuc" class="append-button" mat-flat-button aria-label="Validar" (click)="validarDocumento()" type="button">
+        Validar
+      </button>
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field appearance="outline" fxFlex="100">
+      <mat-label>Razon social</mat-label>
+      <input matInput formControlName="razonSocial">
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field appearance="outline" fxFlex="100">
+      <mat-label>Correo electrónico</mat-label>
+      <input matInput formControlName="correoElectronico">
+    </mat-form-field>
+  </div>
+  <h2>Número de teléfono fijo *</h2>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field appearance="outline" fxFlex="50">
+      <mat-label>Ciudad</mat-label>
+      <mat-select formControlName="ciudadTelefono">
+        <mat-option *ngFor="let item of departamentoList" [value]="item">{{item.nodep}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex="50">
+      <mat-label>Teléfono</mat-label>
+      <input matInput formControlName="telefono" (keypress)="validarsoloNumeros($event)" maxlength="7">
+    </mat-form-field>
+  </div>
+  <h2>Domicilio físico</h2>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field appearance="outline" fxFlex>
+      <mat-label>Departamento</mat-label>
+      <mat-select formControlName="departamento" (valueChange)="cambiarProvincia($event)">
+        <mat-option *ngFor="let item of departamentoList" [value]="item">{{item.nodep}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex>
+      <mat-label>Provincia</mat-label>
+      <mat-select formControlName="provincia" (valueChange)="cambiarDistrito($event)">
+        <mat-option *ngFor="let item of provinciaList" [value]="item">{{item.noprv}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex>
+      <mat-label>Distrito</mat-label>
+      <mat-select formControlName="distrito">
+        <mat-option *ngFor="let item of distritoList" [value]="item">{{item.nodis}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field appearance="outline" fxFlex="100">
+      <mat-label>Dirección</mat-label>
+      <input matInput formControlName="direccion">
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field appearance="outline" fxFlex="100">
+      <mat-label>Página web</mat-label>
+      <input matInput formControlName="paginaWeb">
+    </mat-form-field>
+  </div>
+</form>

@@ -1,0 +1,174 @@
+<form [formGroup]="formGroup" (submit)="$event.preventDefault()">
+  <div fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field appearance="outline" fxFlex="100">
+      <mat-label>Tipo de documento adjunto</mat-label>
+      <mat-select formControlName="tipoDocumentoAdjunto" >
+        <mat-option *ngFor="let item of tipoDocumentoAdjuntoList" [value]="item">{{item.nombre}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field appearance="outline" fxFlex="100">
+      <mat-label>Especifique</mat-label>
+      <input matInput formControlName="tipoDocumentoAdjuntoNombre">
+    </mat-form-field>
+  </div>
+
+  <!-- <div fxLayout="row" fxLayoutGap="10px">
+     <div style="display: none">
+      <input matInput formControlName="documentoArchivo">
+    </div> 
+     <app-upload-file
+      (fileDropped)="handleArchivoAgregado($event)"
+      fxFlex="100"
+      label="Cargar el documento de sustento"
+      title="Arrastrar y soltar"
+      description="Cargar el documento de sustento (Formato JPG o PDF, peso máximo 2Mb)"></app-upload-file> 
+  </div> -->
+
+
+
+  <div fxLayout="row" fxLayoutGap="10px">
+
+
+    <div class="labelsColor">
+      Adjuntar un archivo PDF como máximo (peso máximo de 10 MB)<br />
+      El nombre del archivo no debe superar los 100 caracteres
+    </div>
+    <file-upload
+      formControlName="files"
+      [multiple]="false"
+      [animation]="true"
+      accept=".pdf"
+      fxFlex="100"
+      [ngStyle]="{
+        'outline-color': filesControl.valid == false ? 'red' : ''
+      }"
+      [ngStyle]="{
+        'background-color': filesControl.valid == false ? '#fdf4f4' : ''
+      }"
+    >
+      <ng-template
+        let-isFileDragDropAvailable="isFileDragDropAvailable"
+        #placeholder
+      >
+        <file-upload-drop-zone>
+          <ng-container
+            *ngIf="isFileDragDropAvailable; else isNotDragDropAvailable"
+          >
+            Agregar archivo, o dar clic aquí.
+          </ng-container>
+          <ng-template #isNotDragDropAvailable> </ng-template>
+        </file-upload-drop-zone>
+      </ng-template>
+
+      <ng-template
+        let-i="index"
+        let-file="file"
+        let-control="control"
+        #item
+      >
+        <file-upload-list-item
+          [index]="i"
+          class="item-test"
+          [file]="file"
+          [control]="control"
+          >Remover</file-upload-list-item
+        >
+      </ng-template>
+    </file-upload>
+
+
+
+
+    <!-- <file-upload formControlName="files" [multiple]="multiple" [animation]="animation"></file-upload> -->
+
+  </div>
+
+
+
+
+  <div fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field appearance="outline" fxFlex="50">
+      <mat-label>Tipo de Documento</mat-label>
+      <mat-select formControlName="tipoDocumento" (selectionChange)="tipoDocumentoCambiado($event.value)">
+        <mat-option *ngFor="let item of tipoDocumentoList" [value]="item">{{item.nombre}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex="50">
+      <mat-label>Número de documento</mat-label>
+      <input matInput formControlName="numeroDocumento" (keypress)="validarsoloNumeros($event)" [maxlength]="maxlength">
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field appearance="outline" fxFlex="100">
+      <mat-label>Apellidos</mat-label>
+      <input matInput formControlName="apellidos">
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field appearance="outline" fxFlex="100">
+      <mat-label>Nombres</mat-label>
+      <input matInput formControlName="nombres">
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field appearance="outline" fxFlex="70">
+      <mat-label>Correo electrónico</mat-label>
+      <input matInput formControlName="correoElectronico">
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex="30">
+      <mat-label>Número de celular</mat-label>
+      <input matInput formControlName="numeroCelular" (keypress)="validarsoloNumeros($event)" maxlength="9">
+    </mat-form-field>
+  </div>
+  <h2>Domicilio físico</h2>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field appearance="outline" fxFlex>
+      <mat-label>Departamento</mat-label>
+      <mat-select formControlName="departamento" (valueChange)="cambiarProvincia($event)">
+        <mat-option *ngFor="let item of departamentoList" [value]="item">{{item.nodep}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex>
+      <mat-label>Provincia</mat-label>
+      <mat-select formControlName="provincia" (valueChange)="cambiarDistrito($event)">
+        <mat-option *ngFor="let item of provinciaList" [value]="item">{{item.noprv}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex>
+      <mat-label>Distrito</mat-label>
+      <mat-select formControlName="distrito">
+        <mat-option *ngFor="let item of distritoList" [value]="item">{{item.nodis}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field appearance="outline" fxFlex="100">
+      <mat-label>Domicilio físico</mat-label>
+      <input matInput formControlName="domicilioFisico">
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field appearance="outline" fxFlex="100">
+      <mat-label>Cargo en la Organización Política</mat-label>
+      <mat-select formControlName="cargo">
+        <mat-option *ngFor="let item of cargoList" [value]="item">{{item.nombre}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field appearance="outline" fxFlex="100">
+      <mat-label>Especifique</mat-label>
+      <input matInput formControlName="cargoNombre">
+    </mat-form-field>
+  </div>
+  <app-alert type="warn">Verifica tus datos antes de hacer click en el botón Validar</app-alert>
+  <br/>
+  <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center">
+    <button mat-flat-button type="button" color="primary" (click)="regresar()">REGRESAR</button>
+    <!-- <button mat-flat-button type="button" color="warn" (click)="continuar()">VALIDAR</button> -->
+    <button mat-flat-button type="button" color="warn" [disabled]="formGroup.invalid" (click)="siguientePaso()">VALIDAR</button>
+  </div>
+
+</form>
