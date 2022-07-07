@@ -62,3 +62,7 @@
   border-top-color: #000000;
   animation: spinner .8s linear infinite;
 }
+
+.mat-body p, .mat-body-1 p, .mat-typography .mat-body p, .mat-typography .mat-body-1 p, .mat-typography p {
+  margin: -22px 6px 12px 10px !important;
+}

@@ -107,7 +107,7 @@ export class SolicitudComponent implements OnInit {
     let Ubigeo = this.requestSave.departamento + " / " +this.requestSave.provincia + " / " + this.requestSave.distrito
 
     fd.append('ubigeo',Ubigeo)
-    
+    console.log("Toda esta información se enviará a grabar", fd);
 
     if(this.requestSave.TipoPersona === 'j'){
       fd.append('representante',JSON.stringify(this.requestSave.representante))

@@ -1,4 +1,5 @@
 export const TipoDocumento_DNI = 'DNI'
+export const TipoDocumento_CE = 'CE'
 export const TipoDocumento_RUC = 'RUC'
 export const Condicion_Persona_Juridica = 'j'
 export const Condicion_Persona_Natural = 'n'

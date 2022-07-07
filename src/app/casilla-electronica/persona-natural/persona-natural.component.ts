@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {Condicion_Persona_Natural, TipoDocumento, TipoDocumento_DNI} from "../../core/dto/documento";
+import {Condicion_Persona_Natural, TipoDocumento, TipoDocumento_DNI, TipoDocumento_CE} from "../../core/dto/documento";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CasillaService} from "../../core/services/casilla.service";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
@@ -73,13 +73,17 @@ export class PersonaNaturalComponent implements OnInit {
   }
 
   async ngOnInit() {
+
+
     this.formGroup = this.formBuilder.group({
       tipoDocumento: ['', Validators.required],
       numeroDocumento: ['', Validators.required],
-      apellidos: ['', Validators.required],
+      //apellidos: ['', Validators.required],
+      apellidoPaterno: ['', Validators.required],
+      apellidoMaterno: ['', Validators.required],
       nombres: ['', Validators.required],
-      //nombrePadre: ['', Validators.required],
-      //nombreMadre: ['', Validators.required],
+      nombrePadre: ['', Validators.required],
+      nombreMadre: ['', Validators.required],
       fechaNacimento: ['', Validators.required],
       digitoVerificacion: ['', Validators.required],
       correoElectronico: ['',[ Validators.required, Validators.email]],
@@ -89,6 +93,7 @@ export class PersonaNaturalComponent implements OnInit {
       distrito: ['', Validators.required],
       domicilioFisico: ['', Validators.required],
       validateEmail : [false, Validators.required],
+      
       recaptchaReactive: this.formBuilder.control(''),
     })
     this.formGroup.get('numeroDocumento')?.disable();
@@ -110,23 +115,32 @@ export class PersonaNaturalComponent implements OnInit {
 
     this.formGroup.get("numeroDocumento")?.setValue("");
     this.formGroup.get("nombres")?.setValue("");
-    this.formGroup.get("apellidos")?.setValue("");
+    //this.formGroup.get("apellidos")?.setValue("");
+    this.formGroup.get("apellidoPaterno")?.setValue("");
+    this.formGroup.get("apellidoMaterno")?.setValue("");
 
     if (value.codigo == TipoDocumento_DNI) {
       this.maxlength = 8;
       this.formGroup.get('nombres')?.disable();
-      this.formGroup.get('apellidos')?.disable();
+      //this.formGroup.get('apellidos')?.disable();
+      this.formGroup.get('apellidoPaterno')?.disable();
+      this.formGroup.get('apellidoMaterno')?.disable();
       this.formGroup.get('numeroDocumento')?.enable();
+      this.formGroup.get("digitoVerificacion")?.setValue("");
       
     } else {
       this.maxlength =9
       this.formGroup.get('nombres')?.enable();
-      this.formGroup.get('apellidos')?.enable();
+      //this.formGroup.get('apellidos')?.enable();
+      this.formGroup.get('apellidoPaterno')?.enable();
+      this.formGroup.get('apellidoMaterno')?.enable();
       this.formGroup.get('numeroDocumento')?.enable();
 
       //this.formGroup.get("nombreMadre")?.setValue(" ");
       //this.formGroup.get("nombrePadre")?.setValue(" ");
-      this.formGroup.get("digitoVerificacion")?.setValue("");
+      this.formGroup.get("digitoVerificacion")?.setValue(" ");
+      this.formGroup.get("apellidoPaterno")?.setValue(" ");
+      this.formGroup.get("apellidoMaterno")?.setValue(" ");
       this.formGroup.get("domicilioFisico")?.setValue("");
       this.formGroup.get("numeroCelular")?.setValue("");
       this.formGroup.get("fechaNacimento")?.setValue("");
@@ -213,7 +227,7 @@ export class PersonaNaturalComponent implements OnInit {
     const numeroDocumento = (this.formGroup.get('numeroDocumento')?.value ?? '') as string
     if (this.esTipoDocumentoDni && numeroDocumento.length == 8) {
 
-      var validate = true;//await this.executeAction('homeLogin'); //  poner en true para desarrollo
+      var validate = true;// await this.executeAction('homeLogin'); //  poner en true para desarrollo
 
       if(validate){
         let envio : ObtenerDatosPersonaDniDto = new ObtenerDatosPersonaDniDto();
@@ -226,7 +240,9 @@ export class PersonaNaturalComponent implements OnInit {
             this.personaNaturalDni = res;
             this.formGroup.patchValue({
               'nombres': this.personaNaturalDni.nombres,
-              'apellidos': this.personaNaturalDni.apellidos,
+              //'apellidos': this.personaNaturalDni.apellidos,
+              'apellidoPaterno': this.personaNaturalDni.apellidos,
+              'apellidoMaterno': this.personaNaturalDni.apellidos,
             });
             this.loading = false;
           this.blockInput = false;          
@@ -285,6 +301,9 @@ export class PersonaNaturalComponent implements OnInit {
     return this.formGroup?.get('tipoDocumento')?.value.codigo == TipoDocumento_DNI
   }
 
+  get esTipoDocumentoCE() {
+    return this.formGroup?.get('tipoDocumento')?.value.codigo == TipoDocumento_CE
+  }
   async cambiarProvincia(value: Departamento) {
     this.provinciaList = await firstValueFrom(this.ubigeoService.getProvinciaList(value.ubdep))
     this.distritoList = []

@@ -15,10 +15,20 @@
       </button>
     </mat-form-field>
   </div>
-  <div fxLayout="row" fxLayoutGap="10px">
+  <!-- <div *ngIf="esTipoDocumentoDni" fxLayout="row" fxLayoutGap="10px">
     <mat-form-field appearance="outline" fxFlex="100" >
       <mat-label>Apellidos</mat-label>
       <input matInput formControlName="apellidos" required maxlength="150">
+    </mat-form-field>
+  </div> -->
+  <div fxLayout="row" fxLayoutGap="10px">
+    <mat-form-field appearance="outline" fxFlex="50" >
+      <mat-label>Apellido Paterno</mat-label>
+      <input matInput formControlName="apellidoPaterno"  maxlength="150">
+    </mat-form-field>
+    <mat-form-field appearance="outline" fxFlex="50" >
+      <mat-label>Apellido Materno</mat-label>
+      <input matInput formControlName="apellidoMaterno"  maxlength="150">
     </mat-form-field>
   </div>
   <div fxLayout="row" fxLayoutGap="10px">
@@ -61,7 +71,7 @@
   <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field appearance="outline" fxFlex="70">
       <mat-label>Correo electrónico</mat-label>
-      <input matInput type="email" name="email" ngModel [email]="true" formControlName="correoElectronico">
+      <input matInput type="email" name="email" ngModel [email]="true" maxlength="100" formControlName="correoElectronico">
       <button class="append-button" mat-flat-button aria-label="Validar" [disabled]="ActiveButton()" (click)="validarCorreoElectronico()" type="button">
         Validar
       </button>
@@ -94,7 +104,7 @@
   <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field appearance="outline" fxFlex="100">
       <mat-label>Domicilio físico</mat-label>
-      <input matInput formControlName="domicilioFisico">
+      <input maxlength="200" matInput formControlName="domicilioFisico">
     </mat-form-field>
   </div>
 </form>
