@@ -24,17 +24,17 @@
   <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field appearance="outline" fxFlex="50" >
       <mat-label>Apellido Paterno</mat-label>
-      <input matInput formControlName="apellidoPaterno"  maxlength="150">
+      <input matInput formControlName="apellidoPaterno"  maxlength="100">
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex="50" >
       <mat-label>Apellido Materno</mat-label>
-      <input matInput formControlName="apellidoMaterno"  maxlength="150">
+      <input matInput formControlName="apellidoMaterno"  maxlength="100">
     </mat-form-field>
   </div>
   <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field appearance="outline" fxFlex="100">
       <mat-label>Nombres</mat-label>
-      <input matInput formControlName="nombres" maxlength="150">
+      <input matInput formControlName="nombres" maxlength="100">
     </mat-form-field>
   </div>
   <!-- <div *ngIf="esTipoDocumentoDni" fxLayout="row" fxLayoutGap="10px">
@@ -71,7 +71,7 @@
   <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field appearance="outline" fxFlex="70">
       <mat-label>Correo electrónico</mat-label>
-      <input matInput type="email" name="email" ngModel [email]="true" maxlength="100" formControlName="correoElectronico">
+      <input matInput type="email" name="email" ngModel [email]="true" maxlength="80" formControlName="correoElectronico">
       <button class="append-button" mat-flat-button aria-label="Validar" [disabled]="ActiveButton()" (click)="validarCorreoElectronico()" type="button">
         Validar
       </button>

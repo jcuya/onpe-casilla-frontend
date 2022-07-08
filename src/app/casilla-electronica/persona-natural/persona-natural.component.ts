@@ -82,8 +82,8 @@ export class PersonaNaturalComponent implements OnInit {
       apellidoPaterno: ['', Validators.required],
       apellidoMaterno: ['', Validators.required],
       nombres: ['', Validators.required],
-      nombrePadre: ['', Validators.required],
-      nombreMadre: ['', Validators.required],
+      //nombrePadre: ['', Validators.required],
+      //nombreMadre: ['', Validators.required],
       fechaNacimento: ['', Validators.required],
       digitoVerificacion: ['', Validators.required],
       correoElectronico: ['',[ Validators.required, Validators.email]],
@@ -136,8 +136,8 @@ export class PersonaNaturalComponent implements OnInit {
       this.formGroup.get('apellidoMaterno')?.enable();
       this.formGroup.get('numeroDocumento')?.enable();
 
-      this.formGroup.get("nombreMadre")?.setValue(" ");
-      this.formGroup.get("nombrePadre")?.setValue(" ");
+      //this.formGroup.get("nombreMadre")?.setValue(" ");
+      //this.formGroup.get("nombrePadre")?.setValue(" ");
       this.formGroup.get("digitoVerificacion")?.setValue(" ");
       this.formGroup.get("apellidoPaterno")?.setValue(" ");
       this.formGroup.get("apellidoMaterno")?.setValue(" ");
@@ -227,7 +227,7 @@ export class PersonaNaturalComponent implements OnInit {
     const numeroDocumento = (this.formGroup.get('numeroDocumento')?.value ?? '') as string
     if (this.esTipoDocumentoDni && numeroDocumento.length == 8) {
 
-      var validate = true;// await this.executeAction('homeLogin'); //  poner en true para desarrollo
+      var validate = await this.executeAction('homeLogin'); //  poner en true para desarrollo
 
       if(validate){
         let envio : ObtenerDatosPersonaDniDto = new ObtenerDatosPersonaDniDto();
@@ -241,8 +241,8 @@ export class PersonaNaturalComponent implements OnInit {
             this.formGroup.patchValue({
               'nombres': this.personaNaturalDni.nombres,
               //'apellidos': this.personaNaturalDni.apellidos,
-              'apellidoPaterno': this.personaNaturalDni.apellidos,
-              'apellidoMaterno': this.personaNaturalDni.apellidos,
+              'apellidoPaterno': this.personaNaturalDni.apellidoPaterno,
+              'apellidoMaterno': this.personaNaturalDni.apellidoMaterno,
             });
             this.loading = false;
           this.blockInput = false;          
