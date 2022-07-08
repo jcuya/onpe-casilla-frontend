@@ -8,7 +8,7 @@
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex="50" class="button-suffix">
       <mat-label>Número de documento</mat-label>
-      <input matInput formControlName="numeroDocumento"  type="text" (change)="invalidarDocumento()"  (keypress)="validarsoloNumeros($event)" (keydown.enter)="validarDocumento()" [maxlength] ="maxlength"  required>
+      <input id="numerodocumento" matInput formControlName="numeroDocumento"  type="text" (change)="invalidarDocumento()"  (keypress)="validateInputKey($event)" (keydown.enter)="validarDocumento()" [maxlength] ="maxlength"  required>
       <button *ngIf="esTipoDocumentoDni && !numeroDniValido" class="append-button" mat-flat-button aria-label="Validar" (click)="validarDocumento()" type="button" [class.spinner]="loading" [disabled]="loading">
         Consultar
        
@@ -78,7 +78,7 @@
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex="30">
       <mat-label>Número de celular</mat-label>
-      <input [(ngModel)]="valueIniCelular" matInput formControlName="numeroCelular" (keypress)="validarsoloNumeros($event)" minlength="9" maxlength="9" (click)="llenar9()" (keydown)="verificaVacio()" (focusout)="onFocusOut9($event)">
+      <input id="numerocelular" [(ngModel)]="valueIniCelular" matInput formControlName="numeroCelular" (keypress)="validarsoloNumeros($event)" minlength="9" maxlength="9" (click)="llenar9()" (keydown)="verificaVacio()" (focusout)="onFocusOut9($event)">
     </mat-form-field>
   </div>
   <div fxLayout="row" fxLayoutGap="10px">

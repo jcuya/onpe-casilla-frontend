@@ -116,8 +116,8 @@ export class PersonaNaturalComponent implements OnInit {
     this.formGroup.get("numeroDocumento")?.setValue("");
     this.formGroup.get("nombres")?.setValue("");
     //this.formGroup.get("apellidos")?.setValue("");
-    this.formGroup.get("apellidoPaterno")?.setValue("");
-    this.formGroup.get("apellidoMaterno")?.setValue("");
+    this.formGroup.get("apellidoPaterno")?.setValue(" ");
+    this.formGroup.get("apellidoMaterno")?.setValue(" ");
 
     if (value.codigo == TipoDocumento_DNI) {
       this.maxlength = 8;
@@ -136,8 +136,8 @@ export class PersonaNaturalComponent implements OnInit {
       this.formGroup.get('apellidoMaterno')?.enable();
       this.formGroup.get('numeroDocumento')?.enable();
 
-      //this.formGroup.get("nombreMadre")?.setValue(" ");
-      //this.formGroup.get("nombrePadre")?.setValue(" ");
+      this.formGroup.get("nombreMadre")?.setValue(" ");
+      this.formGroup.get("nombrePadre")?.setValue(" ");
       this.formGroup.get("digitoVerificacion")?.setValue(" ");
       this.formGroup.get("apellidoPaterno")?.setValue(" ");
       this.formGroup.get("apellidoMaterno")?.setValue(" ");
@@ -316,20 +316,52 @@ export class PersonaNaturalComponent implements OnInit {
   validarsoloNumeros(event : any): boolean{
     const charCode = (event.which) ? event.which : event.keyCode;
     var inp = String.fromCharCode(event.keyCode);
-    if (this.maxlength == 8){
-      if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-        return false;
-      }
+  
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
     }
-    if (this.maxlength == 9){
-      if (/[a-zA-Z0-9]/.test(inp)) {
-        return true;
-      } else {
-        event.preventDefault();
-        return false;
-      }
-    }
+
+    //if(this.formGroup.controls["tipoDocumento"].value.codigo == TipoDocumento_DNI && idName ==='numerocelular'){
+
+
+   
+
+
+      // if (this.maxlength == 9){
+      //   if (/[a-zA-Z0-9]/.test(inp)) {
+      //     return true;
+      //   } else {
+      //     event.preventDefault();
+      //     return false;
+      //   }
+      // }
+   // }
+
+
     return true;
+   }
+
+
+   validateInputKey(event : any): boolean{
+
+    const charCode = (event.which) ? event.which : event.keyCode;
+    var inp = String.fromCharCode(event.keyCode);
+
+      if (this.maxlength == 9){
+        if (/[a-zA-Z0-9]/.test(inp)) {
+          return true;
+        } else {
+          event.preventDefault();
+          return false;
+        }
+      }
+
+      if(this.maxlength = 8){
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+          return false;
+        }
+      }
+return true;
    }
 
    public recentToken = '';
