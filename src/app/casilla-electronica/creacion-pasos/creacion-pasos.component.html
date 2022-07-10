@@ -15,7 +15,7 @@
       <ng-template matStepLabel>Términos y condiciones</ng-template>
       <app-terminos-condiciones (completedStep)="completedStep()" (previousStep)="previousStep()"></app-terminos-condiciones>
     </mat-step>
-    <mat-step label="Foto con DNI" [editable]="isEditable" >
+    <mat-step label="Foto con DNI/C.E." [editable]="isEditable" >
       <ng-template matStepLabel>Foto con DNI</ng-template>
       <app-foto-dni (completedStep)="completedStep()" (previousStep)="previousStep()"></app-foto-dni>
     </mat-step>

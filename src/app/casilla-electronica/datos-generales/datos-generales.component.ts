@@ -236,13 +236,18 @@ export class DatosGeneralesComponent implements OnInit {
 
   generateRequestNaturalEmit(){
 
-    var apellidos = this.personaNaturalFormGroup.controls['apellidos'].value.split(' ');
+    //var apellidos = this.personaNaturalFormGroup.controls['apellidos'].value.split(' ');
+    //var apellidoPaterno = this.personaNaturalFormGroup.controls['apellidoPaterno'].value.split(' ');
+    //var apellidoMaterno = this.personaNaturalFormGroup.controls['apellidoMaterno'].value.split(' ');
     var tipoDoc = this.personaNaturalFormGroup.controls['tipoDocumento'].value;
     this.requestSave.tipoDocumento = tipoDoc.nombre;
     this.requestSave.numeroDocumento = this.personaNaturalFormGroup.controls['numeroDocumento'].value;
     this.requestSave.nombres = this.personaNaturalFormGroup.controls['nombres'].value;
-    this.requestSave.apePaterno = apellidos[0];
-    this.requestSave.apeMaterno =  apellidos[1];
+    //this.requestSave.apePaterno = apellidos[0];
+    //this.requestSave.apeMaterno =  apellidos[1];
+    this.requestSave.apePaterno = this.personaNaturalFormGroup.controls['apellidoPaterno'].value;
+    this.requestSave.apeMaterno =  this.personaNaturalFormGroup.controls['apellidoMaterno'].value;
+
     this.requestSave.correoElectronico = this.personaNaturalFormGroup.controls['correoElectronico'].value;
     this.requestSave.numeroCelular = this.personaNaturalFormGroup.controls['numeroCelular'].value;
     this.requestSave.domicilioFisico =  this.personaNaturalFormGroup.controls['domicilioFisico'].value;

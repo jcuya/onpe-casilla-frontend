@@ -1,6 +1,9 @@
 <form [formGroup]="formGroup" (submit)="$event.preventDefault()">
   
     <br>
+    
+  <div fxLayout="row" fxLayoutGap="10px">
+    <div>
     <app-alert type="warn"><p><strong>Instrucciones</strong></p>
       <ol>
         <li>La foto debe ser tomada de frente, sin lentes, con el rostro y las orejas descubiertas y mostrando su DNI. La imagen debe tener fondo claro.</li>
@@ -12,6 +15,12 @@
       </ol>
      </app-alert>
     <br/>
+  </div>
+  <div class="imgDni" >
+    <img src="../../../assets/imgDNI.jpeg" height="300px" >
+  </div>
+    
+  </div>
     <!-- <div fxLayout="column" fxLayoutGap="10px">
         <div>
            <div style="display: none">

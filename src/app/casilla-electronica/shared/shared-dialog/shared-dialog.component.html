@@ -23,9 +23,11 @@
                 <input style="text-transform: uppercase;" type="text" #input6 class="cuadro"  maxlength="1" formControlName="codigo6" (keyup)="(input6.value.length == 1) ? btn.focus() :''" (keydown)="input6.value = ''" tabindex="-1">
 
             </form>
- 
+            <div style="margin-bottom: -26px;" *ngIf="blockbtnTimmer" >
+                <span class="adviceActivateButton">{{timeLeft}} segundos para reintentar</span>
+            </div>
             <div  align="start"  >
-                <button #btn mat-flat-button type="button" color="success" class="btnReenviar" tabindex="-1" [disabled]="blockbtnTimmer" (click)="reenvio()">Reenvio código de verificación</button> <p *ngIf="blockbtnTimmer" class="adviceActivateButton">{{timeLeft}} segundos para reintentar</p>
+                <button #btn mat-flat-button type="button" color="success" class="btnReenviar" tabindex="-1" [disabled]="blockbtnTimmer" (click)="reenvio()">Reenvio código de verificación</button> 
             </div>
             <div  align="end"  >
                 <button #btn mat-flat-button type="button" color="success" class="btnValidar" tabindex="-1" (click)="valid()">Validar</button>

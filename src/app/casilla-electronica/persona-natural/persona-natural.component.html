@@ -24,17 +24,17 @@
   <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field appearance="outline" fxFlex="50" >
       <mat-label>Apellido Paterno</mat-label>
-      <input matInput formControlName="apellidoPaterno"  maxlength="100">
+      <input matInput formControlName="apellidoPaterno"  maxlength="100" autocomplete="off">
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex="50" >
       <mat-label>Apellido Materno</mat-label>
-      <input matInput formControlName="apellidoMaterno"  maxlength="100">
+      <input matInput formControlName="apellidoMaterno"  maxlength="100" autocomplete="off">
     </mat-form-field>
   </div>
   <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field appearance="outline" fxFlex="100">
       <mat-label>Nombres</mat-label>
-      <input matInput formControlName="nombres" maxlength="100">
+      <input matInput formControlName="nombres" maxlength="100" autocomplete="off">
     </mat-form-field>
   </div>
   <!-- <div *ngIf="esTipoDocumentoDni" fxLayout="row" fxLayoutGap="10px">
@@ -62,7 +62,7 @@
     </mat-form-field>
     <mat-form-field *ngIf="esTipoDocumentoDni" appearance="outline" fxFlex="50">
       <mat-label>Dígito de verificación</mat-label>
-      <input matInput formControlName="digitoVerificacion" (keypress)="validarsoloNumeros($event)" maxlength="1">
+      <input matInput formControlName="digitoVerificacion" (keypress)="validarsoloNumeros($event)" maxlength="1" autocomplete="off">
       <button class="tooltip" data-text="Es el número separado con un guión después de tu número de DNI." class="tooltip left" matSuffix mat-icon-button >
         <mat-icon>info</mat-icon>
       </button>       
@@ -71,14 +71,14 @@
   <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field appearance="outline" fxFlex="70">
       <mat-label>Correo electrónico</mat-label>
-      <input matInput type="email" name="email" ngModel [email]="true" maxlength="80" formControlName="correoElectronico">
+      <input matInput type="email" name="email" ngModel [email]="true" maxlength="80" formControlName="correoElectronico" autocomplete="off">
       <button class="append-button" mat-flat-button aria-label="Validar" [disabled]="ActiveButton()" (click)="validarCorreoElectronico()" type="button">
         Validar
       </button>
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex="30">
       <mat-label>Número de celular</mat-label>
-      <input id="numerocelular" [(ngModel)]="valueIniCelular" matInput formControlName="numeroCelular" (keypress)="validarsoloNumeros($event)" minlength="9" maxlength="9" (click)="llenar9()" (keydown)="verificaVacio()" (focusout)="onFocusOut9($event)">
+      <input id="numerocelular" [(ngModel)]="valueIniCelular" matInput formControlName="numeroCelular" (keypress)="validarsoloNumeros($event)" minlength="9" maxlength="9" (click)="llenar9()" (keydown)="verificaVacio()" (focusout)="onFocusOut9($event)" autocomplete="off">
     </mat-form-field>
   </div>
   <div fxLayout="row" fxLayoutGap="10px">
@@ -104,7 +104,7 @@
   <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field appearance="outline" fxFlex="100">
       <mat-label>Domicilio físico</mat-label>
-      <input maxlength="200" matInput formControlName="domicilioFisico">
+      <input maxlength="200" matInput formControlName="domicilioFisico" autocomplete="off">
     </mat-form-field>
   </div>
 </form>

@@ -127,6 +127,10 @@ export class PersonaNaturalComponent implements OnInit {
       this.formGroup.get('apellidoMaterno')?.disable();
       this.formGroup.get('numeroDocumento')?.enable();
       this.formGroup.get("digitoVerificacion")?.setValue("");
+      this.formGroup.get("fechaNacimento")?.setValue("");
+      this.formGroup.get('correoElectronico')?.enable();
+      this.formGroup.get("validateEmail")?.setValue(false);
+      this.formGroup.get("correoElectronico")?.setValue("");
       
     } else {
       this.maxlength =9
@@ -347,16 +351,16 @@ export class PersonaNaturalComponent implements OnInit {
     const charCode = (event.which) ? event.which : event.keyCode;
     var inp = String.fromCharCode(event.keyCode);
 
-      if (this.maxlength == 9){
+      /*if (this.maxlength == 9){
         if (/[a-zA-Z0-9]/.test(inp)) {
           return true;
         } else {
           event.preventDefault();
           return false;
         }
-      }
+      }*/
 
-      if(this.maxlength = 8){
+      if(this.maxlength >= 8){
         if (charCode > 31 && (charCode < 48 || charCode > 57)) {
           return false;
         }
