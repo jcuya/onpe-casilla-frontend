@@ -52,8 +52,7 @@ export class PersonaNaturalComponent implements OnInit {
 
    public loading: boolean = false;
    blockInput : boolean = true;
-
-
+   todaydate : Date = new Date( new Date().setFullYear(new Date().getFullYear() - 18));
 
 
   constructor(
