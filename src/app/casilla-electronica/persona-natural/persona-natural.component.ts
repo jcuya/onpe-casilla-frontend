@@ -98,7 +98,7 @@ export class PersonaNaturalComponent implements OnInit {
     this.formGroup.get('numeroDocumento')?.disable();
     this.tipoDocumentoList = await firstValueFrom(this.casillaService.getTipoDocumentoList(Condicion_Persona_Natural))
     this.departamentoList = await firstValueFrom(this.ubigeoService.getDepartamentoList())
-   
+  
   }
 
   tipoDocumentoCambiado(value: TipoDocumento) {
@@ -224,6 +224,9 @@ export class PersonaNaturalComponent implements OnInit {
     if(this.valueIniCelular=='') this.valueIniCelular='9'
   }
   async validarDocumento() {
+
+    if(this.getNumeroDoc().length != this.maxlength) return;
+
     this.loading = true;
     this.formGroup.get('numeroDocumento')?.disable();
     console.log('validando documento')
@@ -298,6 +301,10 @@ export class PersonaNaturalComponent implements OnInit {
 
   obtenerCorreo() {
     return this.formGroup.get('correoElectronico')?.value ?? ''
+  }
+
+  getNumeroDoc(){
+    return this.formGroup.get('numeroDocumento')?.value ?? '';
   }
 
   get esTipoDocumentoDni() {
