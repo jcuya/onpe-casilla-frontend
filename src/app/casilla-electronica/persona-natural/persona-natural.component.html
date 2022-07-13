@@ -9,7 +9,7 @@
     <mat-form-field appearance="outline" fxFlex="50" class="button-suffix">
       <mat-label>Número de documento</mat-label>
       <input id="numerodocumento" matInput formControlName="numeroDocumento"  type="text" (change)="invalidarDocumento()"  (keypress)="validateInputKey($event)" (keydown.enter)="validarDocumento()" [maxlength] ="maxlength"  required>
-      <button *ngIf="(getNumeroDoc().length == 8) && !numeroDniValido" class="append-button" mat-flat-button aria-label="Validar" (click)="validarDocumento()" type="button" [class.spinner]="loading" [disabled]="loading">
+      <button *ngIf="(getNumeroDoc().length == 8) && !numeroDniValido && esTipoDocumentoDni" class="append-button" mat-flat-button aria-label="Validar" (click)="validarDocumento()" type="button" [class.spinner]="loading" [disabled]="loading">
         Consultar
        
       </button>
