@@ -42,7 +42,8 @@
         [multiple]="false"
         [animation]="true"
         accept="file_extension|image/*"
-        fxFlex="100"
+        fxFlex="100" 
+        fileslimit=1 
         [ngStyle]="{
           'outline-color': filesControl.valid == false ? 'red' : ''
         }"

@@ -135,7 +135,7 @@ export class SolicitudComponent implements OnInit {
         this.dialog.open(AlertDialogComponent, {
           disableClose: true,
           hasBackdrop: true,
-          data: {cabecera : 'Error!' ,messages: ['Error al  registrar']}
+          data: {cabecera : '¡Advertencia!' ,messages: ['Por favor verifique el archivo adjunto.']}
         })
       }
 

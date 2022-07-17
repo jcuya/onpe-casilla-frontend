@@ -2,14 +2,14 @@
   <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field appearance="outline" fxFlex="50">
       <mat-label>Tipo de Documento</mat-label>
-      <mat-select formControlName="tipoDocumento" (selectionChange)="tipoDocumentoCambiado($event.value)" required>
+      <mat-select formControlName="tipoDocumento" [disabled]="buscando" (selectionChange)="tipoDocumentoCambiado($event.value)" required>
         <mat-option *ngFor="let item of tipoDocumentoList" [value]="item">{{item.nombre}}</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex="50" class="button-suffix">
       <mat-label>Número de documento</mat-label>
       <input id="numerodocumento" matInput formControlName="numeroDocumento"  type="text" (change)="invalidarDocumento()"  (keypress)="validateInputKey($event)" (keydown.enter)="validarDocumento()" [maxlength] ="maxlength"  required>
-      <button *ngIf="(getNumeroDoc().length == 8) && !numeroDniValido && esTipoDocumentoDni" class="append-button" mat-flat-button aria-label="Validar" (click)="validarDocumento()" type="button" [class.spinner]="loading" [disabled]="loading">
+      <button *ngIf="(getNumeroDoc().length == 8 && !numeroDniValido && esTipoDocumentoDni)" class="append-button" mat-flat-button aria-label="Validar" (click)="validarDocumento()" type="button" [class.spinner]="loading" [disabled]="loading">
         Consultar
        
       </button>
@@ -24,17 +24,17 @@
   <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field appearance="outline" fxFlex="50" >
       <mat-label>Apellido Paterno</mat-label>
-      <input matInput formControlName="apellidoPaterno"  maxlength="100" autocomplete="off">
+      <input style="text-transform: uppercase;" matInput formControlName="apellidoPaterno"  maxlength="100" autocomplete="off">
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex="50" >
       <mat-label>Apellido Materno</mat-label>
-      <input matInput formControlName="apellidoMaterno"  maxlength="100" autocomplete="off">
+      <input style="text-transform: uppercase;" matInput formControlName="apellidoMaterno"  maxlength="100" autocomplete="off">
     </mat-form-field>
   </div>
   <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field appearance="outline" fxFlex="100">
       <mat-label>Nombres</mat-label>
-      <input matInput formControlName="nombres" maxlength="100" autocomplete="off">
+      <input style="text-transform: uppercase;" matInput formControlName="nombres" maxlength="100" autocomplete="off">
     </mat-form-field>
   </div>
   <!-- <div *ngIf="esTipoDocumentoDni" fxLayout="row" fxLayoutGap="10px">

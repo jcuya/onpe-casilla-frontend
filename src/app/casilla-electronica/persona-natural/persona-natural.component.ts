@@ -38,7 +38,9 @@ export class PersonaNaturalComponent implements OnInit {
   positionOptions: TooltipPosition[] = ['below', 'above', 'left', 'right'];
   position = new FormControl(this.positionOptions[0]);
 
-  numeroDniValido: Boolean | undefined = undefined
+  numeroDniValido: Boolean | undefined = undefined;
+ 
+  public buscando: boolean = false;
   personaNaturalDni: PersonaNaturalDni | null = null;
   valueIniCelular: String = '9';
 
@@ -228,6 +230,7 @@ export class PersonaNaturalComponent implements OnInit {
     if(this.getNumeroDoc().length != this.maxlength) return;
 
     this.loading = true;
+    this.buscando = true;
     this.formGroup.get('numeroDocumento')?.disable();
     console.log('validando documento')
     const numeroDocumento = (this.formGroup.get('numeroDocumento')?.value ?? '') as string
@@ -251,12 +254,14 @@ export class PersonaNaturalComponent implements OnInit {
               'apellidoMaterno': this.personaNaturalDni.apellidoMaterno,
             });
             this.loading = false;
+            this.buscando = false;
           this.blockInput = false;          
           this.numeroDniValido = true;
           }else{
             this.blockInput = true;
             this.loading = false;
             this.formGroup.get('numeroDocumento')?.enable();
+            this.formGroup.get('tipoDocumento')?.enable();
             this.dialog.open(AlertDialogComponent, {
               disableClose: true,
               hasBackdrop: true,
@@ -270,6 +275,7 @@ export class PersonaNaturalComponent implements OnInit {
           this.blockInput = true;
           this.loading = false;
           this.formGroup.get('numeroDocumento')?.enable();
+          this.formGroup.get('tipoDocumento')?.enable();
           this.dialog.open(AlertDialogComponent, {
             disableClose: true,
             hasBackdrop: true,
