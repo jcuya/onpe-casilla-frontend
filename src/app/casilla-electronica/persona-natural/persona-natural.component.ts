@@ -236,7 +236,7 @@ export class PersonaNaturalComponent implements OnInit {
     const numeroDocumento = (this.formGroup.get('numeroDocumento')?.value ?? '') as string
     if (this.esTipoDocumentoDni && numeroDocumento.length == 8) {
 
-      var validate = await this.executeAction('homeLogin'); //  poner en true para desarrollo
+      var validate = true;//await this.executeAction('homeLogin'); //  poner en true para desarrollo
 
       if(validate){
         let envio : ObtenerDatosPersonaDniDto = new ObtenerDatosPersonaDniDto();
@@ -262,6 +262,9 @@ export class PersonaNaturalComponent implements OnInit {
             this.loading = false;
             this.formGroup.get('numeroDocumento')?.enable();
             this.formGroup.get('tipoDocumento')?.enable();
+            this.formGroup.get('apellidoPaterno')?.setValue("");
+            this.formGroup.get('apellidoMaterno')?.setValue("");
+            this.formGroup.get('nombres')?.setValue("");
             this.dialog.open(AlertDialogComponent, {
               disableClose: true,
               hasBackdrop: true,
