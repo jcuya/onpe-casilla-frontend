@@ -13,15 +13,22 @@ import { DatosRepresentanteComponent } from './casilla-electronica/datos-represe
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { RecaptchaFormsModule, RecaptchaModule, RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
 import { environment } from 'src/environments/environment.prod';
+import { VerificacionNavegadorComponent } from './verificacion-navegador/verificacion-navegador.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LayoutComponent
+    LayoutComponent,
+    VerificacionNavegadorComponent
   ],
   imports: [
     BrowserModule,
+    RouterModule.forRoot([
+      {
+        path: 'verificar-navegador', component: VerificacionNavegadorComponent
+      },
+    ]),
     BrowserAnimationsModule,
     ReactiveFormsModule,
     FileUploadModule,
