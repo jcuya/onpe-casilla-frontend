@@ -262,9 +262,9 @@ export class PersonaNaturalComponent implements OnInit {
             this.loading = false;
             this.formGroup.get('numeroDocumento')?.enable();
             this.formGroup.get('tipoDocumento')?.enable();
-            this.formGroup.get('apellidoPaterno')?.setValue("");
-            this.formGroup.get('apellidoMaterno')?.setValue("");
-            this.formGroup.get('nombres')?.setValue("");
+            /*this.formGroup.get('apellidoPaterno')?.setValue(null);
+            this.formGroup.get('apellidoMaterno')?.setValue(null);
+            this.formGroup.get('nombres')?.setValue(null);*/
             this.dialog.open(AlertDialogComponent, {
               disableClose: true,
               hasBackdrop: true,
