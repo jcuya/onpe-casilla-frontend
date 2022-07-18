@@ -1,3 +1,16 @@
 <div #principal >
+  
+
+<div *ngIf="isValid;else other_content">
   <app-creacion-pasos></app-creacion-pasos>
+</div>
+
+<ng-template #other_content>
+  <app-verificacion-navegador></app-verificacion-navegador>
+</ng-template>
+
+
+
+  
+
 </div>

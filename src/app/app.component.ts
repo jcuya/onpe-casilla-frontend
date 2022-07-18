@@ -11,17 +11,18 @@ export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild('principal') elementView!: ElementRef;
 
   contentHeight!: number;
+  isValid : boolean = true;
 
 
   ngOnInit(){
-    
+
   }
 
   ngAfterViewInit() {
     this.contentHeight = this.elementView.nativeElement.offsetHeight;
 
     if( this.contentHeight >= 370){
-
+      this.isValid = false
     }
 
     console.log("tamaño", this.contentHeight)
