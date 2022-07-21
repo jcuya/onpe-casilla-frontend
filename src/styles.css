@@ -2,3 +2,27 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+
+@media only screen and (min-width: 770px) {
+    .principal {
+      /* background-color: blue; */
+      margin-left: 200px;
+      margin-right: 200px;
+      
+
+    }
+    button{
+        width: 100px !important;
+    }
+
+    
+    .mat-form-field {
+        width: 100% !important;
+        
+        /* fxLayout="column" fxLayoutAlign="space-evenly stretch"  */
+      }
+    
+  }
+

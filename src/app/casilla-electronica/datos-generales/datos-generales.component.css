@@ -1,3 +1,8 @@
 .camposObligatorios{
     color: rgb(232, 0, 0);
 }
+
+
+.alert-style{
+   background-color: blue !important;
+}

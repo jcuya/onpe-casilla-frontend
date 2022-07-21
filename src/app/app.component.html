@@ -1,8 +1,35 @@
+
+    <!-- <mat-toolbar class="toolbar">
+   
+     
+      <mat-toolbar-row>
+        <span>Solicitud de Creación de Casilla Electrónica</span>
+      </mat-toolbar-row>
+    </mat-toolbar> -->
+
+    <div class="centrarVerticalmente">
+      <img class="imagen" src="../assets/isologo.svg" />
+     </div>
+ <!-- en caso que no tengas un transform en el eje x -->
+ <div class="centrarVerticalmente2 margin-auto">
+    
+    <span class="margin-auto__content">
+      Solicitud de Creación de Casilla Electrónica
+    </span>
+ </div>
+
 <div #principal >
+
   
 
 <div *ngIf="isValid;else other_content">
+  
+
+
+
   <app-creacion-pasos></app-creacion-pasos>
+</div>
+
 </div>
 
 <ng-template #other_content>
@@ -11,6 +38,11 @@
 
 
 
-  
+<footer>
+  <p>Central telefónica<br>
+   +51 4170630  | lunes a viernes -8:30 a.m. a 4:30 p.m
 
-</div>
+  </p>
+</footer>
+
+

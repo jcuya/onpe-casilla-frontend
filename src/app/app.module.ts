@@ -14,7 +14,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { RecaptchaFormsModule, RecaptchaModule, RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
 import { environment } from 'src/environments/environment.prod';
 import { VerificacionNavegadorComponent } from './verificacion-navegador/verificacion-navegador.component';
-
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -38,7 +38,8 @@ import { VerificacionNavegadorComponent } from './verificacion-navegador/verific
     RouterModule.forRoot([]),
     RecaptchaModule, //this is the recaptcha main module
     RecaptchaFormsModule, //this is the module for form incase form validation
-    RecaptchaV3Module
+    RecaptchaV3Module,
+    MatToolbarModule
   ],
   providers: [   
     {
