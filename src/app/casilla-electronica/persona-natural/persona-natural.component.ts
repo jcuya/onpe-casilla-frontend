@@ -46,6 +46,7 @@ export class PersonaNaturalComponent implements OnInit {
 
   //@Output() FormValidNatural = new EventEmitter<any>()
    maxlength : number = 8;
+   minlength : number = 8;
 
    sitekey = '';
    RequerdCaptcha: boolean = true;
@@ -115,13 +116,14 @@ export class PersonaNaturalComponent implements OnInit {
     this.invalidarDocumento();
 
     this.formGroup.get("numeroDocumento")?.setValue("");
-    this.formGroup.get("nombres")?.setValue("");
+    this.formGroup.get("nombres")?.reset();
     //this.formGroup.get("apellidos")?.setValue("");
-    this.formGroup.get("apellidoPaterno")?.setValue(" ");
-    this.formGroup.get("apellidoMaterno")?.setValue(" ");
+    this.formGroup.get("apellidoPaterno")?.reset();
+    this.formGroup.get("apellidoMaterno")?.reset();
 
     if (value.codigo == TipoDocumento_DNI) {
       this.maxlength = 8;
+      this.minlength = 8;
       this.formGroup.get('nombres')?.disable();
       //this.formGroup.get('apellidos')?.disable();
       this.formGroup.get('apellidoPaterno')?.disable();
@@ -134,7 +136,8 @@ export class PersonaNaturalComponent implements OnInit {
       this.formGroup.get("correoElectronico")?.setValue("");
       
     } else {
-      this.maxlength =9
+      this.maxlength = 9
+      this.minlength = 9;
       this.formGroup.get('nombres')?.enable();
       //this.formGroup.get('apellidos')?.enable();
       this.formGroup.get('apellidoPaterno')?.enable();
@@ -144,8 +147,8 @@ export class PersonaNaturalComponent implements OnInit {
       //this.formGroup.get("nombreMadre")?.setValue(" ");
       //this.formGroup.get("nombrePadre")?.setValue(" ");
       this.formGroup.get("digitoVerificacion")?.setValue(" ");
-      this.formGroup.get("apellidoPaterno")?.setValue(" ");
-      this.formGroup.get("apellidoMaterno")?.setValue(" ");
+      this.formGroup.get("apellidoPaterno")?.reset();
+      this.formGroup.get("apellidoMaterno")?.reset();
       this.formGroup.get("domicilioFisico")?.setValue("");
       this.formGroup.get("numeroCelular")?.setValue("");
       this.formGroup.get("fechaNacimento")?.setValue("");
@@ -236,7 +239,7 @@ export class PersonaNaturalComponent implements OnInit {
     const numeroDocumento = (this.formGroup.get('numeroDocumento')?.value ?? '') as string
     if (this.esTipoDocumentoDni && numeroDocumento.length == 8) {
 
-      var validate = true;//await this.executeAction('homeLogin'); //  poner en true para desarrollo
+      var validate = await this.executeAction('homeLogin'); //  poner en true para desarrollo
 
       if(validate){
         let envio : ObtenerDatosPersonaDniDto = new ObtenerDatosPersonaDniDto();
@@ -268,13 +271,19 @@ export class PersonaNaturalComponent implements OnInit {
             this.dialog.open(AlertDialogComponent, {
               disableClose: true,
               hasBackdrop: true,
-              data: {cabecera : 'Verifica si tu número de DNI ingresado es correcto.' ,messages: ['En caso sea correcto, te invitamos a presentar tu Solicitud mediante Mesa de Partes Física o Virtual.']}
+              data: {cabecera : 'Error' ,messages: ['No hubo respuesta, intente nuevamente en unos momentos.']}
             });
             return;
           }
 
-
         },error =>{
+          let mensajeError = {cabecera : 'Error', messages: ['Error al obtener información.']};
+          if(error.error.statusCode == 401){
+            mensajeError = {cabecera : 'No autorizado', messages: [error.error.message]};
+          }
+          if(error.error.statusCode == 404){
+            mensajeError = {cabecera : 'Verifica si tu número de DNI ingresado es correcto.', messages: ['En caso sea correcto, te invitamos a presentar tu Solicitud mediante Mesa de Partes Física o Virtual.']};
+          }
           this.blockInput = true;
           this.loading = false;
           this.formGroup.get('numeroDocumento')?.enable();
@@ -282,7 +291,7 @@ export class PersonaNaturalComponent implements OnInit {
           this.dialog.open(AlertDialogComponent, {
             disableClose: true,
             hasBackdrop: true,
-            data: {cabecera : 'Verifica si tu número de DNI ingresado es correcto.' ,messages: ['En caso sea correcto, te invitamos a presentar tu Solicitud mediante Mesa de Partes Física o Virtual.']}
+            data: mensajeError
           });
           return;
         })

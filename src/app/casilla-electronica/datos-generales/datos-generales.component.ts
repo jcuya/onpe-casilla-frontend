@@ -212,7 +212,10 @@ export class DatosGeneralesComponent implements OnInit {
     if(this.formGroup.valid){
 
       if(this.esPersonaNatural){
-        if(this.personaNaturalFormGroup?.valid){
+        if(
+          this.personaNaturalFormGroup?.valid && this.personaNaturalFormGroup?.controls["nombres"].value != null && 
+          (this.personaNaturalFormGroup?.controls["apellidoMaterno"].value != null || this.personaNaturalFormGroup?.controls["apellidoPaterno"].value != null)
+        ){
           retorno= false;
         }
 
