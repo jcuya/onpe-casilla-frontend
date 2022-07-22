@@ -77,7 +77,8 @@ export class DatosGeneralesComponent implements OnInit {
    
 
     //SOLO PERSONA NATURAL
-    this.formGroup.get('condicion')?.setValue(this.condicionList[0])
+    this.formGroup.get('condicion')?.setValue(this.condicionList[0].codigo)
+    this.formGroup.controls['condicion'].disable();
     this.update();
   }
 
@@ -86,7 +87,7 @@ export class DatosGeneralesComponent implements OnInit {
   obtenerCondicion() {
     //return Condicion_Persona_Natural
     //todo enable
-    return this.formGroup.get('condicion')?.value.codigo
+    return this.formGroup.get('condicion')?.value
   }
 
   async continuar() {

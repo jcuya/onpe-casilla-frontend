@@ -1,0 +1,54 @@
+footer {
+    text-align: center;
+    padding: 3px;
+    background-color: #003770;
+    color: white;
+  }
+
+  .toolbar{
+    background-color: #0073CF;
+    color: white;
+  }
+
+
+  .centrarVerticalmente{
+
+    height: 150px;
+    width: 100%;
+    background: #E5E5E5;
+    top: 50%; 
+    margin-top: -50px; /*mitad de la altura del div*/
+    
+  }
+  
+  .centrarVerticalmente2{
+  
+      height: 50px;
+      background-color: #0073CF;
+      color: white;
+      width: 100%;
+      top: 50%;
+    
+  
+  }
+
+  .label-toolbar{
+    text-align: center;
+  }
+
+
+
+  .margin-auto {
+    display: flex;
+  }
+  
+  .margin-auto__content {
+    margin: auto;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .imagen{
+    width: 140px;
+    max-height: 100%;
+  }

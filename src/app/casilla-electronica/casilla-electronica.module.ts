@@ -10,7 +10,7 @@ import {
   CreacionPasosComponent
 } from "./creacion-pasos/creacion-pasos.component";
 import {MatStepperModule} from "@angular/material/stepper";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
 import {MatInputModule} from "@angular/material/input";
@@ -34,6 +34,8 @@ import { SharedDialogComponent } from './shared/shared-dialog/shared-dialog.comp
 import { FileUploadModule } from '@iplab/ngx-file-upload';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FinProcesoComponent } from './fin-proceso/fin-proceso.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -72,7 +74,10 @@ import { FinProcesoComponent } from './fin-proceso/fin-proceso.component';
     MatDialogModule,
     MatSnackBarModule,
     FileUploadModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    BrowserModule,
+    NgbModule,
+    FormsModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA]
 })

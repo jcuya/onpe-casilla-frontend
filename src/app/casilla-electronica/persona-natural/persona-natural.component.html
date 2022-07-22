@@ -1,27 +1,21 @@
 <form [formGroup]="formGroup" (submit)="$event.preventDefault()">
-  <div fxLayout="row" fxLayoutGap="10px">
+  <!-- <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field appearance="outline" fxFlex="50">
       <mat-label>Tipo de Documento</mat-label>
-      <mat-select formControlName="tipoDocumento" [disabled]="buscando" (selectionChange)="tipoDocumentoCambiado($event.value)" required>
-        <mat-option *ngFor="let item of tipoDocumentoList" [value]="item">{{item.nombre}}</mat-option>
+      <mat-select formControlName="tipoDocumento" [disabled]="buscando" (selectionChange)="tipoDocumentoCambiado()" required>
+        <mat-option *ngFor="let item of tipoDocumentoList" [value]="item.codigo">{{item.nombre}}</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex="50" class="button-suffix">
       <mat-label>Número de documento</mat-label>
       <input id="numerodocumento" matInput formControlName="numeroDocumento"  type="text" (change)="invalidarDocumento()"  (keypress)="validateInputKey($event)" (keydown.enter)="validarDocumento()" [maxlength] ="maxlength" [minlength] = "minlength" required>
       <button *ngIf="(getNumeroDoc().length == 8 && !numeroDniValido && esTipoDocumentoDni)" class="append-button" mat-flat-button aria-label="Validar" (click)="validarDocumento()" type="button" [class.spinner]="loading" [disabled]="loading">
-        Consultar
-       
+        Consultar       
       </button>
     </mat-form-field>
-  </div>
-  <!-- <div *ngIf="esTipoDocumentoDni" fxLayout="row" fxLayoutGap="10px">
-    <mat-form-field appearance="outline" fxFlex="100" >
-      <mat-label>Apellidos</mat-label>
-      <input matInput formControlName="apellidos" required maxlength="150">
-    </mat-form-field>
   </div> -->
-  <div fxLayout="row" fxLayoutGap="10px">
+
+  <!-- <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field appearance="outline" fxFlex="50" >
       <mat-label>Apellido Paterno</mat-label>
       <input style="text-transform: uppercase;" matInput formControlName="apellidoPaterno"  maxlength="100" autocomplete="off">
@@ -30,13 +24,14 @@
       <mat-label>Apellido Materno</mat-label>
       <input style="text-transform: uppercase;" matInput formControlName="apellidoMaterno"  maxlength="100" autocomplete="off">
     </mat-form-field>
-  </div>
-  <div fxLayout="row" fxLayoutGap="10px">
+  </div> -->
+
+  <!-- <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field appearance="outline" fxFlex="100">
       <mat-label>Nombres</mat-label>
       <input style="text-transform: uppercase;" required matInput formControlName="nombres" maxlength="100" autocomplete="off">
     </mat-form-field>
-  </div>
+  </div> -->
   <!-- <div *ngIf="esTipoDocumentoDni" fxLayout="row" fxLayoutGap="10px">
     <mat-form-field appearance="outline" fxFlex="100">
       <mat-label>Nombre del padre</mat-label>
@@ -53,7 +48,7 @@
       </mat-select>
     </mat-form-field>
   </div> -->
-  <div fxLayout="row" fxLayoutGap="10px">
+  <!-- <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field appearance="outline" fxFlex="50">
       <mat-label>Fecha de nacimiento</mat-label>
       <input matInput  [max]="todaydate" [matDatepicker]="picker" formControlName="fechaNacimento" readonly>
@@ -67,8 +62,8 @@
         <mat-icon>info</mat-icon>
       </button>       
     </mat-form-field>
-  </div>
-  <div fxLayout="row" fxLayoutGap="10px">
+  </div> -->
+  <!-- <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field appearance="outline" fxFlex="70">
       <mat-label>Correo electrónico</mat-label>
       <input matInput type="email" name="email" ngModel [email]="true" maxlength="80" formControlName="correoElectronico" autocomplete="off">
@@ -80,8 +75,8 @@
       <mat-label>Número de celular</mat-label>
       <input id="numerocelular" [(ngModel)]="valueIniCelular" matInput formControlName="numeroCelular" (keypress)="validarsoloNumeros($event)" minlength="9" maxlength="9" (click)="llenar9()" (keydown)="verificaVacio()" (focusout)="onFocusOut9($event)" autocomplete="off">
     </mat-form-field>
-  </div>
-  <div fxLayout="row" fxLayoutGap="10px">
+  </div> -->
+  <!-- <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field appearance="outline" fxFlex>
       <mat-label>Departamento</mat-label>
       <mat-select id="departamento" name="departamento" formControlName="departamento" (valueChange)="cambiarProvincia($event)">
@@ -100,11 +95,151 @@
         <mat-option *ngFor="let item of distritoList" [value]="item">{{item.nodis}}</mat-option>
       </mat-select>
     </mat-form-field>
-  </div>
-  <div fxLayout="row" fxLayoutGap="10px">
+  </div> -->
+
+  <!-- <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field appearance="outline" fxFlex="100">
       <mat-label>Domicilio físico</mat-label>
       <input maxlength="200" matInput formControlName="domicilioFisico" autocomplete="off">
     </mat-form-field>
+  </div> -->
+
+
+
+
+
+  <div class="row">
+    <div class="col-sm">
+      <label class="label-blue"> Tipo de documento</label>
+    </div>
+    <div class="col-sm">
+      <select class="form-select" formControlName="tipoDocumento" [disabled]="buscando" (change)="tipoDocumentoCambiado()" required>
+        <option *ngFor="let item of tipoDocumentoList" [value]="item.codigo">{{item.nombre}}</option>
+      </select>
+    </div>
+    <div class="col-sm">
+      <label class="label-blue">N° de documento</label>
+    </div>
+   
+      <div class="input-group mb-3 col-sm">
+        <input type="text" class="form-control" formControlName="numeroDocumento"  type="text" (change)="invalidarDocumento()"  (keypress)="validateInputKey($event)" (keydown.enter)="validarDocumento()" [maxlength] ="maxlength"  required>
+        <button class="btn btn-outline-secondary" type="button" id="button-addon2" *ngIf="(getNumeroDoc().length == 8 && !numeroDniValido && esTipoDocumentoDni)" (click)="validarDocumento()"  [class.spinner]="loading" [disabled]="loading">Consultar</button>
+      </div>
+
   </div>
+
+  <div class="row">
+    <div class="col-sm">
+      <label class="label-blue"> Apellido Paterno</label>
+    </div>
+    <div class="col-sm">
+      <input type="text" class="form-control" style="text-transform: uppercase;" formControlName="apellidoPaterno"  maxlength="100" autocomplete="off" >
+    </div>
+    <div class="col-sm">
+      <label class="label-blue">Apellido Materno</label>
+    </div> 
+      <div class="input-group mb-3 col-sm">
+        <input type="text" class="form-control" style="text-transform: uppercase;" formControlName="apellidoMaterno"  maxlength="100" autocomplete="off" > 
+      </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-2">
+      <label class="label-blue">Nombres</label>  
+    </div>
+    <div class="input-group mb-3 col-sm">
+      <input type="text" class="form-control" style="text-transform: uppercase;" formControlName="nombres"  maxlength="100" autocomplete="off" >
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm">
+      <label class="label-blue"> Fecha de nacimiento</label>
+    </div>
+    <div class=" input-group mb-3 col-sm">
+      <input type="text" class="form-control" placeholder="dd-mm-yyyy"   [maxDate]="maxdate"  name="dp" formControlName="fechaNacimento" ngbDatepicker #d="ngbDatepicker" readonly>
+        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+    </div>
+    <div class="col-sm" *ngIf="esTipoDocumentoDni">
+      <label class="label-blue">Dígito de verificación</label>
+    </div>  
+
+    <div class="input-group mb-3 col-sm" *ngIf="esTipoDocumentoDni">
+      <input type="text" class="form-control" formControlName="digitoVerificacion" (keypress)="validarsoloNumeros($event)" maxlength="1" autocomplete="off">
+      
+    </div>
+
+  </div>
+
+
+
+
+  <div class="row">
+    <div class="col-sm">
+      <label class="label-blue"> Correo electrónico</label>
+    </div>
+    <div class="input-group mb-3 col-sm">
+      <input type="email" class="form-control" maxlength="80" formControlName="correoElectronico" autocomplete="off">
+      <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="validarCorreoElectronico()" [disabled]="ActiveButton()">Validar</button>
+    </div>
+    <div class="col-sm">
+      <label class="label-blue">Número celular</label>
+    </div> 
+      <div class="input-group mb-3 col-sm">
+        <input type="text" class="form-control" [(ngModel)]="valueIniCelular"  formControlName="numeroCelular" (keypress)="validarsoloNumeros($event)" minlength="9" maxlength="9" (click)="llenar9()" (keydown)="verificaVacio()" (focusout)="onFocusOut9($event)" autocomplete="off" > 
+      </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-sm">
+      <label class="label-blue"> Departamento</label>
+    </div>
+    <div class="col-sm">
+      <select class="form-select" id="departamento" name="departamento" formControlName="departamento" (change)="cambiarProvincia()">
+        <option *ngFor="let item of departamentoList" [value]="item.ubdep">{{item.nodep}}</option>
+      </select>
+    </div>
+    <div class="col-sm">
+      <label class="label-blue">Provincia</label>
+    </div>
+   
+      <div class="input-group mb-3 col-sm">
+        <select class="form-select"id="provincia" name="provincia" formControlName="provincia" (change)="cambiarDistrito()">
+          <option *ngFor="let item of provinciaList" [value]="item">{{item.noprv}}</option>
+        </select>
+      </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-sm">
+      <label class="label-blue"> Distrito</label>
+    </div>
+    <div class="input-group mb-3 col-sm">
+      <select class="form-select" id="distrito" name="distrito" formControlName="distrito">
+        <option  *ngFor="let item of distritoList" [value]="item.ubdis">{{item.nodis}}</option>
+      </select>
+    </div>
+    
+
+  </div>
+
+  <div class="row">
+    <div class="col-sm-2">
+      <label class="label-blue">Domicilio físico</label>  
+    </div>
+    <div class="input-group mb-3 col-sm">
+      <input type="text" class="form-control" maxlength="200"  formControlName="domicilioFisico" autocomplete="off" >
+    </div>
+  </div>
+
 </form>
+
+
+
+
+
+
+
+

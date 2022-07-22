@@ -5,7 +5,7 @@ import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angula
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements OnInit {
   title = 'frontend_create_casilla';
 
   @ViewChild('principal') elementView!: ElementRef;
@@ -18,14 +18,14 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   }
 
-  ngAfterViewInit() {
-    this.contentHeight = this.elementView.nativeElement.offsetHeight;
+//   ngAfterViewInit() {
+//     this.contentHeight = this.elementView.nativeElement.offsetHeight;
 
-    if( this.contentHeight >= 370){
-      this.isValid = false
-    }
+//     if( this.contentHeight >= 370){
+//       this.isValid = false
+//     }
 
-    console.log("tamaño", this.contentHeight)
-}
+//     console.log("tamaño", this.contentHeight)
+// }
 
 }

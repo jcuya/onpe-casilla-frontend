@@ -1,4 +1,4 @@
-import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
@@ -14,7 +14,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import { RecaptchaFormsModule, RecaptchaModule, RecaptchaV3Module, RECAPTCHA_V3_SITE_KEY } from 'ng-recaptcha';
 import { environment } from 'src/environments/environment.prod';
 import { VerificacionNavegadorComponent } from './verificacion-navegador/verificacion-navegador.component';
-
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -38,13 +38,16 @@ import { VerificacionNavegadorComponent } from './verificacion-navegador/verific
     RouterModule.forRoot([]),
     RecaptchaModule, //this is the recaptcha main module
     RecaptchaFormsModule, //this is the module for form incase form validation
-    RecaptchaV3Module
+    RecaptchaV3Module,
+    MatToolbarModule
   ],
   providers: [   
     {
     provide: RECAPTCHA_V3_SITE_KEY,
     useValue: environment.KeycodeCaptcha,
-  },],
+  },
+  // { provide: LOCALE_ID, useValue: 'fr-FR' }
+],
   exports: [],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
