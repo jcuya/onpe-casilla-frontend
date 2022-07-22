@@ -22,6 +22,7 @@ import {
   ReCaptchaV3Service,
 } from 'ng-recaptcha';
 import { environment } from 'src/environments/environment';
+import { NgbCalendar, NgbInputDatepickerConfig } from '@ng-bootstrap/ng-bootstrap';
 //import 'moment/locale/ja';
 
 @Component({
@@ -55,6 +56,7 @@ export class PersonaNaturalComponent implements OnInit {
    public loading: boolean = false;
    blockInput : boolean = true;
    todaydate : Date = new Date( new Date().setFullYear(new Date().getFullYear() - 18));
+   maxdate  !: any;
 
 
   constructor(
@@ -66,11 +68,13 @@ export class PersonaNaturalComponent implements OnInit {
     private personaNaturalService: PersonaNaturalService,
     private _adapter: DateAdapter<any>,
     @Inject(MAT_DATE_LOCALE) private _locale: string,
-    private reCaptchaV3Service: ReCaptchaV3Service
+    private reCaptchaV3Service: ReCaptchaV3Service,
+    config: NgbInputDatepickerConfig, calendar: NgbCalendar
   ) {
     this._locale = 'es';
     this._adapter.setLocale(this._locale);
     this.sitekey =  environment.KeycodeCaptcha;
+    this.maxdate = {year: this.todaydate.getFullYear(), month: this.todaydate.getMonth(), day: this.todaydate.getDay()};
   }
 
   async ngOnInit() {
@@ -100,10 +104,12 @@ export class PersonaNaturalComponent implements OnInit {
     this.formGroup.get('numeroDocumento')?.disable();
     this.tipoDocumentoList = await firstValueFrom(this.casillaService.getTipoDocumentoList(Condicion_Persona_Natural))
     this.departamentoList = await firstValueFrom(this.ubigeoService.getDepartamentoList())
-  
+
   }
 
-  tipoDocumentoCambiado(value: TipoDocumento) {
+  tipoDocumentoCambiado() {
+
+    var value  = this.formGroup.get('tipoDocumento')?.value;
     this.blockInput = false;
       this.formGroup.get("departamento")?.setValue(null);
       this.formGroup.get("provincia")?.setValue(null);
@@ -120,7 +126,7 @@ export class PersonaNaturalComponent implements OnInit {
     this.formGroup.get("apellidoPaterno")?.setValue(" ");
     this.formGroup.get("apellidoMaterno")?.setValue(" ");
 
-    if (value.codigo == TipoDocumento_DNI) {
+    if (value === TipoDocumento_DNI) {
       this.maxlength = 8;
       this.formGroup.get('nombres')?.disable();
       //this.formGroup.get('apellidos')?.disable();
@@ -234,7 +240,7 @@ export class PersonaNaturalComponent implements OnInit {
     this.formGroup.get('numeroDocumento')?.disable();
     console.log('validando documento')
     const numeroDocumento = (this.formGroup.get('numeroDocumento')?.value ?? '') as string
-    if (this.esTipoDocumentoDni && numeroDocumento.length == 8) {
+    if (this.esTipoDocumentoDni  && numeroDocumento.length == 8) {
 
       var validate = true;//await this.executeAction('homeLogin'); //  poner en true para desarrollo
 
@@ -317,19 +323,26 @@ export class PersonaNaturalComponent implements OnInit {
   }
 
   get esTipoDocumentoDni() {
-    return this.formGroup?.get('tipoDocumento')?.value.codigo == TipoDocumento_DNI
+    return this.formGroup?.get('tipoDocumento')?.value == TipoDocumento_DNI
   }
 
   get esTipoDocumentoCE() {
     return this.formGroup?.get('tipoDocumento')?.value.codigo == TipoDocumento_CE
   }
-  async cambiarProvincia(value: Departamento) {
-    this.provinciaList = await firstValueFrom(this.ubigeoService.getProvinciaList(value.ubdep))
+  async cambiarProvincia() {
+
+    var value = this.formGroup.get('departamento')?.value
+
+
+    this.provinciaList = await firstValueFrom(this.ubigeoService.getProvinciaList(value))
     this.distritoList = []
   }
 
-  async cambiarDistrito(value: Provincia) {
-    this.distritoList = await firstValueFrom(this.ubigeoService.getDistritoList(value.ubdep, value.ubprv))
+  async cambiarDistrito() {
+
+    var valueprovincia = this.formGroup.get('provincia')?.value
+    var valuedepar = this.formGroup.get('departamento')?.value
+    this.distritoList = await firstValueFrom(this.ubigeoService.getDistritoList(valuedepar.ubdep, valueprovincia.ubprv))
   }
 
   validarsoloNumeros(event : any): boolean{

@@ -1,5 +1,5 @@
 <form [formGroup]="formGroup" (submit)="$event.preventDefault()">
-  <div fxLayout="row" fxLayoutGap="10px">
+  <!-- <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field appearance="outline" fxFlex="100">
       <mat-label>Condición</mat-label>
       <mat-select formControlName="condicion" (selectionChange)="update()" [disabled]="true" >
@@ -7,8 +7,23 @@
       </mat-select>
       
     </mat-form-field>
+
+
   
+  </div> -->
+
+  <div class="row">
+    <div class="col-sm-2">
+      <label class="label-blue">Condición</label>  
+    </div>
+    <div class="col-sm-10">
+      <select  class="form-select" formControlName="condicion" (change)="update()" >
+        <option *ngFor="let item of condicionList; let i = index" [value]="item.codigo">{{item.nombre}}</option>
+      </select>      
+    </div>
   </div>
+
+
   <app-persona-natural *ngIf="esPersonaNatural"></app-persona-natural>
   <app-persona-juridica *ngIf="esPersonaJuridica"></app-persona-juridica>
   <app-alert type="info">

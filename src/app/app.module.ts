@@ -1,4 +1,4 @@
-import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
@@ -45,7 +45,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     {
     provide: RECAPTCHA_V3_SITE_KEY,
     useValue: environment.KeycodeCaptcha,
-  },],
+  },
+  // { provide: LOCALE_ID, useValue: 'fr-FR' }
+],
   exports: [],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
