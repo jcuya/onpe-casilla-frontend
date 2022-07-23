@@ -8,7 +8,7 @@
     </mat-form-field>
     <mat-form-field appearance="outline" fxFlex="50" class="button-suffix">
       <mat-label>Número de documento</mat-label>
-      <input id="numerodocumento" matInput formControlName="numeroDocumento"  type="text" (change)="invalidarDocumento()"  (keypress)="validateInputKey($event)" (keydown.enter)="validarDocumento()" [maxlength] ="maxlength"  required>
+      <input id="numerodocumento" matInput formControlName="numeroDocumento"  type="text" (change)="invalidarDocumento()"  (keypress)="validateInputKey($event)" (keydown.enter)="validarDocumento()" [maxlength] ="maxlength" [minlength] = "minlength" required>
       <button *ngIf="(getNumeroDoc().length == 8 && !numeroDniValido && esTipoDocumentoDni)" class="append-button" mat-flat-button aria-label="Validar" (click)="validarDocumento()" type="button" [class.spinner]="loading" [disabled]="loading">
         Consultar       
       </button>
@@ -29,7 +29,7 @@
   <!-- <div fxLayout="row" fxLayoutGap="10px">
     <mat-form-field appearance="outline" fxFlex="100">
       <mat-label>Nombres</mat-label>
-      <input style="text-transform: uppercase;" matInput formControlName="nombres" maxlength="100" autocomplete="off">
+      <input style="text-transform: uppercase;" required matInput formControlName="nombres" maxlength="100" autocomplete="off">
     </mat-form-field>
   </div> -->
   <!-- <div *ngIf="esTipoDocumentoDni" fxLayout="row" fxLayoutGap="10px">
