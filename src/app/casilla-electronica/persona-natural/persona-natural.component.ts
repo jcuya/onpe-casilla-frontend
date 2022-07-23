@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {AbstractControl, FormControl} from '@angular/forms';
 import {Condicion_Persona_Natural, TipoDocumento, TipoDocumento_DNI, TipoDocumento_CE} from "../../core/dto/documento";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CasillaService} from "../../core/services/casilla.service";
@@ -336,6 +336,10 @@ export class PersonaNaturalComponent implements OnInit {
 
     this.provinciaList = await firstValueFrom(this.ubigeoService.getProvinciaList(value))
     this.distritoList = []
+  }
+
+  get f(): { [key: string]: AbstractControl } {
+    return this.formGroup.controls;
   }
 
   async cambiarDistrito() {

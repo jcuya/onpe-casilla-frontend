@@ -113,7 +113,9 @@
       <label class="label-blue"> Tipo de documento</label>
     </div>
     <div class="col-sm">
-      <select class="form-select" formControlName="tipoDocumento" [disabled]="buscando" (change)="tipoDocumentoCambiado()" required>
+      <select class="form-select" formControlName="tipoDocumento" [disabled]="buscando" (change)="tipoDocumentoCambiado()" 
+      [ngClass]="{ 'is-invalid': f.tipoDocumento.errors }"
+      required>
         <option *ngFor="let item of tipoDocumentoList" [value]="item.codigo">{{item.nombre}}</option>
       </select>
     </div>
@@ -122,7 +124,7 @@
     </div>
    
       <div class="input-group mb-3 col-sm">
-        <input type="text" class="form-control" formControlName="numeroDocumento"  type="text" (change)="invalidarDocumento()"  (keypress)="validateInputKey($event)" (keydown.enter)="validarDocumento()" [maxlength] ="maxlength"  required>
+        <input type="text" class="form-control" formControlName="numeroDocumento"  [ngClass]="{ 'is-invalid': f.numeroDocumento.errors }" type="text" (change)="invalidarDocumento()"  (keypress)="validateInputKey($event)" (keydown.enter)="validarDocumento()" [maxlength] ="maxlength"  required>
         <button class="btn btn-outline-secondary" type="button" id="button-addon2" *ngIf="(getNumeroDoc().length == 8 && !numeroDniValido && esTipoDocumentoDni)" (click)="validarDocumento()"  [class.spinner]="loading" [disabled]="loading">Consultar</button>
       </div>
 
@@ -133,13 +135,13 @@
       <label class="label-blue"> Apellido Paterno</label>
     </div>
     <div class="col-sm">
-      <input type="text" class="form-control" style="text-transform: uppercase;" formControlName="apellidoPaterno"  maxlength="100" autocomplete="off" >
+      <input type="text" class="form-control" style="text-transform: uppercase;" formControlName="apellidoPaterno" [ngClass]="{ 'is-invalid': f.apellidoPaterno.errors }" maxlength="100" autocomplete="off" >
     </div>
     <div class="col-sm">
       <label class="label-blue">Apellido Materno</label>
     </div> 
       <div class="input-group mb-3 col-sm">
-        <input type="text" class="form-control" style="text-transform: uppercase;" formControlName="apellidoMaterno"  maxlength="100" autocomplete="off" > 
+        <input type="text" class="form-control" style="text-transform: uppercase;" formControlName="apellidoMaterno" [ngClass]="{ 'is-invalid': f.apellidoMaterno.errors }" maxlength="100" autocomplete="off" > 
       </div>
   </div>
 
@@ -148,7 +150,7 @@
       <label class="label-blue">Nombres</label>  
     </div>
     <div class="input-group mb-3 col-sm">
-      <input type="text" class="form-control" style="text-transform: uppercase;" formControlName="nombres"  maxlength="100" autocomplete="off" >
+      <input type="text" class="form-control" style="text-transform: uppercase;" formControlName="nombres" [ngClass]="{ 'is-invalid': f.nombres.errors }" maxlength="100" autocomplete="off" >
     </div>
   </div>
 
@@ -157,7 +159,7 @@
       <label class="label-blue"> Fecha de nacimiento</label>
     </div>
     <div class=" input-group mb-3 col-sm">
-      <input type="text" class="form-control" placeholder="dd-mm-yyyy"   [maxDate]="maxdate"  name="dp" formControlName="fechaNacimento" ngbDatepicker #d="ngbDatepicker" readonly>
+      <input type="text" class="form-control" placeholder="dd-mm-yyyy"   [maxDate]="maxdate"  name="dp" formControlName="fechaNacimento" [ngClass]="{ 'is-invalid': f.fechaNacimento.errors }" ngbDatepicker #d="ngbDatepicker" readonly>
         <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
     </div>
     <div class="col-sm" *ngIf="esTipoDocumentoDni">
@@ -165,7 +167,7 @@
     </div>  
 
     <div class="input-group mb-3 col-sm" *ngIf="esTipoDocumentoDni">
-      <input type="text" class="form-control" formControlName="digitoVerificacion" (keypress)="validarsoloNumeros($event)" maxlength="1" autocomplete="off">
+      <input type="text" class="form-control" formControlName="digitoVerificacion" [ngClass]="{ 'is-invalid': f.digitoVerificacion.errors }" (keypress)="validarsoloNumeros($event)" maxlength="1" autocomplete="off">
       
     </div>
 
@@ -179,14 +181,14 @@
       <label class="label-blue"> Correo electrónico</label>
     </div>
     <div class="input-group mb-3 col-sm">
-      <input type="email" class="form-control" maxlength="80" formControlName="correoElectronico" autocomplete="off">
+      <input type="email" class="form-control" maxlength="80" formControlName="correoElectronico" [ngClass]="{ 'is-invalid': f.correoElectronico.errors }" autocomplete="off">
       <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="validarCorreoElectronico()" [disabled]="ActiveButton()">Validar</button>
     </div>
     <div class="col-sm">
       <label class="label-blue">Número celular</label>
     </div> 
       <div class="input-group mb-3 col-sm">
-        <input type="text" class="form-control" [(ngModel)]="valueIniCelular"  formControlName="numeroCelular" (keypress)="validarsoloNumeros($event)" minlength="9" maxlength="9" (click)="llenar9()" (keydown)="verificaVacio()" (focusout)="onFocusOut9($event)" autocomplete="off" > 
+        <input type="text" class="form-control" [(ngModel)]="valueIniCelular"  formControlName="numeroCelular" [ngClass]="{ 'is-invalid': f.numeroCelular.errors }" (keypress)="validarsoloNumeros($event)" minlength="9" maxlength="9" (click)="llenar9()" (keydown)="verificaVacio()" (focusout)="onFocusOut9($event)" autocomplete="off" > 
       </div>
   </div>
 
@@ -196,7 +198,7 @@
       <label class="label-blue"> Departamento</label>
     </div>
     <div class="col-sm">
-      <select class="form-select" id="departamento" name="departamento" formControlName="departamento" (change)="cambiarProvincia()">
+      <select class="form-select" id="departamento" name="departamento" formControlName="departamento" [ngClass]="{ 'is-invalid': f.departamento.errors }" (change)="cambiarProvincia()">
         <option *ngFor="let item of departamentoList" [value]="item.ubdep">{{item.nodep}}</option>
       </select>
     </div>
@@ -205,7 +207,7 @@
     </div>
    
       <div class="input-group mb-3 col-sm">
-        <select class="form-select"id="provincia" name="provincia" formControlName="provincia" (change)="cambiarDistrito()">
+        <select class="form-select"id="provincia" name="provincia" formControlName="provincia" [ngClass]="{ 'is-invalid': f.provincia.errors }" (change)="cambiarDistrito()">
           <option *ngFor="let item of provinciaList" [value]="item">{{item.noprv}}</option>
         </select>
       </div>
@@ -217,7 +219,7 @@
       <label class="label-blue"> Distrito</label>
     </div>
     <div class="input-group mb-3 col-sm">
-      <select class="form-select" id="distrito" name="distrito" formControlName="distrito">
+      <select class="form-select" id="distrito" name="distrito" formControlName="distrito" [ngClass]="{ 'is-invalid': f.distrito.errors }">
         <option  *ngFor="let item of distritoList" [value]="item.ubdis">{{item.nodis}}</option>
       </select>
     </div>
@@ -230,7 +232,7 @@
       <label class="label-blue">Domicilio físico</label>  
     </div>
     <div class="input-group mb-3 col-sm">
-      <input type="text" class="form-control" maxlength="200"  formControlName="domicilioFisico" autocomplete="off" >
+      <input type="text" class="form-control" maxlength="200"  formControlName="domicilioFisico" [ngClass]="{ 'is-invalid': f.domicilioFisico.errors }" autocomplete="off" >
     </div>
   </div>
 
