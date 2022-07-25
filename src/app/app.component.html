@@ -19,17 +19,9 @@
  </div>
 
 <div #principal >
-
-  
-
-<div *ngIf="isValid;else other_content">
-  
-
-
-
-  <app-creacion-pasos></app-creacion-pasos>
-</div>
-
+  <div *ngIf="isValid;else other_content">
+    <app-creacion-pasos></app-creacion-pasos>
+  </div>
 </div>
 
 <ng-template #other_content>
@@ -39,10 +31,30 @@
 
 
 <footer>
-  <p>Central telefónica<br>
-   +51 4170630  | lunes a viernes -8:30 a.m. a 4:30 p.m
 
-  </p>
+  <div class="container foot">
+    <div class="row">
+      <div class="col-sm" style="text-align: initial;">
+        <span style="color: #FFB81C;">Central telefónica : </span> <br>
+        <span> +51 4170630  | lunes a viernes -8:30 a.m. a 4:30 p.m</span>
+       
+      </div>
+      <div class="col-sm" style="text-align: initial;">
+        <span style="color: #FFB81C;">Escríbenos</span> <br>
+        <span> informes@onpe.gop.pe</span>
+     
+      </div>
+      <div class="col-sm" style="text-align: initial;">
+        <span style="color: #FFB81C;">Oficina central</span> <br>
+        <span> Jr. Washington 1894 - Cercado de Lima</span>
+    
+      </div>
+    </div>
+  </div>
+
+
+
+
 </footer>
 
 
