@@ -8,3 +8,8 @@ p,li {
   text-align: justify;
   margin-bottom: 14px;
 }
+
+.terminos ,h1{
+  color: #003770;
+  font-family: 'Poppins';
+}

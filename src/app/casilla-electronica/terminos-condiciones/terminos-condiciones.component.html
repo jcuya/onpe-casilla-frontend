@@ -1,7 +1,7 @@
 <form [formGroup]="formGroup" (submit)="$event.preventDefault()">
-  <mat-card class="long-text-card"  [style.overflow]="'auto'" [style.height.px]="'250'">
-  
-    <h1>ACEPTACIÓN DE TÉRMINOS Y CONDICIONES PARA EL USO DE LA CASILLA ELECTRÓNICA  DE LA ONPE
+  <!-- <mat-card class="long-text-card"  [style.overflow]="'auto'" [style.height.px]="'250'"> -->
+  <div  class="terminos">
+    <h1 style="text-align: center; font-size: 16px; font-weight: bold;">ACEPTACIÓN DE TÉRMINOS Y CONDICIONES PARA EL USO DE LA CASILLA ELECTRÓNICA  DE LA ONPE
     </h1>
     <p>Conste  por el presente, la aceptación expresa y voluntaria del suscrito respecto a la  aceptación de términos y condiciones para el uso de la casilla electrónica de  la Oficina Nacional de Procesos Electorales - ONPE, quien manifiesta conocer su  contenido, aceptando expresamente la totalidad de las condiciones que a continuación  se detallan:</p>
     <ol>
@@ -19,11 +19,13 @@
       <li>En cumplimiento con lo dispuesto por la  Ley n.º 29733, Ley de Protección de Datos Personales y su Reglamento, aprobado  por Decreto Supremo n.º 003-2013-JUS, el Usuario brinda su consentimiento para  el tratamiento de sus datos personales, los cuales serán empleados para todos  los procedimientos y servicios realizados ante la ONPE. </li>
       <li>En atención a la normativa vigente, la  ONPE ha adoptado medidas legales, organizativas y técnicas apropiadas para  garantizar la seguridad de los datos personales del suscrito, a fin de evitar  su alteración, pérdida, tratamiento indebido o acceso no autorizado. En ese  sentido, la ONPE sólo realizará el tratamiento de los datos personales del  suscrito que estén almacenados en repositorios que reúnan las condiciones de  seguridad exigidas por la normativa de protección de datos personales vigente.</li>
     </ol>
-    
+  </div>
 
-  </mat-card>
+  <!-- </mat-card> -->
   <br>
-  <div fxLayout="column" fxLayoutGap="10px">
+ 
+  <hr>
+  <div fxLayout="column" fxLayoutGap="10px" class="terminos">
     <div fxFlex="100">
       <mat-checkbox formControlName="terminosCondiciones">Estoy de acuerdo con los TÉRMINOS Y CONDICIONES.
       </mat-checkbox>
