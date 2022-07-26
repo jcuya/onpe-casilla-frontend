@@ -208,7 +208,7 @@
    
       <div class="input-group mb-3 col-sm">
         <select class="form-select"id="provincia" name="provincia" formControlName="provincia" [ngClass]="{ 'is-invalid': f.provincia.errors }" (change)="cambiarDistrito()">
-          <option *ngFor="let item of provinciaList" [value]="item">{{item.noprv}}</option>
+          <option *ngFor="let item of provinciaList" [value]="item.ubprv">{{item.noprv}}</option>
         </select>
       </div>
 
