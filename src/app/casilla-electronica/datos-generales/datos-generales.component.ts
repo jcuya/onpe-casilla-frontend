@@ -248,7 +248,7 @@ export class DatosGeneralesComponent implements OnInit {
     //var apellidoPaterno = this.personaNaturalFormGroup.controls['apellidoPaterno'].value.split(' ');
     //var apellidoMaterno = this.personaNaturalFormGroup.controls['apellidoMaterno'].value.split(' ');
     var tipoDoc = this.personaNaturalFormGroup.controls['tipoDocumento'].value;
-    this.requestSave.tipoDocumento = tipoDoc.nombre;
+    this.requestSave.tipoDocumento = tipoDoc;
     this.requestSave.numeroDocumento = this.personaNaturalFormGroup.controls['numeroDocumento'].value;
     this.requestSave.nombres = this.personaNaturalFormGroup.controls['nombres'].value;
     //this.requestSave.apePaterno = apellidos[0];
@@ -264,9 +264,9 @@ export class DatosGeneralesComponent implements OnInit {
     var provincia  = this.personaNaturalFormGroup.controls['provincia'].value;
     var distrito  = this.personaNaturalFormGroup.controls['distrito'].value;
 
-    this.requestSave.departamento = departamento.nodep;
-    this.requestSave.provincia = provincia.noprv;
-    this.requestSave.distrito = distrito.nodis;
+    this.requestSave.departamento = departamento;
+    this.requestSave.provincia = provincia;
+    this.requestSave.distrito = distrito;
     this.requestSave.recaptcha = this.personaNaturalFormGroup.controls['recaptchaReactive'].value;
 
     this.casillaService.setCasilla(this.requestSave);
