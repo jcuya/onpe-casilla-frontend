@@ -425,7 +425,7 @@ return true;
             this.recentError = undefined;
             this.TOkenCaptcha = token;
             console.log
-            this.formGroup.get("recaptchaReactive")?.setValue(this.TOkenCaptcha);
+            //this.formGroup.get("recaptchaReactive")?.setValue(this.TOkenCaptcha);
             resolve(true);
           },
           (error) => {
