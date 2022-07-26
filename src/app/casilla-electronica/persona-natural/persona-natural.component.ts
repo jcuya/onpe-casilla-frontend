@@ -355,7 +355,7 @@ export class PersonaNaturalComponent implements OnInit {
 
     var valueprovincia = this.formGroup.get('provincia')?.value
     var valuedepar = this.formGroup.get('departamento')?.value
-    this.distritoList = await firstValueFrom(this.ubigeoService.getDistritoList(valuedepar.ubdep, valueprovincia.ubprv))
+    this.distritoList = await firstValueFrom(this.ubigeoService.getDistritoList(valuedepar, valueprovincia))
   }
 
   validarsoloNumeros(event : any): boolean{
