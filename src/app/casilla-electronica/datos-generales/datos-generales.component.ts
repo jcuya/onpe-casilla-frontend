@@ -130,7 +130,6 @@ export class DatosGeneralesComponent implements OnInit {
   }
 
   siguientePaso() {
-    
 
     if(this.formGroup.valid){
 
@@ -147,7 +146,7 @@ export class DatosGeneralesComponent implements OnInit {
           }
 
 
-          this.validateRequest.tipoDocumento = this.personaNaturalFormGroup.controls['tipoDocumento'].value.codigo;
+          this.validateRequest.tipoDocumento = this.personaNaturalFormGroup.controls['tipoDocumento'].value;
           this.validateRequest.dni = this.personaNaturalFormGroup.controls['numeroDocumento'].value;
           this.validateRequest.nroDocumento = this.personaNaturalFormGroup.controls['numeroDocumento'].value;
           //this.validateRequest.nombreMadre = this.personaNaturalFormGroup.controls['nombreMadre'].value;
