@@ -17,7 +17,7 @@
       <label class="label-blue">Condición</label>  
     </div>
     <div class="input-group mb-3 col-sm">
-      <select  class="form-select" formControlName="condicion" (change)="update()" >
+      <select  class="form-select" formControlName="condicion" (change)="update()" [attr.disabled]="true" >
         <option *ngFor="let item of condicionList; let i = index" [value]="item.codigo">{{item.nombre}}</option>
       </select>      
     </div>
@@ -33,6 +33,6 @@
   <br/>
   <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center">
     <!-- <button mat-flat-button type="button" color="warn" [disabled]="validateForms()" (click)="continuar()">VALIDAR</button> -->
-    <button  type="button"  class="btn-valid" [disabled]="validateForms()" (click)="continuar()" (click)="continuar()">VALIDAR</button>
+    <button  type="button" [disabled]="validateForms()" (click)="continuar()">VALIDAR</button>
   </div>
 </form>
