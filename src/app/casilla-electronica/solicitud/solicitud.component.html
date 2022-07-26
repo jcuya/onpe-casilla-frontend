@@ -185,7 +185,15 @@
 <app-alert type="warn">Una vez enviada la información, se le notificará el resultado de su Solicitud mediante su correo electrónico registrado.<br />
  </app-alert>
 <br/>
-<div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center">
-  <button mat-flat-button type="button" color="primary" (click)="regresar()">REGRESAR</button>
-  <button mat-flat-button color="warn" (click)="continuar()">ENVIAR</button>
+<div class="container">
+  <div class="row" style="text-align: center;" >
+
+    <div class="col-sm">
+      <button class="btn-valid" type="button"  [disabled]="validarForm()" (click)="continuar()">CONTINUAR</button>
+    </div>
+    <br>
+    <div class="col-sm">
+      <button class="btn-back" type="button"  (click)="regresar()">REGRESAR</button>
+    </div>
+  </div>
 </div>

@@ -3,6 +3,7 @@ import {Component, EventEmitter, HostBinding, Inject, OnInit, Output, ViewChild}
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { MatDialog } from '@angular/material/dialog';
 import { Route, Router } from '@angular/router';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
 import { Subscription } from 'rxjs';
 import { requestGlobal, RequestRepresentante } from 'src/app/core/dto/request';
 import { CasillaService } from 'src/app/core/services/casilla.service';
@@ -39,7 +40,8 @@ export class SolicitudComponent implements OnInit {
     private casillaService: CasillaService,
     public dialog: MatDialog,
     private router : Router,
-    @Inject(DOCUMENT) private document: Document
+    @Inject(DOCUMENT) private document: Document,
+    private reCaptchaV3Service: ReCaptchaV3Service
   ) {
     this.observableRequestSubscription = casillaService.casilla$.subscribe(
       (requestSave: requestGlobal) => {
@@ -71,11 +73,36 @@ export class SolicitudComponent implements OnInit {
     this.previousStep.emit()
   }
 
+  public recentToken = '';
+  public recentError?: { error: any };
+  private singleExecutionSubscription!: Subscription;
+  private executeAction = async (action: string) => {
+   return new Promise((resolve) => {
+     if (this.singleExecutionSubscription) {
+       this.singleExecutionSubscription.unsubscribe();
+     }
+     this.singleExecutionSubscription = this.reCaptchaV3Service
+       .execute(action)
+       .subscribe(
+         (token) => {
+           this.recentToken = token;
+           this.recentError = undefined;           
+           this.requestSave.recaptcha = token;
+           resolve(true);
+         },
+         (error) => {
+           this.recentToken = '';
+           this.recentError = { error };
+           resolve(false);
+         }
+       );
+   });
+ };
 
 
 
 
-  enviar(){
+async  enviar(){
     // correoElectronico !: string;
     // numeroCelular!: string;
     // telefono!: string;
@@ -88,6 +115,10 @@ export class SolicitudComponent implements OnInit {
     // razonSocial!: string;
     // file!: File;
     // TipoPersona !: string;
+
+    var validate = await this.executeAction('homeLogin');
+
+   // if(!validate) return;
 
     const fd = new FormData();
     fd.append('tipoDocumento',this.requestSave.tipoDocumento)
