@@ -27,6 +27,7 @@ export class RequestValidateData{
   fechaNacimiento !:Date;
   codigoVerifi !: string;
   correo!: string;
+  recaptcha!: string;
 }
 
 

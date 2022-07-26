@@ -13,6 +13,7 @@ import { PersonaJuridicaComponent } from '../persona-juridica/persona-juridica.c
 import { PersonaNaturalComponent } from '../persona-natural/persona-natural.component';
 import { TerminosCondicionesComponent } from '../terminos-condiciones/terminos-condiciones.component';
 
+
 @Component({
   selector: 'app-solicitud',
   templateUrl: './solicitud.component.html',
@@ -75,7 +76,6 @@ export class SolicitudComponent implements OnInit {
 
 
   enviar(){
-
     // correoElectronico !: string;
     // numeroCelular!: string;
     // telefono!: string;
@@ -87,7 +87,6 @@ export class SolicitudComponent implements OnInit {
     // numeroDocumento!: string;
     // razonSocial!: string;
     // file!: File;
-
     // TipoPersona !: string;
 
     const fd = new FormData();
@@ -105,9 +104,8 @@ export class SolicitudComponent implements OnInit {
     fd.append('tipoPersona',this.requestSave.TipoPersona)
     fd.append('files',this.requestSave.file)
     let Ubigeo = this.requestSave.departamento + " / " +this.requestSave.provincia + " / " + this.requestSave.distrito
-
-    fd.append('ubigeo',Ubigeo)
-    
+    fd.append('ubigeo',Ubigeo)   
+    fd.append('recaptcha',this.requestSave.recaptcha)   
 
     if(this.requestSave.TipoPersona === 'j'){
       fd.append('representante',JSON.stringify(this.requestSave.representante))
@@ -115,11 +113,7 @@ export class SolicitudComponent implements OnInit {
       this.listFiles.push(this.requestSave.representante.file);
     }
 
-
-
     this.casillaService.enviarDatos(fd).subscribe(res =>{
-
-
       if(res.status){
         // this.dialog.open(AlertDialogComponent, {
         //   disableClose: true,
@@ -143,25 +137,19 @@ export class SolicitudComponent implements OnInit {
 
   }
 
-
-
   onFileChange(foto : File) {
-    const reader = new FileReader();
-    
+    const reader = new FileReader();    
     if(foto) {
       const file = foto;
       reader.readAsDataURL(file);
     
       reader.onload = () => {
    
-        this.imageSrc = reader.result as string;
-     
+        this.imageSrc = reader.result as string;     
         // this.myForm.patchValue({
         //   fileSource: reader.result
-        // });
-   
-      };
-   
+        // });   
+      };   
     }
   }
 

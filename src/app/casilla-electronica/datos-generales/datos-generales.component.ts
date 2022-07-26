@@ -152,6 +152,7 @@ export class DatosGeneralesComponent implements OnInit {
           this.validateRequest.fechaNacimiento = new Date (this.personaNaturalFormGroup.controls['fechaNacimento'].value);
           this.validateRequest.codigoVerifi = this.personaNaturalFormGroup.controls['digitoVerificacion'].value;
           this.validateRequest.correo = this.personaNaturalFormGroup.controls['correoElectronico'].value;
+          this.validateRequest.recaptcha =  this.personaNaturalFormGroup.controls['recaptchaReactive'].value;
           console.log("request envio", this.validateRequest)
 
           this.personaService.validarDatosPersona(this.validateRequest).subscribe(res =>{
@@ -264,6 +265,7 @@ export class DatosGeneralesComponent implements OnInit {
     this.requestSave.departamento = departamento.nodep;
     this.requestSave.provincia = provincia.noprv;
     this.requestSave.distrito = distrito.nodis;
+    this.requestSave.recaptcha = this.personaNaturalFormGroup.controls['recaptchaReactive'].value;
 
     this.casillaService.setCasilla(this.requestSave);
     this.completedStep.emit();

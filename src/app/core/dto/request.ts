@@ -17,6 +17,7 @@ export class requestGlobal{
     departamento!: string;
     provincia!: string;
     distrito!: string;
+    recaptcha!: string;
 }
 
 

@@ -44,6 +44,7 @@ export class PersonaNaturalComponent implements OnInit {
   public buscando: boolean = false;
   personaNaturalDni: PersonaNaturalDni | null = null;
   valueIniCelular: String = '9';
+  recaptchaGlobal: String = '';
 
   //@Output() FormValidNatural = new EventEmitter<any>()
    maxlength : number = 8;
@@ -79,8 +80,6 @@ export class PersonaNaturalComponent implements OnInit {
   }
 
   async ngOnInit() {
-
-
     this.formGroup = this.formBuilder.group({
       tipoDocumento: ['', Validators.required],
       numeroDocumento: ['', Validators.required],
@@ -98,9 +97,8 @@ export class PersonaNaturalComponent implements OnInit {
       provincia: ['', Validators.required],
       distrito: ['', Validators.required],
       domicilioFisico: ['', Validators.required],
-      validateEmail : [false, Validators.required],
-      
-      recaptchaReactive: this.formBuilder.control(''),
+      validateEmail : [false, Validators.required],      
+      recaptchaReactive: [''],
     })
     this.formGroup.get('numeroDocumento')?.disable();
     this.tipoDocumentoList = await firstValueFrom(this.casillaService.getTipoDocumentoList(Condicion_Persona_Natural))
@@ -140,6 +138,7 @@ export class PersonaNaturalComponent implements OnInit {
       this.formGroup.get('correoElectronico')?.enable();
       this.formGroup.get("validateEmail")?.setValue(false);
       this.formGroup.get("correoElectronico")?.setValue("");
+      this.formGroup.get("recaptchaReactive")?.setValue("");
       
     } else {
       this.maxlength = 9
@@ -161,6 +160,7 @@ export class PersonaNaturalComponent implements OnInit {
       this.formGroup.get('correoElectronico')?.enable();
       this.formGroup.get("validateEmail")?.setValue(false);
       this.formGroup.get("correoElectronico")?.setValue("");
+      this.formGroup.get("recaptchaReactive")?.setValue("");
 
     }
   }
@@ -245,7 +245,7 @@ export class PersonaNaturalComponent implements OnInit {
     const numeroDocumento = (this.formGroup.get('numeroDocumento')?.value ?? '') as string
     if (this.esTipoDocumentoDni  && numeroDocumento.length == 8) {
 
-      var validate = await this.executeAction('homeLogin'); //  poner en true para desarrollo
+      var validate = true; //await this.executeAction('homeLogin'); //  poner en true para desarrollo
 
       if(validate){
         let envio : ObtenerDatosPersonaDniDto = new ObtenerDatosPersonaDniDto();
@@ -424,6 +424,8 @@ return true;
             this.recentToken = token;
             this.recentError = undefined;
             this.TOkenCaptcha = token;
+            console.log
+            this.formGroup.get("recaptchaReactive")?.setValue(this.TOkenCaptcha);
             resolve(true);
           },
           (error) => {
