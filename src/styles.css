@@ -62,3 +62,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background: #0A7DCF;
     border: 1px solid #0A7DCF;
   }
+
+
+  button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
