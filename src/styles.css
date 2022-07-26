@@ -4,25 +4,23 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
+.principal {
+  background-color: red;
+  margin-left: 200px;
+  margin-right: 200px;
+}
 
-@media only screen and (min-width: 900px) {
+@media only screen and (max-width: 900px) {
     .principal {
-      /* background-color: blue; */
-      margin-left: 200px;
-      margin-right: 200px;
-      
-
-    }
-    button{
-        width: 100px !important;
+      background-color: red;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    
-    .mat-form-field {
+    .btn-valid , .btn-back{
         width: 100% !important;
-        
-        /* fxLayout="column" fxLayoutAlign="space-evenly stretch"  */
-      }
+    }
+
     
   }
 
@@ -45,4 +43,22 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     height: 41px;
     left: 207px;
     top: 385px;
+  }
+
+  .btn-valid{
+    background-color: #DF0A14;
+    color: white;
+    width: 170px ;
+    height: 48px !important;
+    font-size: 16px;
+    border: 1px solid #DF0A14;
+  }
+
+  .btn-back{
+    color: white;
+    width: 170px ;
+    height: 48px !important;
+    font-size: 16px;
+    background: #0A7DCF;
+    border: 1px solid #0A7DCF;
   }

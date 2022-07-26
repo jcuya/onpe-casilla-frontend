@@ -32,6 +32,7 @@
   </app-alert>
   <br/>
   <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center">
-    <button mat-flat-button type="button" color="warn" [disabled]="validateForms()" (click)="continuar()">VALIDAR</button>
+    <!-- <button mat-flat-button type="button" color="warn" [disabled]="validateForms()" (click)="continuar()">VALIDAR</button> -->
+    <button  type="button"  class="btn-valid" [disabled]="validateForms()" (click)="continuar()" (click)="continuar()">VALIDAR</button>
   </div>
 </form>

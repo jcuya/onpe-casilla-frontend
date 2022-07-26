@@ -2,18 +2,107 @@
   </app-alert>
   <br> <br>
 
-  <div class="wrapper">
+
+
+  <div class="container wrapper">
+    <div class="row">
+      <div class="col-sm" >
+        
+
+        <div>
+          <!-- <ol *ngIf="requestSave.TipoPersona === 'n'; else juridica" >
+            <li>Persona Natural</li>
+            <li>Tipo de documento: <b>{{requestSave.tipoDocumento}}</b> </li>
+            <li>Número de documento: <b>{{requestSave.numeroDocumento}}</b></li>
+            <li>Apellidos y Nombres: <b>{{requestSave.apePaterno }}  {{requestSave.apeMaterno }} {{requestSave.nombres}}</b></li>
+            <li>Correo Electrónico: <b>{{requestSave.correoElectronico}}</b></li>
+            <li>Número de Celular: <b>{{requestSave.numeroCelular}}</b></li>
+            <li>Departamento / Provincia / Distrito: <b>{{requestSave.departamento}} / {{requestSave.provincia}} / {{requestSave.distrito}} </b></li>
+            <li>Dirección: <b>{{requestSave.domicilioFisico}}</b></li>
+          </ol> -->
+          
+          <ol *ngIf="requestSave.TipoPersona === 'n'; else juridica" >
+            <li>
+              <div class="wrapper">
+                <div class="labelList">Tipo de documento: </div>
+                <div class="detailList"><b>{{requestSave.tipoDocumento}}</b></div>
+              </div>
+            </li>
+            <li>
+              <div class="wrapper">
+                <div class="labelList">Número de documento: </div>
+                <div class="detailList"><b>{{requestSave.numeroDocumento}}</b></div>
+              </div>
+            </li>
+            <li>
+              <div class="wrapper">
+                <div class="labelList">Apellidos y Nombres:</div>
+                <div class="detailList"><b>{{requestSave.apePaterno }}  {{requestSave.apeMaterno }} {{requestSave.nombres}}</b></div>
+              </div>
+            </li>
+            <li>
+              <div class="wrapper">
+                <div class="labelList">Correo Electrónico: </div>
+                <div class="detailList"> <b>{{requestSave.correoElectronico}}</b></div>
+              </div>
+            </li>
+            <li>
+              <div class="wrapper">
+                <div class="labelList">Número de Celular:</div>
+                <div class="detailList"><b>{{requestSave.numeroCelular}}</b></div>
+              </div>
+            </li>
+            <li>
+              <div class="wrapper">
+                <div class="labelList">Departamento / Provincia / Distrito:</div>
+                <div class="detailList"><b>{{requestSave.departamento}}, {{requestSave.provincia}}, {{requestSave.distrito}} </b></div>
+              </div>
+            </li>
+            <li>
+              <div class="wrapper">
+                <div class="labelList">Dirección:</div>
+                <div class="detailList"><b>{{requestSave.domicilioFisico}}</b></div>
+              </div>
+            </li>
+          </ol>
+      
+      
+      
+          <ng-template #juridica>
+            <h1 class="h1Persona">Datos de la Entidad:</h1>
+            <ol >
+              <li>Persona Jurídica</li>
+              <li>RUC: <b>{{requestSave.numeroDocumento}}</b></li>
+              <li>Razón Social: <b>{{requestSave.razonSocial}}</b></li>
+              <li>Correo Electrónico: <b>{{requestSave.correoElectronico}}</b></li>
+              <li>Número de teléfono: <b>{{requestSave.telefono}}</b> </li>
+              <li>Departamento / Provincia / Distrito: <b>{{requestSave.departamento}} / {{requestSave.provincia}} / {{requestSave.distrito}} </b></li>
+              <li>Dirección: <b>{{requestSave.domicilioFisico}}</b> </li>
+              <li>Página Web: <b>{{requestSave.paginaWeb}}</b></li>
+            </ol>
+            
+            <h1 class="h1Persona">Representante:</h1>
+            <ol style="margin-left: 20px;">
+              <li>Tipo de documento: <b>{{requestSave?.representante!.tipoDocumento}}</b></li>
+              <li>Número de documento: <b>{{requestSave?.representante!.numeroDocumento}}</b> </li>
+              <li>Apellidos y Nombres: <b>{{requestSave?.representante!.nombreCompleto}}</b></li>
+            </ol>
+          </ng-template>
+          
+        </div>
+
+       
+      </div>
+      <div class="col-sm" >
+        <div><img class="center" [src]="imageSrc" *ngIf="imageSrc" ></div>
+     
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="wrapper">
   <div>
-    <!-- <ol *ngIf="requestSave.TipoPersona === 'n'; else juridica" >
-      <li>Persona Natural</li>
-      <li>Tipo de documento: <b>{{requestSave.tipoDocumento}}</b> </li>
-      <li>Número de documento: <b>{{requestSave.numeroDocumento}}</b></li>
-      <li>Apellidos y Nombres: <b>{{requestSave.apePaterno }}  {{requestSave.apeMaterno }} {{requestSave.nombres}}</b></li>
-      <li>Correo Electrónico: <b>{{requestSave.correoElectronico}}</b></li>
-      <li>Número de Celular: <b>{{requestSave.numeroCelular}}</b></li>
-      <li>Departamento / Provincia / Distrito: <b>{{requestSave.departamento}} / {{requestSave.provincia}} / {{requestSave.distrito}} </b></li>
-      <li>Dirección: <b>{{requestSave.domicilioFisico}}</b></li>
-    </ol> -->
+   
     
     <ol *ngIf="requestSave.TipoPersona === 'n'; else juridica" >
       <li>
@@ -85,7 +174,7 @@
     
   </div>
   <div><img class="center" [src]="imageSrc" *ngIf="imageSrc" ></div>
-</div>
+</div> -->
 
 
 

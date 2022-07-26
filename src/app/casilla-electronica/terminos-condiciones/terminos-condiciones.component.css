@@ -12,4 +12,6 @@ p,li {
 .terminos ,h1{
   color: #003770;
   font-family: 'Poppins';
+  word-wrap: break-all !important;
+width: auto;
 }
