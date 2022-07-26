@@ -340,10 +340,10 @@ export class PersonaNaturalComponent implements OnInit {
   }
   async cambiarProvincia() {
 
-    var value = this.formGroup.get('departamento')?.value
+    var value  = this.formGroup.get('departamento')?.value.ubdep
 
 
-    this.provinciaList = await firstValueFrom(this.ubigeoService.getProvinciaList(value.ubdep))
+    this.provinciaList = await firstValueFrom(this.ubigeoService.getProvinciaList(value))
     this.distritoList = []
   }
 
@@ -353,9 +353,9 @@ export class PersonaNaturalComponent implements OnInit {
 
   async cambiarDistrito() {
 
-    var valueprovincia = this.formGroup.get('provincia')?.value
-    var valuedepar = this.formGroup.get('departamento')?.value
-    this.distritoList = await firstValueFrom(this.ubigeoService.getDistritoList(valuedepar.ubdep, valueprovincia.ubprv))
+    var valueprovincia = this.formGroup.get('provincia')?.value.ubprv
+    var valuedepar = this.formGroup.get('departamento')?.value.ubdep
+    this.distritoList = await firstValueFrom(this.ubigeoService.getDistritoList(valuedepar, valueprovincia))
   }
 
   validarsoloNumeros(event : any): boolean{
