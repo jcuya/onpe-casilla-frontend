@@ -199,7 +199,7 @@
     </div>
     <div class="col-sm">
       <select class="form-select" id="departamento" name="departamento" formControlName="departamento" [ngClass]="{ 'is-invalid': f.departamento.errors }" (change)="cambiarProvincia()">
-        <option *ngFor="let item of departamentoList" [value]="item.ubdep">{{item.nodep}}</option>
+        <option *ngFor="let item of departamentoList" [value]="item">{{item.nodep}}</option>
       </select>
     </div>
     <div class="col-sm">
@@ -208,7 +208,7 @@
    
       <div class="input-group mb-3 col-sm">
         <select class="form-select"id="provincia" name="provincia" formControlName="provincia" [ngClass]="{ 'is-invalid': f.provincia.errors }" (change)="cambiarDistrito()">
-          <option *ngFor="let item of provinciaList" [value]="item.ubprv">{{item.noprv}}</option>
+          <option *ngFor="let item of provinciaList" [value]="item">{{item.noprv}}</option>
         </select>
       </div>
 
@@ -220,7 +220,7 @@
     </div>
     <div class="input-group mb-3 col-sm">
       <select class="form-select" id="distrito" name="distrito" formControlName="distrito" [ngClass]="{ 'is-invalid': f.distrito.errors }">
-        <option  *ngFor="let item of distritoList" [value]="item.ubdis">{{item.nodis}}</option>
+        <option  *ngFor="let item of distritoList" [value]="item">{{item.nodis}}</option>
       </select>
     </div>
   </div>

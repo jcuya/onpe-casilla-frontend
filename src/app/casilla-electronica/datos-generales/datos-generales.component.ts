@@ -264,9 +264,9 @@ export class DatosGeneralesComponent implements OnInit {
     var provincia  = this.personaNaturalFormGroup.controls['provincia'].value;
     var distrito  = this.personaNaturalFormGroup.controls['distrito'].value;
 
-    this.requestSave.departamento = departamento;
-    this.requestSave.provincia = provincia;
-    this.requestSave.distrito = distrito;
+    this.requestSave.departamento = departamento.nodep;
+    this.requestSave.provincia = provincia.noprv;
+    this.requestSave.distrito = distrito.nodis;
     this.requestSave.recaptcha = this.personaNaturalFormGroup.controls['recaptchaReactive'].value;
 
     this.casillaService.setCasilla(this.requestSave);
