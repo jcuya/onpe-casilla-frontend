@@ -30,20 +30,23 @@ footer {
   
   .centrarVerticalmente2{
   
-      height: 50px;
-      background-color: #0073CF;
-      color: white;
-      width: 100%;
-      top: 50%;
-    
+    height: 50px;
+    background-color: #0073CF;
+    color: white;
+    width: 100%;
+    top: 50%;
   
-  }
+
+}
+.centrarVerticalmente3{
+    height: 96px;
+    background-color: #ffffff;
+    width: 100%;
+}
 
   .label-toolbar{
     text-align: center;
   }
-
-
 
   .margin-auto {
     display: flex;
@@ -60,8 +63,15 @@ footer {
     max-height: 100%;
   }
 
+  .imagenLogo{
+    width: 140px;
+    max-height: 100%;
+    margin: 5px;
+  }
+
 .foot{
   font-family: 'Open Sans';
+  margin-top: 10px;
 }
 
 .font-foot1{
