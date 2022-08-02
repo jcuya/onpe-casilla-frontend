@@ -173,10 +173,14 @@
 
     <div class="input-group mb-3 col-sm" *ngIf="esTipoDocumentoDni">
       <input type="text" class="form-control" formControlName="digitoVerificacion" [ngClass]="{ 'is-invalid': (f.digitoVerificacion!.touched || f.digitoVerificacion!.dirty) && f.digitoVerificacion.errors }" (keypress)="validarsoloNumeros($event)" maxlength="1" autocomplete="off">
-      
+      <div class="input-group-append">
+        <span class="glyphicon glyphicon-info-sign"></span>
+      </div>
     </div>
 
   </div>
+
+
 
 
 

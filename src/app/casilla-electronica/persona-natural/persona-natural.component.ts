@@ -230,7 +230,7 @@ export class PersonaNaturalComponent implements OnInit {
   validarCorreoElectronico() {
 
     let request = {
-      tipoDocumento : this.formGroup.get('tipoDocumento')?.value.codigo ,
+      tipoDocumento : this.formGroup.get('tipoDocumento')?.value ,
       numeroDocumento : this.formGroup.get('numeroDocumento')?.value,
       correoElectronico : this.formGroup.get('correoElectronico')?.value
       }
