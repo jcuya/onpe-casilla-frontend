@@ -100,7 +100,7 @@ export class SharedDialogComponent implements OnInit   {
         this.dialog.open(AlertDialogComponent, {
           disableClose: true,
           hasBackdrop: true,
-          data: {cabecera : 'Error' ,messages: ['Error al  validar código']}
+          data: {cabecera : 'Advertencia' ,messages: [respuesta.mensaje]}
         }).afterClosed().subscribe(result =>{
           this.respuesta = false;
           //this.input1.nativeElement.focus();

@@ -327,7 +327,7 @@ export class PersonaNaturalComponent implements OnInit {
           }
 
         },error =>{
-          let mensajeError = {cabecera : 'Error', messages: ['Error al obtener información.']};
+          let mensajeError = {cabecera : 'Advertencia', messages: ['Error al obtener información.']};
           if(error.error.statusCode == 401){
             mensajeError = {cabecera : 'No autorizado', messages: [error.error.message]};
           }
