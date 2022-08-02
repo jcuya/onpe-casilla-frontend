@@ -10,13 +10,15 @@
     text-align: center;
 }
 .btnCancel{
-  top: -24px;
+  /* top: -24px;
   left: 24px;
-  float: right;
+  float: right; */
   width: 10px;
   padding: 0px;
   margin: 0px;
   font-size: 18px;
+  background-color: #ED1A3A;
+  color: white;
 }
 .btnValidar{
   border: 1px solid #7e7e7e;
@@ -33,4 +35,9 @@ input {
   }
   :-moz-placeholder {
     text-align: center;
+  }
+
+
+  .headerdialog{
+    text-align: end;
   }
