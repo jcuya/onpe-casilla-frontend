@@ -60,6 +60,9 @@ export class PersonaNaturalComponent implements OnInit {
    todaydate : Date = new Date( new Date().setFullYear(new Date().getFullYear() - 18));
    maxdate  !: any;
 
+   activar  : boolean = true;
+   cont = 0;
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -101,12 +104,51 @@ export class PersonaNaturalComponent implements OnInit {
       recaptchaReactive: [''],
     })
     this.formGroup.get('numeroDocumento')?.disable();
+    this.desactivarInputsInit();
     this.tipoDocumentoList = await firstValueFrom(this.casillaService.getTipoDocumentoList(Condicion_Persona_Natural))
     this.departamentoList = await firstValueFrom(this.ubigeoService.getDepartamentoList())
-
+    
   }
 
+
+  desactivarInputsInit(){
+    this.formGroup.get('apellidoPaterno')?.disable();
+    this.formGroup.get('apellidoMaterno')?.disable();
+    this.formGroup.get('nombres')?.disable();
+    this.formGroup.get('fechaNacimento')?.disable();
+    this.formGroup.get('digitoVerificacion')?.disable();
+    this.formGroup.get('correoElectronico')?.disable();
+    this.formGroup.get('numeroCelular')?.disable();
+    this.formGroup.get('departamento')?.disable();
+    this.formGroup.get('provincia')?.disable();
+    this.formGroup.get('distrito')?.disable();
+    this.formGroup.get('domicilioFisico')?.disable();
+  }
+
+  activarInputs(){
+    this.formGroup.get('apellidoPaterno')?.enable();
+    this.formGroup.get('apellidoMaterno')?.enable();
+    this.formGroup.get('nombres')?.enable();
+    this.formGroup.get('fechaNacimento')?.enable();
+    this.formGroup.get('digitoVerificacion')?.enable();
+    this.formGroup.get('correoElectronico')?.enable();
+    this.formGroup.get('numeroCelular')?.enable();
+    this.formGroup.get('departamento')?.enable();
+    this.formGroup.get('provincia')?.enable();
+    this.formGroup.get('distrito')?.enable();
+    this.formGroup.get('domicilioFisico')?.enable();
+  }
+
+
   tipoDocumentoCambiado() {
+
+    if(this.cont == 0){
+      this.activarInputs();
+    }
+
+
+ 
+
 
     var value  = this.formGroup.get('tipoDocumento')?.value;
     this.blockInput = false;
@@ -345,10 +387,11 @@ export class PersonaNaturalComponent implements OnInit {
 
     this.provinciaList = await firstValueFrom(this.ubigeoService.getProvinciaList(value))
     this.distritoList = []
+    
   }
 
   get f(): { [key: string]: AbstractControl } {
-    return this.formGroup.controls;
+    return this.formGroup.controls ;
   }
 
   async cambiarDistrito() {
