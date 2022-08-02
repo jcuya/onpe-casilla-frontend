@@ -287,7 +287,7 @@ export class PersonaNaturalComponent implements OnInit {
     const numeroDocumento = (this.formGroup.get('numeroDocumento')?.value ?? '') as string
     if (this.esTipoDocumentoDni  && numeroDocumento.length == 8) {
 
-      var validate = true; //await this.executeAction('homeLogin'); //  poner en true para desarrollo
+      var validate = await this.executeAction('homeLogin'); //  poner en true para desarrollo
 
       if(validate){
         let envio : ObtenerDatosPersonaDniDto = new ObtenerDatosPersonaDniDto();
