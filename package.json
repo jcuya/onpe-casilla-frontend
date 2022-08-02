@@ -24,6 +24,7 @@
     "@angular/router": "~13.2.0",
     "@iplab/ngx-file-upload": "^2.0.9",
     "@ng-bootstrap/ng-bootstrap": "^12.1.2",
+    "@popperjs/core": "^2.11.5",
     "bootstrap": "^5.2.0",
     "ng-recaptcha": "^7.0.1",
     "rxjs": "~7.5.0",
