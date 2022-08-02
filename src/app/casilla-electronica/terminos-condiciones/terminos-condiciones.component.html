@@ -38,12 +38,11 @@
   <div class="container">
     <div class="row" style="text-align: center;" >
 
+      <div class="col-sm mb-3">
+        <button class="btn-back" type="button"  (click)="regresar()">REGRESAR</button>
+      </div>
       <div class="col-sm">
         <button class="btn-valid" type="button"  [disabled]="validarForm()" (click)="continuar()">CONTINUAR</button>
-      </div>
-      <br>
-      <div class="col-sm">
-        <button class="btn-back" type="button"  (click)="regresar()">REGRESAR</button>
       </div>
     </div>
   </div>

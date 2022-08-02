@@ -100,7 +100,7 @@ export class DatosGeneralesComponent implements OnInit {
 
 
     this.siguientePaso();
-   
+    
     /*if (!this.formGroup.valid) {
       this.formGroup.markAllAsTouched()
       return

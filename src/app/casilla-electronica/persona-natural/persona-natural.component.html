@@ -173,9 +173,14 @@
 
     <div class="input-group mb-3 col-sm" *ngIf="esTipoDocumentoDni">
       <input type="text" class="form-control" formControlName="digitoVerificacion" [ngClass]="{ 'is-invalid': (f.digitoVerificacion!.touched || f.digitoVerificacion!.dirty) && f.digitoVerificacion.errors }" (keypress)="validarsoloNumeros($event)" maxlength="1" autocomplete="off">
-      <div class="input-group-append">
-        <span class="glyphicon glyphicon-info-sign"></span>
-      </div>
+      <!-- <div class="input-group-append">
+        <button class="tooltip" data-text="Es el número separado con un guión después de tu número de DNI." class="tooltip left" >
+          <span class="glyphicon glyphicon-info-sign"></span>
+        </button>
+      </div> -->
+      <button class="btn btn-outline-secondary" type="button" placement="start" ngbTooltip="Es el número separado con un guión después de tu número de DNI." >
+        <i class="fa fa-info"></i>
+    </button>
     </div>
 
   </div>
@@ -244,3 +249,6 @@
   </div>
 
 </form>
+
+
+
