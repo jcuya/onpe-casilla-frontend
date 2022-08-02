@@ -82,6 +82,7 @@ export class SharedDialogComponent implements OnInit   {
         numeroDocumento: this.numeroDocumento,
         idEnvio: this.idEnvio,
         codigo: codigoEnvio.toUpperCase(),
+        correo: this.email,
       }
 
       this.correoService.validarCodigoVerificacion(request).subscribe(respuesta =>{
