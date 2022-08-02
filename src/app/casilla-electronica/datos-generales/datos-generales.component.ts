@@ -151,7 +151,7 @@ export class DatosGeneralesComponent implements OnInit {
           this.validateRequest.nroDocumento = this.personaNaturalFormGroup.controls['numeroDocumento'].value;
           //this.validateRequest.nombreMadre = this.personaNaturalFormGroup.controls['nombreMadre'].value;
           //this.validateRequest.nombrePadre = this.personaNaturalFormGroup.controls['nombrePadre'].value;
-          this.validateRequest.fechaNacimiento = new Date (this.personaNaturalFormGroup.controls['fechaNacimento'].value.year + "-" + this.personaNaturalFormGroup.controls['fechaNacimento'].value.month + "-" + this.personaNaturalFormGroup.controls['fechaNacimento'].value.day);
+          this.validateRequest.fechaNacimiento = new Date (this.personaNaturalFormGroup.controls['fechaNacimento'].value);
           this.validateRequest.codigoVerifi = this.personaNaturalFormGroup.controls['digitoVerificacion'].value;
           this.validateRequest.correo = this.personaNaturalFormGroup.controls['correoElectronico'].value;
           this.validateRequest.recaptcha =  this.personaNaturalFormGroup.controls['recaptchaReactive'].value;

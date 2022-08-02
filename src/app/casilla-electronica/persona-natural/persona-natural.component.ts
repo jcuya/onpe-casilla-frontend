@@ -236,6 +236,8 @@ export class PersonaNaturalComponent implements OnInit {
       }
 
 
+
+
     this.correoService.envioCorreoVerificacion(request).subscribe(res =>{
 
       if(res){
