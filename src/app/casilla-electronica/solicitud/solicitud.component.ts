@@ -116,7 +116,7 @@ async  enviar(){
     // file!: File;
     // TipoPersona !: string;
 
-    var validate = await this.executeAction('homeLogin');
+    var validate = await this.executeAction('homeLogin'); 
 
    // if(!validate) return;
 
