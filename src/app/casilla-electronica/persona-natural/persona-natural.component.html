@@ -135,13 +135,13 @@
       <label class="label-blue"> Apellido Paterno</label>
     </div>
     <div class="col-sm">
-      <input type="text" class="form-control" style="text-transform: uppercase;" formControlName="apellidoPaterno" [ngClass]="{ 'is-invalid': (f.apellidoPaterno!.touched || f.apellidoPaterno!.dirty) && f.apellidoPaterno.errors }" maxlength="100" autocomplete="off"  >
+      <input type="text" class="form-control" style="text-transform: uppercase;" formControlName="apellidoPaterno" [ngClass]="{ 'is-invalid': (f.apellidoPaterno!.touched || f.apellidoPaterno!.dirty) && f.apellidoPaterno.errors }" maxlength="100" autocomplete="off" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇOEÆČŠŽ∂ð ,.'-]{2,254}" maxlength="100" >
     </div>
     <div class="col-sm">
       <label class="label-blue">Apellido Materno</label>
     </div> 
       <div class="input-group mb-3 col-sm">
-        <input type="text" class="form-control" style="text-transform: uppercase;" formControlName="apellidoMaterno" [ngClass]="{ 'is-invalid': (f.apellidoMaterno!.touched || f.apellidoMaterno!.dirty) && f.apellidoMaterno.errors }" maxlength="100" autocomplete="off" > 
+        <input type="text" class="form-control" style="text-transform: uppercase;" formControlName="apellidoMaterno" [ngClass]="{ 'is-invalid': (f.apellidoMaterno!.touched || f.apellidoMaterno!.dirty) && f.apellidoMaterno.errors }" maxlength="100" autocomplete="off" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇOEÆČŠŽ∂ð ,.'-]{2,254}" maxlength="100"> 
       </div>
   </div>
 
@@ -150,7 +150,7 @@
       <label class="label-blue">Nombres</label>  
     </div>
     <div class="input-group mb-3 col-sm">
-      <input type="text" class="form-control" style="text-transform: uppercase;" formControlName="nombres" [ngClass]="{ 'is-invalid': (f.nombres!.touched || f.nombres!.dirty) && f.nombres.errors }" maxlength="100" autocomplete="off" >
+      <input type="text" class="form-control" style="text-transform: uppercase;" formControlName="nombres" [ngClass]="{ 'is-invalid': (f.nombres!.touched || f.nombres!.dirty) && f.nombres.errors }" maxlength="100" autocomplete="off" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇOEÆČŠŽ∂ð ,.'-]{2,254}" maxlength="100">
     </div>
   </div>
 
