@@ -236,13 +236,12 @@ export class PersonaNaturalComponent implements OnInit {
       }
 
 
-
-
     this.correoService.envioCorreoVerificacion(request).subscribe(res =>{
 
       if(res){
         const dialogRef = this.dialog.open(SharedDialogComponent, {
-          width: "700px",
+          width: "771px",
+          height : "434px",  
           disableClose: false,
           data: {  idEnvio :res.idEnvio , requestData : request , email : this.formGroup.get('correoElectronico')?.value},
         });
