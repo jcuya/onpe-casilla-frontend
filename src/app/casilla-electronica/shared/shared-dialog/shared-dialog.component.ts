@@ -1,6 +1,8 @@
 import { Component, Inject, OnInit,ElementRef ,ViewChild, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ReCaptchaV3Service } from 'ng-recaptcha';
+import { Subscription } from 'rxjs';
 import { ValidarCorreoService } from 'src/app/core/services/validar-correo.service';
 import { AlertDialogComponent } from '../../alert-dialog/alert-dialog.component';
 
@@ -24,13 +26,15 @@ export class SharedDialogComponent implements OnInit   {
   email !: string;
   interval : any;
   timeLeft: number = 30;
+  TOkenCaptcha: string = '';
 
   constructor( @Inject(MAT_DIALOG_DATA) private data : any,
   private dialogRef: MatDialogRef<SharedDialogComponent>,
   private dialogRefmessage: MatDialogRef<AlertDialogComponent>,
   private correoService : ValidarCorreoService,
   private formBuilder: FormBuilder,
-  public dialog: MatDialog
+  public dialog: MatDialog,  
+  private reCaptchaV3Service: ReCaptchaV3Service
   ) {
     this.idEnvio = data.idEnvio;
     this.tipoDocumento = data.requestData.tipoDocumento;
@@ -73,16 +77,18 @@ export class SharedDialogComponent implements OnInit   {
     this.dialogRef.close(resp);
   }
 
-  valid(){
+  async valid(){
     if(this.formGroup.valid){
       
       var codigoEnvio = this.formGroup.get('codigo1')?.value + this.formGroup.get('codigo2')?.value + this.formGroup.get('codigo3')?.value + this.formGroup.get('codigo4')?.value + this.formGroup.get('codigo5')?.value +  this.formGroup.get('codigo6')?.value
+      var validate = await this.executeAction('homeLogin'); 
       let request = {
         tipoDocumento: this.tipoDocumento,
         numeroDocumento: this.numeroDocumento,
         idEnvio: this.idEnvio,
         codigo: codigoEnvio.toUpperCase(),
         correo: this.email,
+        recaptcha : this.TOkenCaptcha
       }
 
       this.correoService.validarCodigoVerificacion(request).subscribe(respuesta =>{
@@ -161,5 +167,36 @@ startTimer() {
 get primerDigito() {
   return this.formGroup.get('codigo1')?.value || null;
 }
+
+
+
+public recentToken = '';
+public recentError?: { error: any };
+private singleExecutionSubscription!: Subscription;
+private executeAction = async (action: string) => {
+ return new Promise((resolve) => {
+   if (this.singleExecutionSubscription) {
+     this.singleExecutionSubscription.unsubscribe();
+   }
+   this.singleExecutionSubscription = this.reCaptchaV3Service
+     .execute(action)
+     .subscribe(
+       (token) => {
+         this.recentToken = token;
+         this.recentError = undefined;
+         this.TOkenCaptcha = token;
+         console.log
+         //this.formGroup.get("recaptchaReactive")?.setValue(this.TOkenCaptcha);
+         resolve(true);
+       },
+       (error) => {
+         this.recentToken = '';
+         this.TOkenCaptcha = '';
+         this.recentError = { error };
+         resolve(false);
+       }
+     );
+ });
+};
 
 }

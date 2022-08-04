@@ -227,12 +227,15 @@ export class PersonaNaturalComponent implements OnInit {
 
 
 
-  validarCorreoElectronico() {
+  async validarCorreoElectronico() {
+
+    var validate = await this.executeAction('homeLogin'); 
 
     let request = {
       tipoDocumento : this.formGroup.get('tipoDocumento')?.value ,
       numeroDocumento : this.formGroup.get('numeroDocumento')?.value,
-      correoElectronico : this.formGroup.get('correoElectronico')?.value
+      correoElectronico : this.formGroup.get('correoElectronico')?.value,
+      recaptcha : this.TOkenCaptcha
       }
 
 
