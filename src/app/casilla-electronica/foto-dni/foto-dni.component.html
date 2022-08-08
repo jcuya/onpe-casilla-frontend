@@ -73,15 +73,12 @@
         formControlName="files"
         [multiple]="false"
         [animation]="true"
-        accept="file_extension|image/*"
+        accept="image/*"
         fxFlex="100" 
+        [maxsize]="maxsize_"
         fileslimit=1 
-        [ngStyle]="{
-          'outline-color': filesControl.valid == false ? 'red' : ''
-        }"
-        [ngStyle]="{
-          'background-color': filesControl.valid == false ? '#fdf4f4' : ''
-        }"
+        [ngClass]="{'class-invalid': (f.files!.touched || f.files!.dirty) && f.files.errors }"
+        (change)="validatorImage()"
       >
         <ng-template
           let-isFileDragDropAvailable="isFileDragDropAvailable"
@@ -91,7 +88,7 @@
             <ng-container
               *ngIf="isFileDragDropAvailable; else isNotDragDropAvailable"
             >
-            Agregar un archivo (PNG, JPG o JPEG) o dar clic aquí.
+            Agregar un archivo (PNG, JPG o JPEG con un peso máximo de 3Mb) o dar clic aquí.
             </ng-container>
             <ng-template #isNotDragDropAvailable> </ng-template>
           </file-upload-drop-zone>
@@ -112,8 +109,10 @@
           >
         </ng-template>
       </file-upload>
-  
     </div>
+    <!-- <p *ngIf="f.files!.errors && f.files!.touched" class="text-file-valid">La imagen debe tener un peso máximo de 3Mb</p> -->
+    <!-- <p *ngIf="f.files!.value![0]!.size >= 5120" class="text-file-valid">La imagen debe tener un peso máximo de 3Mb</p> -->
+ 
 
 
 
