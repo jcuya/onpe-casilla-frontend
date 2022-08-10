@@ -30,7 +30,7 @@ export class DatosGeneralesComponent implements OnInit {
   codigoEnviado = false;
 
   validateRequest : RequestValidateData = new RequestValidateData();
-
+  @ViewChild('myButton') button : any;
 
   observableRequestSubscription!: Subscription;
   requestSave: requestGlobal = new requestGlobal();
@@ -96,7 +96,7 @@ export class DatosGeneralesComponent implements OnInit {
     console.log('siguiente paso')
 
 
-
+    this.button.nativeElement.disabled = true;
 
 
     this.siguientePaso();
@@ -142,6 +142,7 @@ export class DatosGeneralesComponent implements OnInit {
               hasBackdrop: true,
               data: {cabecera : 'Validación' ,messages: ['No validó el correo electrónico']}
             });
+            this.button.nativeElement.disabled = false;
             return;
           }
 
@@ -158,8 +159,9 @@ export class DatosGeneralesComponent implements OnInit {
           console.log("request envio", this.validateRequest)
 
           this.personaService.validarDatosPersona(this.validateRequest).subscribe(res =>{
+            this.button.nativeElement.disabled = false;
             if(res.status){
-
+             
              this.generateRequestNaturalEmit();
 
             }else{
@@ -270,6 +272,7 @@ export class DatosGeneralesComponent implements OnInit {
     this.requestSave.recaptcha = this.personaNaturalFormGroup.controls['recaptchaReactive'].value;
 
     this.casillaService.setCasilla(this.requestSave);
+    
     this.completedStep.emit();
   }
 
