@@ -23,8 +23,12 @@ export class AlertDialogComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  cancelar(){
+    this.dialogRef.close(false);
+  }
+
   aceptar(){
-    this.dialogRef.close();
+    this.dialogRef.close(true);
     //this.document.location.href = 'https://casillaelectronica.onpe.gob.pe/#/login';
   
   }

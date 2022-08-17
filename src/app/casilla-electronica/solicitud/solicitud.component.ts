@@ -65,8 +65,19 @@ export class SolicitudComponent implements OnInit {
   }
 
   continuar() {
-    this.enviar();
+    
     //this.completedStep.emit(true)
+    this.dialog.open(AlertDialogComponent, {
+      disableClose: true,
+      hasBackdrop: true,
+      data: {cabecera : 'Notificación' ,messages: ['¿Está segura de enviar la información?']}
+    }).afterClosed().subscribe(result =>{
+     if(result){
+      this.enviar();
+     }
+    
+    });
+
   }
 
   regresar() {

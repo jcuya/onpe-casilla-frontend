@@ -2,7 +2,11 @@
 <mat-dialog-content>
 <p *ngFor="let message of data.messages">{{message}}</p>
 </mat-dialog-content>
-<mat-dialog-actions align="end">
+<mat-dialog-actions >
+  <button mat-flat-button class="btnAceptar"
+          (click)="cancelar()"
+  >CANCELAR</button>
+
   <button mat-flat-button class="btnAceptar"
           (click)="aceptar()"
   >ACEPTAR</button>
