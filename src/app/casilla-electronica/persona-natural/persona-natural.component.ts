@@ -452,7 +452,24 @@ export class PersonaNaturalComponent implements OnInit {
         return true;
       }
     }
-    
+   }
+
+   validardomicilio(event : any): boolean{
+    const charCode = (event.which) ? event.which : event.keyCode;
+    var numDigito = this.formGroup.get('numeroCelular')?.value.length;
+    if(numDigito <=3){
+      if(charCode == 32){
+        return false;
+      }else{
+        return true;
+      }
+    }else{
+      return true;
+    }
+
+
+
+
 
    }
 
