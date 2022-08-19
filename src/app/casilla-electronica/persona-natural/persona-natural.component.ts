@@ -43,7 +43,7 @@ export class PersonaNaturalComponent implements OnInit {
  
   public buscando: boolean = false;
   personaNaturalDni: PersonaNaturalDni | null = null;
-  valueIniCelular: String = '9';
+  // valueIniCelular: String = '9';
   recaptchaGlobal: String = '';
 
   //@Output() FormValidNatural = new EventEmitter<any>()
@@ -271,15 +271,15 @@ export class PersonaNaturalComponent implements OnInit {
   invalidarDocumento() {
     this.numeroDniValido = false
   }
-  llenar9(){
-    if(this.valueIniCelular=='') this.valueIniCelular='9'
-  }
-  onFocusOut9(event: any){
-    if(this.valueIniCelular=='') this.valueIniCelular='9'
-  }
-  verificaVacio(){
-    if(this.valueIniCelular=='') this.valueIniCelular='9'
-  }
+  // llenar9(){
+  //   if(this.valueIniCelular=='') this.valueIniCelular='9'
+  // }
+  // onFocusOut9(event: any){
+  //   if(this.valueIniCelular=='') this.valueIniCelular='9'
+  // }
+  // verificaVacio(){
+  //   if(this.valueIniCelular=='') this.valueIniCelular='9'
+  // }
   async validarDocumento() {
 
     if(this.getNumeroDoc().length != this.maxlength) return;
@@ -433,6 +433,23 @@ export class PersonaNaturalComponent implements OnInit {
 
 
     return true;
+   }
+
+
+   validarCelular(event : any): boolean{
+    var numDigito = this.formGroup.get('numeroCelular')?.value.length;
+    if(numDigito >= 1){
+      return true;
+    }else{
+      const charCode = (event.which) ? event.which : event.keyCode;
+      if(charCode == 57){
+        return true;
+      }else{
+        return false;
+      }
+    }
+    
+
    }
 
 

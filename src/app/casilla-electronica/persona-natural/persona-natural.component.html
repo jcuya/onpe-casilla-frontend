@@ -202,7 +202,7 @@
       <label class="label-blue">Número de celular</label>
     </div> 
       <div class="input-group mb-3 col-sm">
-        <input type="text" class="form-control" [(ngModel)]="valueIniCelular"  formControlName="numeroCelular" [ngClass]="{ 'is-invalid': (f.numeroCelular!.touched || f.numeroCelular!.dirty) && f.numeroCelular.errors }" (keypress)="validarsoloNumeros($event)" minlength="9" maxlength="9" (click)="llenar9()" (keydown)="verificaVacio()" (focusout)="onFocusOut9($event)" autocomplete="off" > 
+        <input type="text" class="form-control"   formControlName="numeroCelular" [ngClass]="{ 'is-invalid': (f.numeroCelular!.touched || f.numeroCelular!.dirty) && f.numeroCelular.errors }" (keypress)="validarCelular($event)" minlength="9" maxlength="9"    autocomplete="off" > 
       </div>
   </div>
 
