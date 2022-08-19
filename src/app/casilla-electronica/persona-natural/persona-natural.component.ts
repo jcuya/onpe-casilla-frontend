@@ -437,15 +437,19 @@ export class PersonaNaturalComponent implements OnInit {
 
 
    validarCelular(event : any): boolean{
+    const charCode = (event.which) ? event.which : event.keyCode;
     var numDigito = this.formGroup.get('numeroCelular')?.value.length;
-    if(numDigito >= 1){
-      return true;
-    }else{
-      const charCode = (event.which) ? event.which : event.keyCode;
-      if(charCode == 57){
+    if(numDigito == 0){
+      if(charCode == 57 ){
         return true;
       }else{
         return false;
+      }
+    }else{
+      if( charCode > 31 && (charCode < 48 || charCode > 57)){
+        return false;
+      }else {
+        return true;
       }
     }
     
