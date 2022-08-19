@@ -456,7 +456,7 @@ export class PersonaNaturalComponent implements OnInit {
 
    validardomicilio(event : any): boolean{
     const charCode = (event.which) ? event.which : event.keyCode;
-    var numDigito = this.formGroup.get('numeroCelular')?.value.length;
+    var numDigito = this.formGroup.get('domicilioFisico')?.value.length;
     if(numDigito <=3){
       if(charCode == 32){
         return false;
