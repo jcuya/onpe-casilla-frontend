@@ -467,10 +467,6 @@ export class PersonaNaturalComponent implements OnInit {
       return true;
     }
 
-
-
-
-
    }
 
 
