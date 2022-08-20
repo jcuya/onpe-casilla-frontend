@@ -244,7 +244,7 @@
       <label class="label-blue">Domicilio físico</label>  
     </div>
     <div class="input-group mb-3 col-sm">
-      <input type="text" class="form-control" maxlength="200" minlength="10" formControlName="domicilioFisico" [ngClass]="{ 'is-invalid': (f.domicilioFisico!.touched || f.domicilioFisico!.dirty) && f.domicilioFisico.errors }" (keypress)="validardomicilio($event)" autocomplete="off" >
+      <input id="domicilioID" type="text" class="form-control" maxlength="200" minlength="10" formControlName="domicilioFisico" [ngClass]="{ 'is-invalid': (f.domicilioFisico!.touched || f.domicilioFisico!.dirty) && f.domicilioFisico.errors }" (keypress)="validardomicilio($event, 'domicilioID')" autocomplete="off" >
     </div>
   </div>
 

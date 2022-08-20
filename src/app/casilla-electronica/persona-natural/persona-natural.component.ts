@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Inject, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Inject, OnInit, Output, Renderer2} from '@angular/core';
 import {AbstractControl, FormControl} from '@angular/forms';
 import {Condicion_Persona_Natural, TipoDocumento, TipoDocumento_DNI, TipoDocumento_CE} from "../../core/dto/documento";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -74,7 +74,8 @@ export class PersonaNaturalComponent implements OnInit {
     private _adapter: DateAdapter<any>,
     @Inject(MAT_DATE_LOCALE) private _locale: string,
     private reCaptchaV3Service: ReCaptchaV3Service,
-    config: NgbInputDatepickerConfig, calendar: NgbCalendar
+    config: NgbInputDatepickerConfig, calendar: NgbCalendar,
+    private renderer: Renderer2
   ) {
     this._locale = 'es';
     this._adapter.setLocale(this._locale);
@@ -438,8 +439,10 @@ export class PersonaNaturalComponent implements OnInit {
 
    validarCelular(event : any): boolean{
     const charCode = (event.which) ? event.which : event.keyCode;
-    var numDigito = this.formGroup.get('numeroCelular')?.value.length;
-    if(numDigito == 0){
+    const numCelular = this.formGroup.get('numeroCelular')?.value;
+    var primerDigito = event.target.selectionStart;
+    var primerdato = numCelular[0];
+    if(primerDigito == 0   ){
       if(charCode == 57 ){
         return true;
       }else{
@@ -454,23 +457,33 @@ export class PersonaNaturalComponent implements OnInit {
     }
    }
 
-   validardomicilio(event : any): boolean{
-    const charCode = (event.which) ? event.which : event.keyCode;
-    var numDigito = this.formGroup.get('domicilioFisico')?.value.length;
-    if(numDigito <=3){
-      if(charCode == 32){
-        return false;
-      }else{
-        return true;
-      }
-    }else{
+   validardomicilio(e : any, idInput: string){
+    // const charCode = (event.which) ? event.which : event.keyCode;
+    // var numDigito = this.formGroup.get('domicilioFisico')?.value.length;
+    // if(numDigito <=3){
+    //   if(charCode == 32){
+    //     return false;
+    //   }else{
+    //     return true;
+    //   }
+    // }else{
+    //   return true;
+    // }
+    var value = this.formGroup.get('domicilioFisico')?.value;
+
+    let inicio = this.renderer.selectRootElement(`#${idInput}`).selectionStart;
+    let fin = this.renderer.selectRootElement(`#${idInput}`).selectionEnd;
+    //let value : string = inputForm.value;
+    if (e.metaKey || e.ctrlKey) {
       return true;
     }
+    if(inicio == 0 && e.key === ' ') return false;
+    
+    this.formGroup.get('domicilioFisico')?.setValue(value.replace(/ {2,}/g, ' '));
+    this.renderer.selectRootElement(`#${idInput}`).setSelectionRange(inicio, fin, 'none');
 
 
-
-
-
+return true;
    }
 
 
