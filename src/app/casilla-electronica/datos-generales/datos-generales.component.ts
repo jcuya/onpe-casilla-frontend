@@ -99,8 +99,8 @@ export class DatosGeneralesComponent implements OnInit {
     this.button.nativeElement.disabled = true;
 
 
-    this.siguientePaso();
-    
+    //this.siguientePaso();
+    this.completedStep.emit();
     /*if (!this.formGroup.valid) {
       this.formGroup.markAllAsTouched()
       return
