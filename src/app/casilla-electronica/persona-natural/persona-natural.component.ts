@@ -458,22 +458,10 @@ export class PersonaNaturalComponent implements OnInit {
    }
 
    validardomicilio(e : any, idInput: string){
-    // const charCode = (event.which) ? event.which : event.keyCode;
-    // var numDigito = this.formGroup.get('domicilioFisico')?.value.length;
-    // if(numDigito <=3){
-    //   if(charCode == 32){
-    //     return false;
-    //   }else{
-    //     return true;
-    //   }
-    // }else{
-    //   return true;
-    // }
     var value = this.formGroup.get('domicilioFisico')?.value;
 
     let inicio = this.renderer.selectRootElement(`#${idInput}`).selectionStart;
     let fin = this.renderer.selectRootElement(`#${idInput}`).selectionEnd;
-    //let value : string = inputForm.value;
     if (e.metaKey || e.ctrlKey) {
       return true;
     }
