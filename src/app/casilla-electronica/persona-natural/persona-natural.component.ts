@@ -63,7 +63,6 @@ export class PersonaNaturalComponent implements OnInit {
    activar  : boolean = true;
    cont = 0;
 
-
   constructor(
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
@@ -84,8 +83,17 @@ export class PersonaNaturalComponent implements OnInit {
   }
 
   async ngOnInit() {
+    this.createForm();
+    this.formGroup.get('numeroDocumento')?.disable();
+    this.desactivarInputsInit();
+    this.tipoDocumentoList = await firstValueFrom(this.casillaService.getTipoDocumentoList(Condicion_Persona_Natural))
+    this.departamentoList = await firstValueFrom(this.ubigeoService.getDepartamentoList())
+    
+  }
+
+  createForm(tipoDoc = ""){
     this.formGroup = this.formBuilder.group({
-      tipoDocumento: ['', Validators.required],
+      tipoDocumento: [tipoDoc, Validators.required],
       numeroDocumento: ['', Validators.required],
       //apellidos: ['', Validators.required],
       apellidoPaterno: ['', Validators.required],
@@ -102,13 +110,8 @@ export class PersonaNaturalComponent implements OnInit {
       distrito: ['', Validators.required],
       domicilioFisico: ['', Validators.required],
       validateEmail : [false, Validators.required],      
-      recaptchaReactive: [''],
+      recaptchaReactive: ['']
     })
-    this.formGroup.get('numeroDocumento')?.disable();
-    this.desactivarInputsInit();
-    this.tipoDocumentoList = await firstValueFrom(this.casillaService.getTipoDocumentoList(Condicion_Persona_Natural))
-    this.departamentoList = await firstValueFrom(this.ubigeoService.getDepartamentoList())
-    
   }
 
 
@@ -151,23 +154,22 @@ export class PersonaNaturalComponent implements OnInit {
  
 
 
-    var value  = this.formGroup.get('tipoDocumento')?.value;
+    const value  = this.formGroup.get('tipoDocumento')?.value;
     this.blockInput = false;
-      this.formGroup.get("departamento")?.setValue(null);
-      this.formGroup.get("provincia")?.setValue(null);
-      this.formGroup.get("distrito")?.setValue(null);
+      // this.formGroup.get("departamento")?.setValue(null);
+      // this.formGroup.get("provincia")?.setValue(null);
+      // this.formGroup.get("distrito")?.setValue(null);
 
       this.provinciaList = []
       this.distritoList = []
     
     this.invalidarDocumento();
 
-    this.formGroup.get("numeroDocumento")?.setValue("");
-    this.formGroup.get("nombres")?.reset();
-    //this.formGroup.get("apellidos")?.setValue("");
-    this.formGroup.get("apellidoPaterno")?.reset();
-    this.formGroup.get("apellidoMaterno")?.reset();
-
+    // this.formGroup.get("numeroDocumento")?.setValue("");
+    // this.formGroup.get("nombres")?.setValue("");
+    // this.formGroup.get("apellidoPaterno")?.setValue("");
+    // this.formGroup.get("apellidoMaterno")?.setValue("");
+    
     if (value === TipoDocumento_DNI) {
       this.maxlength = 8;
       this.minlength = 8;
@@ -175,37 +177,39 @@ export class PersonaNaturalComponent implements OnInit {
       //this.formGroup.get('apellidos')?.disable();
       this.formGroup.get('apellidoPaterno')?.disable();
       this.formGroup.get('apellidoMaterno')?.disable();
-      this.formGroup.get('numeroDocumento')?.enable();
-      this.formGroup.get("digitoVerificacion")?.setValue("");
-      this.formGroup.get("fechaNacimento")?.setValue("");
+      this.formGroup.get('numeroDocumento')?.enable();      
       this.formGroup.get('correoElectronico')?.enable();
-      this.formGroup.get("validateEmail")?.setValue(false);
-      this.formGroup.get("correoElectronico")?.setValue("");
-      this.formGroup.get("recaptchaReactive")?.setValue("");
+      
+
+
+      // this.formGroup.get("digitoVerificacion")?.setValue("");
+      // this.formGroup.get("fechaNacimento")?.setValue("");
+      // this.formGroup.get("validateEmail")?.setValue(false);
+      // this.formGroup.get("correoElectronico")?.setValue("");
+      // this.formGroup.get("recaptchaReactive")?.setValue("");
       
     } else {
       this.maxlength = 9
       this.minlength = 9;
       this.formGroup.get('nombres')?.enable();
-      //this.formGroup.get('apellidos')?.enable();
+      
+      this.formGroup.get('correoElectronico')?.enable();
       this.formGroup.get('apellidoPaterno')?.enable();
       this.formGroup.get('apellidoMaterno')?.enable();
       this.formGroup.get('numeroDocumento')?.enable();
 
-      //this.formGroup.get("nombreMadre")?.setValue(" ");
-      //this.formGroup.get("nombrePadre")?.setValue(" ");
-      this.formGroup.get("digitoVerificacion")?.setValue(" ");
-      this.formGroup.get("apellidoPaterno")?.reset();
-      this.formGroup.get("apellidoMaterno")?.reset();
-      this.formGroup.get("domicilioFisico")?.setValue("");
-      this.formGroup.get("numeroCelular")?.setValue("");
-      this.formGroup.get("fechaNacimento")?.setValue("");
-      this.formGroup.get('correoElectronico')?.enable();
-      this.formGroup.get("validateEmail")?.setValue(false);
-      this.formGroup.get("correoElectronico")?.setValue("");
-      this.formGroup.get("recaptchaReactive")?.setValue("");
+      // this.formGroup.get("digitoVerificacion")?.setValue(" ");
+      // this.formGroup.get("apellidoPaterno")?.setValue("");
+      // this.formGroup.get("apellidoMaterno")?.setValue("");
+      // this.formGroup.get("domicilioFisico")?.setValue("");
+      // this.formGroup.get("numeroCelular")?.setValue("");
+      // this.formGroup.get("fechaNacimento")?.setValue("");
+      // this.formGroup.get("validateEmail")?.setValue(false);
+      // this.formGroup.get("correoElectronico")?.setValue("");
+      // this.formGroup.get("recaptchaReactive")?.setValue("");
 
     }
+    this.createForm(value);
   }
 
   
@@ -457,24 +461,47 @@ export class PersonaNaturalComponent implements OnInit {
     }
    }
 
-   validardomicilio(event : any): boolean{
-    const charCode = (event.which) ? event.which : event.keyCode;
-    var numDigito = this.formGroup.get('domicilioFisico')?.value.length;
-    if(numDigito <=3){
-      if(charCode == 32){
-        return false;
-      }else{
-        return true;
-      }
-    }else{
+   validardomicilio(e : any, idInput: string){
+    var value = this.formGroup.get('domicilioFisico')?.value;
+
+    let inicio = this.renderer.selectRootElement(`#${idInput}`).selectionStart;
+    let fin = this.renderer.selectRootElement(`#${idInput}`).selectionEnd;
+    if (e.metaKey || e.ctrlKey) {
       return true;
     }
-
-
-
-
-
+    if(inicio == 0 && e.key === ' ') return false;
+    
+    this.formGroup.get('domicilioFisico')?.setValue(value.replace(/ {2,}/g, ' '));
+    this.renderer.selectRootElement(`#${idInput}`).setSelectionRange(inicio, fin, 'none');
+      return true;
    }
+
+   quitarDobleEspacio(idInput: string, e: any) {
+
+    let inicio = this.renderer.selectRootElement(`#${idInput}`).selectionStart;
+    let fin = this.renderer.selectRootElement(`#${idInput}`).selectionEnd;
+    if (e.metaKey || e.ctrlKey) {
+      return true;
+    }
+    if(inicio == 0 && e.key === ' ') return false;
+
+    switch(idInput){
+      case 'apellidoPaterno':
+        var value = this.formGroup.get('apellidoPaterno')?.value;
+        console.log("value",value)
+      this.formGroup.get('apellidoPaterno')?.setValue(value.replace(/ {2,}/g, ' ')); break;
+      case 'apellidoMaterno':
+        var value = this.formGroup.get('apellidoMaterno')?.value;
+      this.formGroup.get('apellidoMaterno')?.setValue(value.replace(/ {2,}/g, ' ')); break;
+      case 'nombres':
+        var value = this.formGroup.get('nombres')?.value;
+      this.formGroup.get('nombres')?.setValue(value.replace(/ {2,}/g, ' ')); break; 
+    }
+  
+    this.renderer.selectRootElement(`#${idInput}`).setSelectionRange(inicio, fin, 'none');
+
+    return true;
+  }
 
 
    validateInputKey(event : any): boolean{
