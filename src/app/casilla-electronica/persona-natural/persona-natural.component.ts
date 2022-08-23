@@ -62,9 +62,6 @@ export class PersonaNaturalComponent implements OnInit {
 
    activar  : boolean = true;
    cont = 0;
-   apellidoPaterno: FormControl = new FormControl('', [Validators.required,]);
-   apellidoMaterno: FormControl = new FormControl('', [Validators.required,]);
-   nombres: FormControl = new FormControl('', [Validators.required,]);
 
   constructor(
     private formBuilder: FormBuilder,
@@ -479,7 +476,7 @@ export class PersonaNaturalComponent implements OnInit {
       return true;
    }
 
-   quitarDobleEspacio(idInput: string, inputForm: FormControl, e: any) {
+   quitarDobleEspacio(idInput: string, e: any) {
 
     let inicio = this.renderer.selectRootElement(`#${idInput}`).selectionStart;
     let fin = this.renderer.selectRootElement(`#${idInput}`).selectionEnd;
