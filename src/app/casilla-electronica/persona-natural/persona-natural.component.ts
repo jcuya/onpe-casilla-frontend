@@ -419,24 +419,6 @@ export class PersonaNaturalComponent implements OnInit {
     if (charCode > 31 && (charCode < 48 || charCode > 57)) {
       return false;
     }
-
-    //if(this.formGroup.controls["tipoDocumento"].value.codigo == TipoDocumento_DNI && idName ==='numerocelular'){
-
-
-   
-
-
-      // if (this.maxlength == 9){
-      //   if (/[a-zA-Z0-9]/.test(inp)) {
-      //     return true;
-      //   } else {
-      //     event.preventDefault();
-      //     return false;
-      //   }
-      // }
-   // }
-
-
     return true;
    }
 
@@ -508,16 +490,6 @@ export class PersonaNaturalComponent implements OnInit {
 
     const charCode = (event.which) ? event.which : event.keyCode;
     var inp = String.fromCharCode(event.keyCode);
-
-      /*if (this.maxlength == 9){
-        if (/[a-zA-Z0-9]/.test(inp)) {
-          return true;
-        } else {
-          event.preventDefault();
-          return false;
-        }
-      }*/
-
       if(this.maxlength >= 8){
         if (charCode > 31 && (charCode < 48 || charCode > 57)) {
           return false;
