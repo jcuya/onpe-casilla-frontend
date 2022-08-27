@@ -91,9 +91,9 @@ export class PersonaNaturalComponent implements OnInit {
     
   }
 
-  createForm(tipoDoc = ""){
+  createForm( value  = ""){
     this.formGroup = this.formBuilder.group({
-      tipoDocumento: [tipoDoc, Validators.required],
+      tipoDocumento: [value, Validators.required],
       numeroDocumento: ['', Validators.required],
       //apellidos: ['', Validators.required],
       apellidoPaterno: ['', Validators.required],
@@ -102,12 +102,12 @@ export class PersonaNaturalComponent implements OnInit {
       //nombrePadre: ['', Validators.required],
       //nombreMadre: ['', Validators.required],
       fechaNacimento: ['', Validators.required],
-      digitoVerificacion: ['', Validators.required],
+      digitoVerificacion: ['5', Validators.required],
       correoElectronico: ['',[ Validators.required, Validators.email]],
       numeroCelular: ['', Validators.required],
-      departamento: ['', Validators.required],
-      provincia: ['', Validators.required],
-      distrito: ['', Validators.required],
+      // departamento: ['', Validators.required],
+      // provincia: ['', Validators.required],
+      // distrito: ['', Validators.required],
       domicilioFisico: ['', Validators.required],
       validateEmail : [false, Validators.required],      
       recaptchaReactive: ['']
@@ -174,7 +174,6 @@ export class PersonaNaturalComponent implements OnInit {
       this.maxlength = 8;
       this.minlength = 8;
       this.formGroup.get('nombres')?.disable();
-      //this.formGroup.get('apellidos')?.disable();
       this.formGroup.get('apellidoPaterno')?.disable();
       this.formGroup.get('apellidoMaterno')?.disable();
       this.formGroup.get('numeroDocumento')?.enable();      
@@ -182,7 +181,7 @@ export class PersonaNaturalComponent implements OnInit {
       
 
 
-      // this.formGroup.get("digitoVerificacion")?.setValue("");
+      this.formGroup.get("digitoVerificacion")?.setValue("");
       // this.formGroup.get("fechaNacimento")?.setValue("");
       // this.formGroup.get("validateEmail")?.setValue(false);
       // this.formGroup.get("correoElectronico")?.setValue("");
@@ -198,7 +197,7 @@ export class PersonaNaturalComponent implements OnInit {
       this.formGroup.get('apellidoMaterno')?.enable();
       this.formGroup.get('numeroDocumento')?.enable();
 
-      // this.formGroup.get("digitoVerificacion")?.setValue(" ");
+      this.formGroup.get("digitoVerificacion")?.setValue(" ");
       // this.formGroup.get("apellidoPaterno")?.setValue("");
       // this.formGroup.get("apellidoMaterno")?.setValue("");
       // this.formGroup.get("domicilioFisico")?.setValue("");
@@ -209,7 +208,7 @@ export class PersonaNaturalComponent implements OnInit {
       // this.formGroup.get("recaptchaReactive")?.setValue("");
 
     }
-    this.createForm(value);
+   this.createForm(value);
   }
 
   

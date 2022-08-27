@@ -4,7 +4,7 @@
 </mat-dialog-content>
 <mat-dialog-actions >
   <button mat-flat-button class="btnAceptar"
-          (click)="cancelar()"
+          (click)="cancelar()"  *ngIf="data.btnCancel"
   >CANCELAR</button>
 
   <button mat-flat-button class="btnAceptar"
