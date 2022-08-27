@@ -4,7 +4,8 @@ import { DOCUMENT } from '@angular/common';
 
 class DialogData {
   messages: string[] = [];
-  cabecera : string = 'Validación de documento de persona'
+  cabecera : string = 'Validación de documento de persona';
+  btnCancel : boolean = false
 }
 
 @Component({
@@ -13,11 +14,15 @@ class DialogData {
   styleUrls: ['./alert-dialog.component.css']
 })
 export class AlertDialogComponent implements OnInit {
+
+  activeCancel = false;
   constructor(
     public dialogRef: MatDialogRef<AlertDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     @Inject(DOCUMENT) private document: Document,
   ) {
+  
+
   }
 
   ngOnInit(): void {
