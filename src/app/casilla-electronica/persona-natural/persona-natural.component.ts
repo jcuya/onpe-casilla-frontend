@@ -91,7 +91,7 @@ export class PersonaNaturalComponent implements OnInit {
     
   }
 
-  createForm( value  = ""){
+  createForm(value =""){
     this.formGroup = this.formBuilder.group({
       tipoDocumento: [value, Validators.required],
       numeroDocumento: ['', Validators.required],
@@ -102,12 +102,12 @@ export class PersonaNaturalComponent implements OnInit {
       //nombrePadre: ['', Validators.required],
       //nombreMadre: ['', Validators.required],
       fechaNacimento: ['', Validators.required],
-      digitoVerificacion: ['5', Validators.required],
+      digitoVerificacion: ['',  Validators.required ],
       correoElectronico: ['',[ Validators.required, Validators.email]],
       numeroCelular: ['', Validators.required],
-      // departamento: ['', Validators.required],
-      // provincia: ['', Validators.required],
-      // distrito: ['', Validators.required],
+      departamento: ['', Validators.required],
+      provincia: ['', Validators.required],
+      distrito: ['', Validators.required],
       domicilioFisico: ['', Validators.required],
       validateEmail : [false, Validators.required],      
       recaptchaReactive: ['']
@@ -156,19 +156,11 @@ export class PersonaNaturalComponent implements OnInit {
 
     const value  = this.formGroup.get('tipoDocumento')?.value;
     this.blockInput = false;
-      // this.formGroup.get("departamento")?.setValue(null);
-      // this.formGroup.get("provincia")?.setValue(null);
-      // this.formGroup.get("distrito")?.setValue(null);
-
       this.provinciaList = []
       this.distritoList = []
     
     this.invalidarDocumento();
 
-    // this.formGroup.get("numeroDocumento")?.setValue("");
-    // this.formGroup.get("nombres")?.setValue("");
-    // this.formGroup.get("apellidoPaterno")?.setValue("");
-    // this.formGroup.get("apellidoMaterno")?.setValue("");
     
     if (value === TipoDocumento_DNI) {
       this.maxlength = 8;
@@ -178,37 +170,34 @@ export class PersonaNaturalComponent implements OnInit {
       this.formGroup.get('apellidoMaterno')?.disable();
       this.formGroup.get('numeroDocumento')?.enable();      
       this.formGroup.get('correoElectronico')?.enable();
-      
 
 
-      this.formGroup.get("digitoVerificacion")?.setValue("");
-      // this.formGroup.get("fechaNacimento")?.setValue("");
-      // this.formGroup.get("validateEmail")?.setValue(false);
-      // this.formGroup.get("correoElectronico")?.setValue("");
-      // this.formGroup.get("recaptchaReactive")?.setValue("");
       
     } else {
       this.maxlength = 9
       this.minlength = 9;
       this.formGroup.get('nombres')?.enable();
-      
       this.formGroup.get('correoElectronico')?.enable();
       this.formGroup.get('apellidoPaterno')?.enable();
       this.formGroup.get('apellidoMaterno')?.enable();
       this.formGroup.get('numeroDocumento')?.enable();
 
-      this.formGroup.get("digitoVerificacion")?.setValue(" ");
-      // this.formGroup.get("apellidoPaterno")?.setValue("");
-      // this.formGroup.get("apellidoMaterno")?.setValue("");
-      // this.formGroup.get("domicilioFisico")?.setValue("");
-      // this.formGroup.get("numeroCelular")?.setValue("");
-      // this.formGroup.get("fechaNacimento")?.setValue("");
-      // this.formGroup.get("validateEmail")?.setValue(false);
-      // this.formGroup.get("correoElectronico")?.setValue("");
-      // this.formGroup.get("recaptchaReactive")?.setValue("");
-
+     
     }
+
+   // this.formGroup.reset(this.createForm())
+   
+
    this.createForm(value);
+
+   if(value === TipoDocumento_DNI){
+    this.formGroup.controls['digitoVerificacion'].setValidators([Validators.required])
+    this.formGroup.controls['digitoVerificacion'].updateValueAndValidity()
+   }else{
+    this.formGroup.controls['digitoVerificacion'].setValidators(null)
+    this.formGroup.controls['digitoVerificacion'].updateValueAndValidity()
+   }
+
   }
 
   
@@ -469,7 +458,7 @@ export class PersonaNaturalComponent implements OnInit {
     switch(idInput){
       case 'apellidoPaterno':
         var value = this.formGroup.get('apellidoPaterno')?.value;
-        console.log("value",value)
+        
       this.formGroup.get('apellidoPaterno')?.setValue(value.replace(/ {2,}/g, ' ')); break;
       case 'apellidoMaterno':
         var value = this.formGroup.get('apellidoMaterno')?.value;
