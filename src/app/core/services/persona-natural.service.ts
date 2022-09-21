@@ -21,6 +21,7 @@ export class PersonaNaturalService {
 
 
   validarDatosPersona(datos : RequestValidateData):Observable<ResponseValidateData>{
+    console.log("va a validarDatosPersona---->", datos);
     return this.http.post<ResponseValidateData>(this.configUrl + '/validarPersona',datos).pipe(map(resp=>resp));
   }
 }

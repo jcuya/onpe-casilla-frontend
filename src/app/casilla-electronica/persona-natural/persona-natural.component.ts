@@ -102,7 +102,7 @@ export class PersonaNaturalComponent implements OnInit {
       //nombrePadre: ['', Validators.required],
       //nombreMadre: ['', Validators.required],
       fechaNacimento: ['', Validators.required],
-      digitoVerificacion: ['',  Validators.required ],
+      digitoVerificacion: [' ',  Validators.required ],
       correoElectronico: ['',[ Validators.required, Validators.email]],
       numeroCelular: ['', Validators.required],
       departamento: ['', Validators.required],
@@ -221,9 +221,7 @@ export class PersonaNaturalComponent implements OnInit {
 
 
   async validarCorreoElectronico() {
-
     var validate = await this.executeAction('homeLogin'); 
-
     let request = {
       tipoDocumento : this.formGroup.get('tipoDocumento')?.value ,
       numeroDocumento : this.formGroup.get('numeroDocumento')?.value,
@@ -402,6 +400,10 @@ export class PersonaNaturalComponent implements OnInit {
 
   validarsoloNumeros(event : any): boolean{
     const charCode = (event.which) ? event.which : event.keyCode;
+    const digitVer = this.formGroup.get('digitoVerificacion')?.value;
+    if(digitVer == " "){
+      this.formGroup.get("digitoVerificacion")?.setValue("");
+    }
     var inp = String.fromCharCode(event.keyCode);
   
     if (charCode > 31 && (charCode < 48 || charCode > 57)) {

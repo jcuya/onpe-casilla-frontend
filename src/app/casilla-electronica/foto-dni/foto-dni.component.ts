@@ -16,8 +16,7 @@ export class FotoDniComponent implements OnInit {
 
   @Output() completedStep = new EventEmitter<any>()
   @Output() previousStep = new EventEmitter<any>()
-
-  maxsize_ = 31200;
+  maxsize_ = 3242880;
 
 
   observableRequestSubscription!: Subscription;
