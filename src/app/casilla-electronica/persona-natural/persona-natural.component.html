@@ -125,7 +125,7 @@
    
       <div class="input-group mb-3 col-sm">
         <!--<input type="text" class="form-control" formControlName="numeroDocumento"  [ngClass]="{ 'is-invalid': (f.numeroDocumento!.touched || f.numeroDocumento!.dirty) && f.numeroDocumento.errors }" type="text" (change)="invalidarDocumento()"  (keypress)="validateInputKey($event)" (keydown.enter)="validarDocumento()" [maxlength] ="maxlength"  required>-->
-        <input type="text" class="form-control" formControlName="numeroDocumento"  [ngClass]="{ 'is-invalid': (f.numeroDocumento!.touched || f.numeroDocumento!.dirty) && f.numeroDocumento.errors }" type="text" (change)="invalidarDocumento()" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" (keydown.enter)="validarDocumento()" [maxlength] ="maxlength"  required>
+        <input type="text" inputmode="numeric" class="form-control" formControlName="numeroDocumento"  [ngClass]="{ 'is-invalid': (f.numeroDocumento!.touched || f.numeroDocumento!.dirty) && f.numeroDocumento.errors }" type="text" (change)="invalidarDocumento()" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" (keydown.enter)="validarDocumento()" [maxlength] ="maxlength"  required>
         <!--<input type="text" formControlName="numeroDocumento" class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">-->
         <button class="btn btn-outline-secondary" type="button" id="button-addon2" *ngIf="(getNumeroDoc().length == 8 && !numeroDniValido && esTipoDocumentoDni)" (click)="validarDocumento()"  [class.spinner]="loading" [disabled]="loading">Consultar</button>
       </div>
@@ -174,7 +174,7 @@
     </div>  
 
     <div class="input-group mb-3 col-sm" *ngIf="esTipoDocumentoDni">
-      <input type="text" class="form-control" formControlName="digitoVerificacion" [ngClass]="{ 'is-invalid': (f.digitoVerificacion!.touched || f.digitoVerificacion!.dirty) && f.digitoVerificacion.errors }" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" maxlength="1" autocomplete="off">
+      <input type="text" inputmode="numeric" class="form-control" formControlName="digitoVerificacion" [ngClass]="{ 'is-invalid': (f.digitoVerificacion!.touched || f.digitoVerificacion!.dirty) && f.digitoVerificacion.errors }" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" maxlength="1" autocomplete="off">
       <!-- <div class="input-group-append">
         <button class="tooltip" data-text="Es el número separado con un guión después de tu número de DNI." class="tooltip left" >
           <span class="glyphicon glyphicon-info-sign"></span>
@@ -204,7 +204,7 @@
       <label class="label-blue">Número de celular</label>
     </div> 
       <div class="input-group mb-3 col-sm">
-        <input type="text" class="form-control"   formControlName="numeroCelular" [ngClass]="{ 'is-invalid': (f.numeroCelular!.touched || f.numeroCelular!.dirty) && f.numeroCelular.errors }" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" (keypress)="validarCelular($event)"  minlength="9" maxlength="9"    autocomplete="off" > 
+        <input type="text" inputmode="numeric" class="form-control"   formControlName="numeroCelular" [ngClass]="{ 'is-invalid': (f.numeroCelular!.touched || f.numeroCelular!.dirty) && f.numeroCelular.errors }" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');" (keypress)="validarCelular($event)"  minlength="9" maxlength="9"    autocomplete="off" > 
       </div>
   </div>
 

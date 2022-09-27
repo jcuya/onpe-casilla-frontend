@@ -94,7 +94,7 @@ export class PersonaNaturalComponent implements OnInit {
     console.log(this.esIos);
   }
 
-  createForm(value =""){
+  createForm(value ="-"){
     this.formGroup = this.formBuilder.group({
       tipoDocumento: [value, Validators.required],
       numeroDocumento: ['', [Validators.required,Validators.pattern('^[0-9]*$')]],
@@ -121,6 +121,7 @@ export class PersonaNaturalComponent implements OnInit {
     var ua = navigator.userAgent;
     if(/iPhone|iPad|iPod|CriOS/i.test(ua)){ //Todos los dispositivos móviles---->: if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i.test(ua))
       this.esIos = true;
+      this.formGroup.get("tipoDocumento")?.setValue('');
     }
     /*else if(/Chrome/i.test(ua)){
        console.log('Chrome');
@@ -192,10 +193,7 @@ export class PersonaNaturalComponent implements OnInit {
       if(this.esIos = true){
         this.formGroup.get('numeroDocumento')?.enable();
       }
-
-
-      
-    } else {
+    } if(value === TipoDocumento_CE) {
       this.maxlength = 9
       this.minlength = 9;
       this.formGroup.get('nombres')?.enable();
@@ -203,8 +201,10 @@ export class PersonaNaturalComponent implements OnInit {
       this.formGroup.get('apellidoPaterno')?.enable();
       this.formGroup.get('apellidoMaterno')?.enable();
       this.formGroup.get('numeroDocumento')?.enable();
+    }
 
-     
+    if(value === "-"){
+      this.desactivarInputsInit();
     }
 
    // this.formGroup.reset(this.createForm())
