@@ -108,9 +108,9 @@ export class PersonaNaturalComponent implements OnInit {
       digitoVerificacion: ['',  Validators.required ],
       correoElectronico: ['',[ Validators.required, Validators.email]],
       numeroCelular: ['', Validators.required],
-      departamento: ['', Validators.required],
-      provincia: ['', Validators.required],
-      distrito: ['', Validators.required],
+      departamento: ['-', Validators.required],
+      provincia: ['-', Validators.required],
+      distrito: ['-', Validators.required],
       domicilioFisico: ['', Validators.required],
       validateEmail : [false, Validators.required],      
       recaptchaReactive: ['']

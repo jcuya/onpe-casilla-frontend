@@ -215,7 +215,7 @@
     </div>
     <div class="col-sm">
       <select class="form-select" id="departamento" name="departamento" formControlName="departamento" [ngClass]="{ 'is-invalid': (f.departamento!.touched || f.departamento!.dirty) && f.departamento.errors }" (change)="cambiarProvincia()">
-        <option  ngValue="">Seleccione departamento</option>
+        <option  ngValue="-">Seleccione departamento</option>
         <option *ngFor="let item of departamentoList" [ngValue]="item">{{item.nodep}}</option>
       </select>
     </div>
@@ -225,7 +225,7 @@
    
       <div class="input-group mb-3 col-sm">
         <select class="form-select"id="provincia" name="provincia" formControlName="provincia" [ngClass]="{ 'is-invalid': (f.provincia!.touched || f.provincia!.dirty) && f.provincia.errors }" (change)="cambiarDistrito()">
-          <option  ngValue="">Seleccione provincia</option>
+          <option  ngValue="-">Seleccione provincia</option>
           <option *ngFor="let item of provinciaList" [ngValue]="item">{{item.noprv}}</option>
         </select>
       </div>
@@ -238,7 +238,7 @@
     </div>
     <div class="input-group mb-3 col-sm">
       <select class="form-select" id="distrito" name="distrito" formControlName="distrito" [ngClass]="{ 'is-invalid': (f.distrito!.touched || f.distrito!.dirty) && f.distrito.errors }">
-        <option  ngValue="">Seleccione distrito</option>
+        <option  ngValue="-">Seleccione distrito</option>
         <option  *ngFor="let item of distritoList" [ngValue]="item">{{item.nodis}}</option>
       </select>
     </div>
