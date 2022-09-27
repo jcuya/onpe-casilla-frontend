@@ -105,12 +105,12 @@ export class PersonaNaturalComponent implements OnInit {
       //nombrePadre: ['', Validators.required],
       //nombreMadre: ['', Validators.required],
       fechaNacimento: ['', Validators.required],
-      digitoVerificacion: ['-',  Validators.required ],
+      digitoVerificacion: ['',  Validators.required ],
       correoElectronico: ['',[ Validators.required, Validators.email]],
       numeroCelular: ['', Validators.required],
-      departamento: ['-', Validators.required],
-      provincia: ['-', Validators.required],
-      distrito: ['-', Validators.required],
+      departamento: ['', Validators.required],
+      provincia: ['', Validators.required],
+      distrito: ['', Validators.required],
       domicilioFisico: ['', Validators.required],
       validateEmail : [false, Validators.required],      
       recaptchaReactive: ['']
@@ -214,11 +214,14 @@ export class PersonaNaturalComponent implements OnInit {
    this.createForm(value);
 
    if(value === TipoDocumento_DNI){
-    this.formGroup.controls['digitoVerificacion'].setValidators([Validators.required])
-    this.formGroup.controls['digitoVerificacion'].updateValueAndValidity()
+    this.formGroup.controls['digitoVerificacion'].setValidators([Validators.required]);
+    this.formGroup.controls['digitoVerificacion'].updateValueAndValidity();
+    this.formGroup.get("digitoVerificacion")?.reset('');
+
    }else{
-    this.formGroup.controls['digitoVerificacion'].setValidators(null)
-    this.formGroup.controls['digitoVerificacion'].updateValueAndValidity()
+    this.formGroup.controls['digitoVerificacion'].setValidators(null);
+    this.formGroup.controls['digitoVerificacion'].updateValueAndValidity();
+    this.formGroup.get("digitoVerificacion")?.setValue(" ");
    }
 
   }
@@ -406,8 +409,10 @@ export class PersonaNaturalComponent implements OnInit {
     return this.formGroup?.get('tipoDocumento')?.value.codigo == TipoDocumento_CE
   }
   async cambiarProvincia() {
-    this.formGroup.get("provincia")?.reset('-');
-    this.formGroup.get("distrito")?.reset('-');
+    this.formGroup.get("provincia")?.reset("");
+    this.formGroup.get("distrito")?.reset("");
+    // this.formGroup.get("provincia")?.setValue('');
+    // this.formGroup.get("distrito")?.setValue('');
     this.provinciaList = [];
   
     var value  = this.formGroup.get('departamento')?.value.ubdep
@@ -424,7 +429,7 @@ export class PersonaNaturalComponent implements OnInit {
 
   async cambiarDistrito() {
     this.distritoList = [];
-    this.formGroup.get("distrito")?.reset('-');
+    this.formGroup.get("distrito")?.reset("");
     var valueprovincia = this.formGroup.get('provincia')?.value.ubprv
     var valuedepar = this.formGroup.get('departamento')?.value.ubdep
     this.distritoList = await firstValueFrom(this.ubigeoService.getDistritoList(valuedepar, valueprovincia))
