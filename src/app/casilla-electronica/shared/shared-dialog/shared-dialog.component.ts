@@ -26,7 +26,8 @@ export class SharedDialogComponent implements OnInit   {
   email !: string;
   interval : any;
   timeLeft: number = 30;
-  TOkenCaptcha: string = '';
+  TOkenCaptcha: string = '';  
+  bloquearValidarCorreoPopUp : boolean = false;
 
   constructor( @Inject(MAT_DIALOG_DATA) private data : any,
   private dialogRef: MatDialogRef<SharedDialogComponent>,
@@ -72,12 +73,13 @@ export class SharedDialogComponent implements OnInit   {
     this.input1.nativeElement.focus();
    }
 
-
   cancel( resp: boolean) {
     this.dialogRef.close(resp);
   }
 
   async valid(){
+    
+   this.bloquearValidarCorreoPopUp = true;
     if(this.formGroup.valid){
       
       var codigoEnvio = this.formGroup.get('codigo1')?.value + this.formGroup.get('codigo2')?.value + this.formGroup.get('codigo3')?.value + this.formGroup.get('codigo4')?.value + this.formGroup.get('codigo5')?.value +  this.formGroup.get('codigo6')?.value
@@ -112,6 +114,8 @@ export class SharedDialogComponent implements OnInit   {
           //this.input1.nativeElement.focus();
           this.autoFocus();
         });
+        
+        this.bloquearValidarCorreoPopUp = false;
       }
 
       })
@@ -119,12 +123,15 @@ export class SharedDialogComponent implements OnInit   {
   }
 }
 
-reenvio(){
+async reenvio(){
+
+    var validate = await this.executeAction('homeLogin');
 
   let request = {
     tipoDocumento : this.tipoDocumento ,
     numeroDocumento : this.numeroDocumento,
-    correoElectronico : this.email
+    correoElectronico : this.email,
+    recaptcha : this.TOkenCaptcha
     }
 
 
@@ -185,8 +192,7 @@ private executeAction = async (action: string) => {
          this.recentToken = token;
          this.recentError = undefined;
          this.TOkenCaptcha = token;
-         console.log
-         //this.formGroup.get("recaptchaReactive")?.setValue(this.TOkenCaptcha);
+         this.formGroup.get("recaptchaReactive")?.setValue(this.TOkenCaptcha);
          resolve(true);
        },
        (error) => {

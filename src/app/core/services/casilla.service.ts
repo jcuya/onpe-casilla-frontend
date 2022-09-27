@@ -16,6 +16,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class CasillaService {
+  esIos: boolean = false;
 
   configUrl = `${environment.serviceUrl}`
 
@@ -60,7 +61,24 @@ export class CasillaService {
     ])
   }
 
+  dipositivo(){
+    var ua = navigator.userAgent;
+    if(/iPhone|iPad|iPod|CriOS/i.test(ua)){ //Todos los dispositivos móviles---->: if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i.test(ua))
+      this.esIos = true;
+    }
+  }
   getTipoDocumentoList(tipoPersona: String): Observable<Array<TipoDocumento>> {
+    
+    if(this.esIos = true){
+      return this.dummy(tipoPersona == 'n' ? [
+        {codigo: '-', nombre: 'SELECCIONE TIPO DE DOCUMENTO'},
+        {codigo: 'DNI', nombre: 'DNI'},
+        {codigo: 'CE', nombre: 'CE'},
+      ] : [
+        {codigo: 'RUC', nombre: 'RUC'},
+      ])
+    }
+
     return this.dummy(tipoPersona == 'n' ? [
       {codigo: 'DNI', nombre: 'DNI'},
       {codigo: 'CE', nombre: 'CE'},

@@ -2,7 +2,13 @@
     color: rgb(232, 0, 0);
 }
 
-
 .alert-style{
    background-color: blue !important;
+}
+
+
+@media only screen and (min-width: 360px) and (max-width: 768px) {
+    .alert-info{
+        height: unset;
+    }
 }

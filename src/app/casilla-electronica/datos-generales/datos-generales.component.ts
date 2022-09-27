@@ -10,7 +10,11 @@ import {ValidarCorreoService} from "../../core/services/validar-correo.service";
 import { RequestValidateData } from 'src/app/core/dto/personaNaturalDni';
 import { PersonaNaturalService } from 'src/app/core/services/persona-natural.service';
 import { AlertDialogComponent } from '../alert-dialog/alert-dialog.component';
-import { requestGlobal } from 'src/app/core/dto/request';
+import { requestGlobal } from 'src/app/core/dto/request';import {
+  RECAPTCHA_V3_SITE_KEY,
+  RecaptchaV3Module,
+  ReCaptchaV3Service,
+} from 'ng-recaptcha';
 
 @Component({
   selector: 'app-datos-generales',
@@ -34,6 +38,8 @@ export class DatosGeneralesComponent implements OnInit {
 
   observableRequestSubscription!: Subscription;
   requestSave: requestGlobal = new requestGlobal();
+  TOkenCaptcha: string = '';
+  bloquearValidar: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -41,6 +47,7 @@ export class DatosGeneralesComponent implements OnInit {
     private casillaService: CasillaService,
     private validarCorreoService: ValidarCorreoService,
     private cdr: ChangeDetectorRef,
+    private reCaptchaV3Service: ReCaptchaV3Service,
     private personaService : PersonaNaturalService
   ) {
 
@@ -93,40 +100,17 @@ export class DatosGeneralesComponent implements OnInit {
   }
 
   async continuar() {
-    console.log('siguiente paso')
+    this.bloquearValidar = true;
+    console.log('siguiente paso');
 
 
-    this.button.nativeElement.disabled = true;
-
-
-    this.siguientePaso();
-    // this.completedStep.emit();
-    /*if (!this.formGroup.valid) {
-      this.formGroup.markAllAsTouched()
-      return
+    //this.button.nativeElement.disabled = true;
+    var validate = await this.executeAction('homeLogin');
+    if(validate){
+      this.siguientePaso();
+    }else{      
+      this.bloquearValidar = false;
     }
-    let correo: string | null = null
-    if (this.esPersonaNatural) {
-      if (!this.personaNaturalComponent?.formGroup.valid) {
-        this.personaNaturalComponent?.formGroup.markAllAsTouched()
-        return
-      }
-      correo = this.personaNaturalComponent.obtenerCorreo()
-    } else if (this.esPersonaJuridica) {
-      if (!this.personaJuridicaComponent?.formGroup.valid) {
-        this.personaJuridicaComponent?.formGroup.markAllAsTouched()
-        return
-      }
-      correo = this.personaJuridicaComponent.obtenerCorreo()
-    }
-    if (correo == null) {
-      return
-    }
-    if (await this.validarCorreoService.iniciarValidacion(correo, this.codigoEnviado)) {
-      this.siguientePaso()
-    } else {
-      this.codigoEnviado = true
-    }*/
   }
 
   siguientePaso() {
@@ -155,11 +139,12 @@ export class DatosGeneralesComponent implements OnInit {
           this.validateRequest.fechaNacimiento = new Date (this.personaNaturalFormGroup.controls['fechaNacimento'].value);
           this.validateRequest.codigoVerifi = this.personaNaturalFormGroup.controls['digitoVerificacion'].value;
           this.validateRequest.correo = this.personaNaturalFormGroup.controls['correoElectronico'].value;
-          this.validateRequest.recaptcha =  this.personaNaturalFormGroup.controls['recaptchaReactive'].value;
+          //this.validateRequest.recaptcha =  this.personaNaturalFormGroup.controls['recaptchaReactive'].value;
+          
           console.log("request envio", this.validateRequest)
 
           this.personaService.validarDatosPersona(this.validateRequest).subscribe(res =>{
-            this.button.nativeElement.disabled = false;
+            //this.button.nativeElement.disabled = false;
             if(res.status){
              
              this.generateRequestNaturalEmit();
@@ -283,4 +268,40 @@ export class DatosGeneralesComponent implements OnInit {
   get esPersonaJuridica(): boolean {
     return this.obtenerCondicion() == Condicion_Persona_Juridica
   }
+
+  
+  public recentToken = '';
+  public recentError?: { error: any };
+  private singleExecutionSubscription!: Subscription;
+  private executeAction = async (action: string) => {
+    
+    this.bloquearValidar = true;
+   return new Promise((resolve) => {
+     if (this.singleExecutionSubscription) {
+       this.singleExecutionSubscription.unsubscribe();
+     }
+     this.singleExecutionSubscription = this.reCaptchaV3Service
+       .execute(action)
+       .subscribe(
+         (token) => {
+           this.recentToken = token;
+           this.recentError = undefined;
+           this.TOkenCaptcha = token;
+           this.validateRequest.recaptcha = this.TOkenCaptcha;
+           resolve(true);
+         },
+         (error) => {
+           this.recentToken = '';
+           this.TOkenCaptcha = '';
+           this.recentError = { error };
+           resolve(false);
+           
+          this.bloquearValidar = false;
+         }
+       );
+   });
+ };
+
+
+
 }

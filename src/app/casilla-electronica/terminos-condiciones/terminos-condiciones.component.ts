@@ -20,6 +20,7 @@ export class TerminosCondicionesComponent implements OnInit {
 
   observableRequestSubscription!: Subscription;
   requestSave: requestGlobal = new requestGlobal();
+  bloquearTerminos : boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -46,11 +47,14 @@ export class TerminosCondicionesComponent implements OnInit {
   }
 
   continuar() {
+    
+  this.bloquearTerminos = true;
     if(this.formGroup.valid){
       if(this.formGroup.controls['terminosCondiciones'].value == true && this.formGroup.controls['politicasDatos'].value == true){
         this.completedStep.emit()
       }else{
         this.formGroup.markAllAsTouched()
+        this.bloquearTerminos = false;
         return
       }
     

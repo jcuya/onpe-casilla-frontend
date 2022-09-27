@@ -62,6 +62,8 @@ export class PersonaNaturalComponent implements OnInit {
 
    activar  : boolean = true;
    cont = 0;
+   esIos: boolean = false;
+   
 
   constructor(
     private formBuilder: FormBuilder,
@@ -86,23 +88,24 @@ export class PersonaNaturalComponent implements OnInit {
     this.createForm();
     this.formGroup.get('numeroDocumento')?.disable();
     this.desactivarInputsInit();
-    this.tipoDocumentoList = await firstValueFrom(this.casillaService.getTipoDocumentoList(Condicion_Persona_Natural))
-    this.departamentoList = await firstValueFrom(this.ubigeoService.getDepartamentoList())
-    
+    this.tipoDocumentoList = await firstValueFrom(this.casillaService.getTipoDocumentoList(Condicion_Persona_Natural));
+    this.departamentoList = await firstValueFrom(this.ubigeoService.getDepartamentoList()); 
+    this.dipositivo();
+    console.log(this.esIos);
   }
 
   createForm(value =""){
     this.formGroup = this.formBuilder.group({
       tipoDocumento: [value, Validators.required],
-      numeroDocumento: ['', Validators.required],
+      numeroDocumento: ['', [Validators.required,Validators.pattern('^[0-9]*$')]],
       //apellidos: ['', Validators.required],
       apellidoPaterno: ['', Validators.required],
-      apellidoMaterno: ['', Validators.required],
+      apellidoMaterno: [''],
       nombres: ['', Validators.required],
       //nombrePadre: ['', Validators.required],
       //nombreMadre: ['', Validators.required],
       fechaNacimento: ['', Validators.required],
-      digitoVerificacion: [' ',  Validators.required ],
+      digitoVerificacion: ['',  Validators.required ],
       correoElectronico: ['',[ Validators.required, Validators.email]],
       numeroCelular: ['', Validators.required],
       departamento: ['', Validators.required],
@@ -114,6 +117,18 @@ export class PersonaNaturalComponent implements OnInit {
     })
   }
 
+  dipositivo(){
+    var ua = navigator.userAgent;
+    if(/iPhone|iPad|iPod|CriOS/i.test(ua)){ //Todos los dispositivos móviles---->: if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i.test(ua))
+      this.esIos = true;
+    }
+    /*else if(/Chrome/i.test(ua)){
+       console.log('Chrome');
+    }
+    else{
+      console.log('Desktop');
+    }*/
+  }
 
   desactivarInputsInit(){
     this.formGroup.get('apellidoPaterno')?.disable();
@@ -127,6 +142,10 @@ export class PersonaNaturalComponent implements OnInit {
     this.formGroup.get('provincia')?.disable();
     this.formGroup.get('distrito')?.disable();
     this.formGroup.get('domicilioFisico')?.disable();
+
+    if(this.esIos = true){
+      this.formGroup.get('numeroDocumento')?.enable();
+    }
   }
 
   activarInputs(){
@@ -143,11 +162,11 @@ export class PersonaNaturalComponent implements OnInit {
     this.formGroup.get('domicilioFisico')?.enable();
   }
 
-
   tipoDocumentoCambiado() {
 
     if(this.cont == 0){
       this.activarInputs();
+      this.formGroup.get('numeroDocumento')?.enable();
     }
 
 
@@ -170,6 +189,9 @@ export class PersonaNaturalComponent implements OnInit {
       this.formGroup.get('apellidoMaterno')?.disable();
       this.formGroup.get('numeroDocumento')?.enable();      
       this.formGroup.get('correoElectronico')?.enable();
+      if(this.esIos = true){
+        this.formGroup.get('numeroDocumento')?.enable();
+      }
 
 
       
@@ -236,7 +258,7 @@ export class PersonaNaturalComponent implements OnInit {
         const dialogRef = this.dialog.open(SharedDialogComponent, {
           width: "771px",
           height : "434px",  
-          disableClose: false,
+          disableClose: true,
           data: {  idEnvio :res.idEnvio , requestData : request , email : this.formGroup.get('correoElectronico')?.value},
         });
         dialogRef.afterClosed().subscribe((result) => {
@@ -282,7 +304,7 @@ export class PersonaNaturalComponent implements OnInit {
     const numeroDocumento = (this.formGroup.get('numeroDocumento')?.value ?? '') as string
     if (this.esTipoDocumentoDni  && numeroDocumento.length == 8) {
 
-      var validate = true;//await this.executeAction('homeLogin'); //  poner en true para desarrollo
+      var validate = await this.executeAction('homeLogin'); //  poner en true para desarrollo
 
       if(validate){
         let envio : ObtenerDatosPersonaDniDto = new ObtenerDatosPersonaDniDto();
@@ -349,6 +371,13 @@ export class PersonaNaturalComponent implements OnInit {
         // }
         // console.log(this.personaNaturalDni);
      
+      }else{        
+        this.dialog.open(AlertDialogComponent, {
+          disableClose: true,
+          hasBackdrop: true,
+          data: {cabecera : 'Error' ,messages: ['No hubo respuesta, intente nuevamente en unos momentos.']}
+        });
+        return;
       }
  
     }
@@ -378,7 +407,8 @@ export class PersonaNaturalComponent implements OnInit {
   async cambiarProvincia() {
     this.formGroup.get("provincia")?.reset();
     this.formGroup.get("distrito")?.reset();
-
+    this.provinciaList = [];
+  
     var value  = this.formGroup.get('departamento')?.value.ubdep
 
 
@@ -392,6 +422,7 @@ export class PersonaNaturalComponent implements OnInit {
   }
 
   async cambiarDistrito() {
+    this.distritoList = [];
     this.formGroup.get("distrito")?.reset();
     var valueprovincia = this.formGroup.get('provincia')?.value.ubprv
     var valuedepar = this.formGroup.get('departamento')?.value.ubdep
@@ -476,15 +507,37 @@ export class PersonaNaturalComponent implements OnInit {
   }
 
 
-   validateInputKey(event : any): boolean{
+   validateInputKey(event : any): boolean{ console.log(event.keyCode);
+    console.log("hola");
 
-    const charCode = (event.which) ? event.which : event.keyCode;
-    var inp = String.fromCharCode(event.keyCode);
-      if(this.maxlength >= 8){
+    var key = event.keyCode || event.which;
+    var teclado = String.fromCharCode(key);
+var numeros = "0123456789";
+var especiales = [8,37,38,46];
+var teclado_especial=false;
+for(var i in especiales) {
+  if(key==especiales[i]){
+    teclado_especial=true;
+  }
+}
+if(numeros.indexOf(teclado)==-1 && !teclado_especial){
+  console.log("false");
+  return false;
+}
+
+    /*const input = String.fromCharCode(event.keyCode);
+    if (!/^[0-9]*$/.test(input)) {
+        event.preventDefault();
+        return false;
+    }*/
+    /*const charCode = (event.which) ? event.which : event.keyCode;
+    //var inp = String.fromCharCode(event.keyCode);
+      //if(this.maxlength >= 8){
         if (charCode > 31 && (charCode < 48 || charCode > 57)) {
           return false;
         }
-      }
+      //}*/
+      console.log("true");
 return true;
    }
 
@@ -503,8 +556,7 @@ return true;
             this.recentToken = token;
             this.recentError = undefined;
             this.TOkenCaptcha = token;
-            console.log
-            //this.formGroup.get("recaptchaReactive")?.setValue(this.TOkenCaptcha);
+            this.formGroup.get("recaptchaReactive")?.setValue(this.TOkenCaptcha);
             resolve(true);
           },
           (error) => {

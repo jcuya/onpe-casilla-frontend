@@ -17,7 +17,6 @@
                
             </div>
             <br>
-            <br>
             <form [formGroup]="formGroup" class="form-inline" class="form-group center">
 
             
@@ -39,7 +38,7 @@
                 <a  (click)="reenvio()"  [ngClass]="{ 'disabled': blockbtnTimmer , 'hrefstyle' : !blockbtnTimmer}" tabindex="-1">Reenvio código de verificación</a>
             </div>
             <div mat-dialog-actions align="center">
-                <button  #btn  type="button" class="btn-valid dialog"  (click)="valid()">VALIDAR</button>
+                <button  #btn  type="button" class="btn-valid dialog"  (click)="valid() || bloquearValidarCorreoPopUp">VALIDAR</button>
               </div>         
         
     </div>

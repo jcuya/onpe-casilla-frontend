@@ -88,3 +88,18 @@ li + li {
   }
   browsers: last 2 versions
 }
+
+@media only screen and (min-width: 360px) and (max-width: 768px) {
+  .center{
+    margin: 0;
+  }
+  .labelList{
+    min-width: unset;
+  }
+  .detailList{
+    min-width: 150px;
+  }
+  .centrarVerticalmente2{
+    padding: 5px;
+}
+}

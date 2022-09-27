@@ -83,3 +83,16 @@ input {
     color: #0073CF;
     cursor: pointer;
   }
+
+  
+@media only screen and (min-width: 360px) and (max-width: 768px) {
+  .info-style{
+    padding: unset;
+    margin-top: 20px;
+  }
+  .cuadro{
+    width: 30px;
+    height: 30px;
+    margin: 3px;
+  }
+}

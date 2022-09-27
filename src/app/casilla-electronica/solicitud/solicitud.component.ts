@@ -30,7 +30,7 @@ export class SolicitudComponent implements OnInit {
   formGroup!: FormGroup;
   listFiles : File[] = [];
   imageSrc: string="";
-
+  deshabilitado : boolean = false;
   observableRequestSubscription!: Subscription;
   requestSave: requestGlobal = new requestGlobal();
   requestRepresentante : RequestRepresentante = new RequestRepresentante();
@@ -65,15 +65,17 @@ export class SolicitudComponent implements OnInit {
   }
 
   continuar() {
-    
+    this.deshabilitado = true;
     //this.completedStep.emit(true)
     this.dialog.open(AlertDialogComponent, {
       disableClose: true,
       hasBackdrop: true,
-      data: {cabecera : 'Notificación' ,messages: ['¿Está segura de enviar la información?'],btnCancel : true}
+      data: {cabecera : 'Notificación' ,messages: ['¿Está de acuerdo con enviar la información?'],btnCancel : true}
     }).afterClosed().subscribe(result =>{
      if(result){
       this.enviar();
+     }else{
+      this.deshabilitado = false;
      }
     
     });
@@ -164,7 +166,6 @@ async  enviar(){
         // }).afterClosed().subscribe(result =>{
         //   this.document.location.href = 'https://casillaelectronica.onpe.gob.pe/#/login';
         // });
-
         this.completedStep.emit();
         
       }else{
@@ -173,8 +174,18 @@ async  enviar(){
           hasBackdrop: true,
           data: {cabecera : '¡Advertencia!' ,messages: ['Por favor verifique el archivo adjunto.']}
         })
+       
       }
 
+      this.deshabilitado = false;
+
+    },error =>{
+      this.dialog.open(AlertDialogComponent, {
+        disableClose: true,
+        hasBackdrop: true,
+        data: {cabecera : '¡Advertencia!' ,messages: ['Error de servicio.']}
+      })
+      this.deshabilitado = false;
     });
 
   }

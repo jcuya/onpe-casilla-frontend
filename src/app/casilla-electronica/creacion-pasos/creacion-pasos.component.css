@@ -14,3 +14,21 @@
     position: absolute; 
     bottom: 0px;
 }
+
+
+@media only screen and (min-width: 360px) and (max-width: 768px) {
+    .mat-stepper-label-position-bottom .mat-horizontal-stepper-header .mat-step-label {
+        display: none;
+    }
+}
+
+
+@media only screen and  (max-width: 575px) {
+
+
+    ::ng-deep  .mat-step-label {
+        display: none !important;
+    }
+}
+
+

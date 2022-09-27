@@ -18,3 +18,9 @@
   height: 50px;
   border-top: #F4F4F4;
 }
+
+@media only screen and (min-width: 360px) and (max-width: 768px) {
+  .alert-info{
+      height: unset;
+  }
+}

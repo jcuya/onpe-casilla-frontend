@@ -39,9 +39,8 @@ footer {
 
 }
 .centrarVerticalmente3{
-    height: 96px;
+    height: 10%;
     background-color: #ffffff;
-    width: 100%;
 }
 
   .label-toolbar{
@@ -61,7 +60,6 @@ footer {
 
 
   .imagenLogo{
-    width: 140px;
     max-height: 100%;
     margin: 5px;
   }
@@ -107,4 +105,14 @@ footer {
 .tamano{
   width:150px;
   height:150px;
+}
+
+.centrarVerticalmente4 {
+  font-size: 20px;
+  font-weight: bold;
+  color:white;
+  background-color: #0073CF;
+}
+.centrarVerticalmente4 span{
+  margin:14px auto;
 }
