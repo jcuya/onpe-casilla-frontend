@@ -229,7 +229,7 @@ export class PersonaNaturalComponent implements OnInit {
     if(this.formGroup.get('validateEmail')?.value == true){
       return true;
     }else{
-      if( this.formGroup.get('tipoDocumento')?.invalid ||this.formGroup.get('numeroDocumento')?.invalid || this.formGroup.get('correoElectronico')?.invalid ){
+      if( this.formGroup.get('tipoDocumento')?.invalid ||this.formGroup.get('numeroDocumento')?.invalid || this.formGroup.get('correoElectronico')?.invalid || this.formGroup.get('tipoDocumento')?.value == "-"){
         return true
       }
       else{
