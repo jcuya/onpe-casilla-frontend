@@ -132,6 +132,7 @@ export class PersonaNaturalComponent implements OnInit {
   }
 
   desactivarInputsInit(){
+    this.formGroup.get('numeroDocumento')?.disable();
     this.formGroup.get('apellidoPaterno')?.disable();
     this.formGroup.get('apellidoMaterno')?.disable();
     this.formGroup.get('nombres')?.disable();
@@ -144,9 +145,9 @@ export class PersonaNaturalComponent implements OnInit {
     this.formGroup.get('distrito')?.disable();
     this.formGroup.get('domicilioFisico')?.disable();
 
-    if(this.esIos = true){
-      this.formGroup.get('numeroDocumento')?.enable();
-    }
+    // if(this.esIos = true){
+    //   this.formGroup.get('numeroDocumento')?.enable();
+    // }
   }
 
   activarInputs(){
@@ -167,7 +168,7 @@ export class PersonaNaturalComponent implements OnInit {
 
     if(this.cont == 0){
       this.activarInputs();
-      this.formGroup.get('numeroDocumento')?.enable();
+      //this.formGroup.get('numeroDocumento')?.enable();
     }
 
 
