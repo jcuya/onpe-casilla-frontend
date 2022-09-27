@@ -121,7 +121,7 @@ export class PersonaNaturalComponent implements OnInit {
     var ua = navigator.userAgent;
     if(/iPhone|iPad|iPod|CriOS/i.test(ua)){ //Todos los dispositivos móviles---->: if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini|Mobile|mobile|CriOS/i.test(ua))
       this.esIos = true;
-      this.formGroup.get("tipoDocumento")?.setValue('');
+      this.formGroup.get("tipoDocumento")?.setValue('-');
     }
     /*else if(/Chrome/i.test(ua)){
        console.log('Chrome');
