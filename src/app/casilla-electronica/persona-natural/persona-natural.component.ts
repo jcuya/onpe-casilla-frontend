@@ -105,7 +105,7 @@ export class PersonaNaturalComponent implements OnInit {
       //nombrePadre: ['', Validators.required],
       //nombreMadre: ['', Validators.required],
       fechaNacimento: ['', Validators.required],
-      digitoVerificacion: ['',  Validators.required ],
+      digitoVerificacion: ['-',  Validators.required ],
       correoElectronico: ['',[ Validators.required, Validators.email]],
       numeroCelular: ['', Validators.required],
       departamento: ['', Validators.required],
