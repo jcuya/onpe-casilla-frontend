@@ -1,6 +1,6 @@
 
 .wrapper {
-  display: flex;
+  display: unset;
 }
 .wrapper > div {
   /*font-size: 4vh;*/
@@ -19,13 +19,16 @@
   border: 1px solid rgb(0 0 0 / 60%);
   border-radius: 4px;
   max-width: 500px;
+  width: 100%;
   max-height: 360px;
 }
 .labelList{
-  min-width: 320px;
+  width: 100%;
+  /*min-width: 320px;*/
 }
 .detailList{
-  min-width: 230px;
+  width: 100%;
+  /* min-width: 230px; */
 }
 .h1Persona{
 margin-left: 20px;
@@ -93,13 +96,27 @@ li + li {
   .center{
     margin: 0;
   }
-  .labelList{
+  /* .wrapper {
+    display: unset;
+} */
+
+  /* .labelList{
     min-width: unset;
-  }
-  .detailList{
+  } */
+  /* .detailList{
     min-width: 150px;
-  }
+  } */
   .centrarVerticalmente2{
     padding: 5px;
 }
+}
+
+
+@media only screen and (min-width: 400px){
+
+  .wrapper {
+    display: contents;
+}
+
+
 }
