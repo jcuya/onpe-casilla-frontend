@@ -71,7 +71,7 @@ export class CasillaService {
     
     if(this.esIos = true){
       return this.dummy(tipoPersona == 'n' ? [
-        {codigo: '-', nombre: 'SELECCIONE TIPO DE DOCUMENTO'},
+        {codigo: '', nombre: 'SELECCIONE TIPO DE DOCUMENTO'},
         {codigo: 'DNI', nombre: 'DNI'},
         {codigo: 'CE', nombre: 'CE'},
       ] : [

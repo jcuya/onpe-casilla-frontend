@@ -94,7 +94,7 @@ export class PersonaNaturalComponent implements OnInit {
     console.log(this.esIos);
   }
 
-  createForm(value ="-"){
+  createForm(value =""){
     this.formGroup = this.formBuilder.group({
       tipoDocumento: [value, Validators.required],
       numeroDocumento: ['', [Validators.required,Validators.pattern('^[0-9]*$')]],

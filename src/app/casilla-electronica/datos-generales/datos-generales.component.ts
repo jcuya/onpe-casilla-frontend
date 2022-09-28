@@ -34,12 +34,12 @@ export class DatosGeneralesComponent implements OnInit {
   codigoEnviado = false;
 
   validateRequest : RequestValidateData = new RequestValidateData();
-  @ViewChild('myButton') button : any;
+  //@ViewChild('myButton') button : any;
 
   observableRequestSubscription!: Subscription;
   requestSave: requestGlobal = new requestGlobal();
   TOkenCaptcha: string = '';
-  bloquearValidar: boolean = false;
+  bloquearValidar: boolean = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -100,7 +100,7 @@ export class DatosGeneralesComponent implements OnInit {
   }
 
   async continuar() {
-    this.bloquearValidar = true;
+    this.bloquearValidar = false;
     console.log('siguiente paso');
 
 
@@ -109,7 +109,7 @@ export class DatosGeneralesComponent implements OnInit {
     if(validate){
       this.siguientePaso();
     }else{      
-      this.bloquearValidar = false;
+      this.bloquearValidar = true;
     }
   }
 
@@ -126,7 +126,8 @@ export class DatosGeneralesComponent implements OnInit {
               hasBackdrop: true,
               data: {cabecera : 'Validación' ,messages: ['No validó el correo electrónico']}
             });
-            this.button.nativeElement.disabled = false;
+            this.bloquearValidar = true;
+            //this.button.nativeElement.disabled = false;
             return;
           }
 
@@ -157,6 +158,7 @@ export class DatosGeneralesComponent implements OnInit {
               });
               return;
             }
+            this.bloquearValidar = true;
           })
         }else{
           this.personaNaturalComponent?.formGroup.markAllAsTouched()
@@ -201,12 +203,12 @@ export class DatosGeneralesComponent implements OnInit {
     let retorno = true;
 
 
-    if(this.formGroup.valid){
+    if(this.formGroup.valid ){
 
       if(this.esPersonaNatural){
         if(
           this.personaNaturalFormGroup?.valid && this.personaNaturalFormGroup?.controls["nombres"].value != null && 
-          (this.personaNaturalFormGroup?.controls["apellidoMaterno"].value != null || this.personaNaturalFormGroup?.controls["apellidoPaterno"].value != null || this.personaNaturalFormGroup?.controls["tipoDocumento"].value != "-")
+          (this.personaNaturalFormGroup?.controls["apellidoMaterno"].value != null || this.personaNaturalFormGroup?.controls["apellidoPaterno"].value != null || this.personaNaturalFormGroup?.controls["tipoDocumento"].value != "-") && this.bloquearValidar
         ){
           retorno= false;
         }
@@ -275,7 +277,7 @@ export class DatosGeneralesComponent implements OnInit {
   private singleExecutionSubscription!: Subscription;
   private executeAction = async (action: string) => {
     
-    this.bloquearValidar = true;
+   // this.bloquearValidar = true;
    return new Promise((resolve) => {
      if (this.singleExecutionSubscription) {
        this.singleExecutionSubscription.unsubscribe();
@@ -296,7 +298,7 @@ export class DatosGeneralesComponent implements OnInit {
            this.recentError = { error };
            resolve(false);
            
-          this.bloquearValidar = false;
+        //  this.bloquearValidar = false;
          }
        );
    });
