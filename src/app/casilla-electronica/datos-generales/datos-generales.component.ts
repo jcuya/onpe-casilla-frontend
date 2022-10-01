@@ -156,6 +156,7 @@ export class DatosGeneralesComponent implements OnInit {
                 hasBackdrop: true,
                 data: {cabecera : 'Verifique sus datos' ,messages: [res.mensaje]}
               });
+              this.bloquearValidar = true;
               return;
             }
             this.bloquearValidar = true;
