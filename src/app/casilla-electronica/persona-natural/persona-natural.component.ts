@@ -453,9 +453,13 @@ export class PersonaNaturalComponent implements OnInit {
    validarCelular(event : any): boolean{
     const charCode = (event.which) ? event.which : event.keyCode;
     const numCelular = this.formGroup.get('numeroCelular')?.value;
-    var primerDigito = event.target.selectionStart;
+    var posicion = event.target.selectionStart;
     var primerdato = numCelular[0];
-    if(primerDigito == 0   ){
+    if(numCelular != ""){
+      if(primerdato != 9  && charCode != 57)
+        return false;
+    }
+    if(posicion == 0 ){
       if(charCode == 57 ){
         return true;
       }else{
@@ -465,6 +469,14 @@ export class PersonaNaturalComponent implements OnInit {
       if( charCode > 31 && (charCode < 48 || charCode > 57)){
         return false;
       }else {
+
+        if(numCelular != ""){
+          if(primerdato != 9  )
+            return false;
+        }else{
+          return true;
+        }
+
         return true;
       }
     }

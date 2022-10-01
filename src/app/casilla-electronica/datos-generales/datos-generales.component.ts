@@ -100,11 +100,9 @@ export class DatosGeneralesComponent implements OnInit {
   }
 
   async continuar() {
+
+
     this.bloquearValidar = false;
-    console.log('siguiente paso');
-
-
-    //this.button.nativeElement.disabled = true;
     var validate = await this.executeAction('homeLogin');
     if(validate){
       this.siguientePaso();
