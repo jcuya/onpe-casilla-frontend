@@ -94,10 +94,16 @@ export class FotoDniComponent implements OnInit {
       this.filesControl.setValue([]);
 
     }
+    var data = Image.type.split('/');
 
-    const type = Image.type.substr(0,5)
+    const type =  data[0]; // Image.type.substr(0,5)
+    const extencion = data[1];
 
-    if(type !== "image"){
+
+
+
+
+    if(type !== "image" || !this.admitExtention(extencion)){
       this.dialog.open(AlertDialogComponent, {
         disableClose: true,
         hasBackdrop: true,
@@ -108,6 +114,17 @@ export class FotoDniComponent implements OnInit {
     return;
    // this.f.files.setValue(null)
     //  this.formGroup.get('files')?.setValue(null);
+
+
+   }
+
+   admitExtention(ext : string){
+
+    if(ext === "png" || ext === "jpg" || ext === "jpeg" ){
+      return true;
+    }else{
+      return false;
+    }
 
 
    }
