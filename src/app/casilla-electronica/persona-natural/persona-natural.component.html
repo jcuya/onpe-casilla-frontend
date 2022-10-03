@@ -125,7 +125,7 @@
    
       <div class="input-group mb-3 col-sm">
         <!--<input type="text" class="form-control" formControlName="numeroDocumento"  [ngClass]="{ 'is-invalid': (f.numeroDocumento!.touched || f.numeroDocumento!.dirty) && f.numeroDocumento.errors }" type="text" (change)="invalidarDocumento()"  (keypress)="validateInputKey($event)" (keydown.enter)="validarDocumento()" [maxlength] ="maxlength"  required>-->
-        <input type="text" inputmode="numeric" class="form-control" formControlName="numeroDocumento"  [ngClass]="{ 'is-invalid': (f.numeroDocumento!.touched || f.numeroDocumento!.dirty) && f.numeroDocumento.errors }" type="text" (change)="invalidarDocumento()" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');" (keydown.enter)="validarDocumento()" [maxlength] ="maxlength"  required>
+        <input type="text" inputmode="numeric" class="form-control" formControlName="numeroDocumento"  [ngClass]="{ 'is-invalid': (f.numeroDocumento!.touched || f.numeroDocumento!.dirty) && f.numeroDocumento.errors }" type="text" (change)="invalidarDocumento()" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*?)\..*/g, '$1');" (keydown.enter)="validarDocumento()" [maxlength] ="maxlength" [minlength]="maxlength" required>
         <!--<input type="text" formControlName="numeroDocumento" class="form-control" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');">-->
         <button class="btn btn-outline-secondary" type="button" id="button-addon2" *ngIf="(getNumeroDoc().length == 8 && !numeroDniValido && esTipoDocumentoDni)" (click)="validarDocumento()"  [class.spinner]="loading" [disabled]="loading">Consultar</button>
       </div>
@@ -137,13 +137,13 @@
       <label class="label-blue"> Apellido Paterno</label>
     </div>
     <div class="col-sm">
-      <input id="apellidoPaterno" type="text" class="form-control" style="text-transform: uppercase;" formControlName="apellidoPaterno" [ngClass]="{ 'is-invalid': (f.apellidoPaterno!.touched || f.apellidoPaterno!.dirty) && f.apellidoPaterno.errors }" maxlength="100" autocomplete="off" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇOEÆČŠŽ∂ð ,.'-]{2,254}" maxlength="30" (keypress)="quitarDobleEspacio('apellidoPaterno', $event)">
+      <input id="apellidoPaterno" type="text" class="form-control" style="text-transform: uppercase;" formControlName="apellidoPaterno" [ngClass]="{ 'is-invalid': (f.apellidoPaterno!.touched || f.apellidoPaterno!.dirty) && f.apellidoPaterno.errors }" maxlength="100" autocomplete="off" pattern="^\S$|[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇOEÆČŠŽ∂ð,.'-]{2,254}"  maxlength="30" (keypress)="quitarDobleEspacio('apellidoPaterno', $event)" ng-trim="true">
     </div>
     <div class="col-sm">
       <label class="label-blue">Apellido Materno</label>
     </div> 
       <div class="input-group mb-3 col-sm">
-        <input id="apellidoMaterno" type="text" class="form-control" style="text-transform: uppercase;" formControlName="apellidoMaterno" [ngClass]="{ 'is-invalid': (f.apellidoMaterno!.touched || f.apellidoMaterno!.dirty) && f.apellidoMaterno.errors }" maxlength="100" autocomplete="off" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇOEÆČŠŽ∂ð ,.'-]{2,254}" maxlength="30" (keypress)="quitarDobleEspacio('apellidoMaterno', $event)"> 
+        <input id="apellidoMaterno" type="text" class="form-control" style="text-transform: uppercase;" formControlName="apellidoMaterno" [ngClass]="{ 'is-invalid': (f.apellidoMaterno!.touched || f.apellidoMaterno!.dirty) && f.apellidoMaterno.errors }" maxlength="100" autocomplete="off" pattern="^\S$|[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇOEÆČŠŽ∂ð,.'-]{2,254}" maxlength="30" (keypress)="quitarDobleEspacio('apellidoMaterno', $event)" ng-trim="true"> 
       </div>
   </div>
 
@@ -152,7 +152,7 @@
       <label class="label-blue">Nombres</label>  
     </div>
     <div class="input-group mb-3 col-sm">
-      <input id="nombres" type="text" class="form-control" style="text-transform: uppercase;" formControlName="nombres" [ngClass]="{ 'is-invalid': (f.nombres!.touched || f.nombres!.dirty) && f.nombres.errors }" maxlength="100" autocomplete="off" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇOEÆČŠŽ∂ð ,.'-]{2,254}" maxlength="30" (keypress)="quitarDobleEspacio('nombres', $event)">
+      <input id="nombres" type="text" class="form-control" style="text-transform: uppercase;" formControlName="nombres" [ngClass]="{ 'is-invalid': (f.nombres!.touched || f.nombres!.dirty) && f.nombres.errors }" maxlength="100" autocomplete="off"  maxlength="30" pattern="^\S$|[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇOEÆČŠŽ∂ð,.'-]{2,254}" (keypress)="quitarDobleEspacio('nombres', $event)" ng-trim="true">
     </div>
   </div>
 

@@ -63,7 +63,10 @@ export class PersonaNaturalComponent implements OnInit {
    activar  : boolean = true;
    cont = 0;
    esIos: boolean = false;
-   
+   regexNomApe = ("[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇOEÆČŠŽ∂ð,.'-]+(\s[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇOEÆČŠŽ∂ð,.'-]+){2,254}");   
+   regex2 = "^([a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇOEÆČŠŽ∂ð,.'-]){2,154}$"; 
+   //^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇOEÆČŠŽ∂ð,.'-]+(\s[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇOEÆČŠŽ∂ð,.'-]+){2,254}*$
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -101,7 +104,7 @@ export class PersonaNaturalComponent implements OnInit {
       //apellidos: ['', Validators.required],
       apellidoPaterno: ['', Validators.required],
       apellidoMaterno: [''],
-      nombres: ['', Validators.required],
+      nombres: ['', [Validators.required ]],
       //nombrePadre: ['', Validators.required],
       //nombreMadre: ['', Validators.required],
       fechaNacimento: ['', Validators.required],
@@ -506,16 +509,23 @@ export class PersonaNaturalComponent implements OnInit {
     }
     if(inicio == 0 && e.key === ' ') return false;
 
+   
+  
+
     switch(idInput){
       case 'apellidoPaterno':
         var value = this.formGroup.get('apellidoPaterno')?.value;
-        
-      this.formGroup.get('apellidoPaterno')?.setValue(value.replace(/ {2,}/g, ' ')); break;
+       // if(!value.replace(/\s/g,'').length) return false
+      this.formGroup.get('apellidoPaterno')?.setValue(value.replace(/ {1,}/g, ' ')); break;
+
       case 'apellidoMaterno':
         var value = this.formGroup.get('apellidoMaterno')?.value;
+       // if(!value.replace(/\s/g,'').length) return false
       this.formGroup.get('apellidoMaterno')?.setValue(value.replace(/ {2,}/g, ' ')); break;
+
       case 'nombres':
         var value = this.formGroup.get('nombres')?.value;
+      //  if(!value.replace(/\s/g,'').length) return false
       this.formGroup.get('nombres')?.setValue(value.replace(/ {2,}/g, ' ')); break; 
     }
   
